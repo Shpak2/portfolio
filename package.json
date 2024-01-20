@@ -10,8 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/i18n": "^8.0.0",
     "nuxt": "^3.9.1",
     "vue": "^3.4.10",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "nuxt3-vuex-module": "^1.0.14",
+    "sass": "^1.69.7",
+    "sass-loader": "^14.0.0"
   }
 }

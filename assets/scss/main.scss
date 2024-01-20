@@ -1,0 +1,102 @@
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --faded-color: #3F3846;
+  --border-color: rgba(0,0,0,0.1);
+  --button-color: #860CFB;
+}
+
+[data-theme="dark"] {
+  --primary-color: #141216;
+  --secondary-color: #ffffff;
+  --faded-color: #3F3846;
+  --border-color: rgba(255,255,255,0.1);
+  --button-color: #860CFB;
+}
+
+@import 'fonts.scss';
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: vw_big_screen(14px);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.flex {
+  display: flex;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-end {
+	align-items: flex-end;
+}
+
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rounded {
+  border-radius: vw_big_screen(8px);
+}
+
+.hover-effect {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    opacity: 0;
+    transition: 0.3s ease;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: rgba(255,255,255,0.2);
+  }
+  &:hover {
+    @include viewport(hover) {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.container {
+  width: vw_big_screen(1076px);
+  @include viewport(tabs) {
+    width: vw_tabs(728px);
+  }
+  @include viewport(mobile) {
+    width: vmin_mobile(335px);
+  }
+}

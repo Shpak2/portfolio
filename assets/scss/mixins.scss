@@ -1,0 +1,147 @@
+@use 'sass:math';
+
+@import 'variables.scss';
+
+@mixin font-face( $font-family, $file-path, $weight: normal, $style: normal ) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+		src:  url($file-path+".eot");
+    src:  url($file-path+'.eot?#iefix') format('embedded-opentype'),
+          url($file-path+".woff") format("woff"),
+          url($file-path+'.ttf') format('truetype');
+		font-display: swap;
+	}
+}
+
+@mixin text( $color, $font, $weight ) {
+	color: $color;
+	font-size: $font;
+	font-weight: $weight;
+}
+
+@function to_rgba($color, $alpha) {
+  @return rgb($color, $alpha);
+}
+
+// PX TO VW
+@function vw_big_screen( $value ) {
+	$vw-context: $vp-big-screen * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vw;
+}
+@function vh_big_screen( $value ) {
+	$vw-context: 1080 * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vh;
+}
+@function vw_laptop( $value ) {
+	$vw-context: $vp-laptop * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vw;
+}
+@function vw_tabs( $value ) {
+	$vw-context: $vp-small-tabs * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vw;
+}
+@function vh_tabs( $value ) {
+	$vw-context: 1111 * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vh;
+}
+@function vw_mobile( $value ) {
+	$vw-context: $vp-mobile * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vw;
+}
+@function vmin_mobile( $value ) {
+	$vw-context: $vp-small-mobile * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vmin;
+}
+@function vw_smobile( $value ) {
+	$vw-context: $vp-small-mobile * 0.01 * 1px;
+	@return math.div($value, $vw-context) * 1vw;
+}
+
+// VIEWPORTS MEDIA
+@mixin viewport( $point ) {
+	// > 1200
+	@if $point == laptop {
+		@media only screen and (max-width: #{$vp-laptop}px) { @content; }
+	}
+	// > 992
+	@else if $point == tabs {
+		@media only screen and (max-width: #{$vp-tabs}px) { @content; }
+	}
+	// > 767
+	@else if $point == stabs {
+		@media only screen and (max-width: #{$vp-small-tabs}px) { @content; }
+	}
+	// > 584
+	@else if $point == mobile {
+		@media only screen and (max-width: #{$vp-mobile}px) { @content; }
+	}
+	// > 350
+	@else if $point == smobile {
+		@media only screen and (max-width: #{$vp-small-mobile}px) { @content; }
+	}
+
+	// ORIENTATION PORTRAIT
+
+	@else if $point == port_laptop {
+		@media only screen and (max-width: #{$vp-laptop}px) and (orientation: portrait) { @content; }
+	}
+	@else if $point == port_tabs {
+		@media only screen and (max-width: #{$vp-tabs}px) and (orientation: portrait) { @content; }
+	}
+	@else if $point == port_stabs {
+		@media only screen and (max-width: #{$vp-small-tabs}px) and (orientation: portrait) { @content; }
+	}
+	@else if $point == port_mobile {
+		@media only screen and (max-width: #{$vp-mobile}px) and (orientation: portrait) { @content; }
+	}
+	@else if $point == port_smobile {
+		@media only screen and (max-width: #{$vp-small-mobile}px) and (orientation: portrait) { @content; }
+	}
+
+	// ORINTATION LANDSCAPE
+	@else if $point == swap_laptop {
+		@media only screen and (max-width: #{$vp-laptop}px) and (orientation: landscape) { @content; }
+	}
+	@else if $point == swap_tabs {
+		@media only screen and (max-width: #{$vp-tabs}px) and (orientation: landscape) { @content; }
+	}
+	@else if $point == swap_stabs {
+		@media only screen and (max-width: #{$vp-small-tabs}px) and (orientation: landscape) { @content; }
+	}
+	@else if $point == swap_mobile {
+		@media only screen and (max-height: #{$vp-mobile}px) and (orientation: landscape) { @content; }
+	}
+	@else if $point == swap_smobile {
+		@media only screen and (max-width: #{$vp-small-mobile}px) and (orientation: landscape) { @content; }
+	}
+
+	// only hover
+	@else if $point == hover {
+		@media only screen and (hover: hover) { @content; }
+	}
+}
+
+@mixin min_viewport( $point ) {
+	// > 1200
+	@if $point == laptop {
+		@media only screen and (min-width: #{$vp-laptop}px) { @content; }
+	}
+	// > 992
+	@else if $point == tabs {
+		@media only screen and (min-width: #{$vp-tabs}px) { @content; }
+	}
+	// > 767
+	@else if $point == stabs {
+		@media only screen and (min-width: #{$vp-small-tabs}px) { @content; }
+	}
+	// > 584
+	@else if $point == mobile {
+		@media only screen and (min-width: #{$vp-mobile}px) { @content; }
+	}
+	// > 350
+	@else if $point == smobile {
+		@media only screen and (min-width: #{$vp-small-mobile}px) { @content; }
+	}
+}
