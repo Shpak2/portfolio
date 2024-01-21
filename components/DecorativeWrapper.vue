@@ -12,7 +12,7 @@
   export default {
     data() {
       return {
-        b: undefined
+        baffleText: undefined
       }
     },
     props: {
@@ -21,17 +21,17 @@
     },
     methods: {
       animateCode() {
-        this.b = baffle([this.$refs.codeOpen, this.$refs.codeClose], {
+        this.baffleText = baffle([this.$refs.codeOpen, this.$refs.codeClose], {
             characters: 'uiopaqwertysdfghjklzxcvbnm',
             speed: 100
         })
-        this.b.start().reveal(4000);
+        this.baffleText.start().reveal(4000);
       }
     },
     watch: {
       '$store.state.activeItem'(newValue, oldValue) {
         setTimeout(() => {
-          this.b.reveal(4000)
+          this.baffleText.reveal(4000)
         }, 200);
       },
     },
@@ -56,11 +56,24 @@
       left: vw_big_screen(-20px);
       position: relative;
       &:first-child {
-        margin-bottom: vw_big_screen(16px);
+        margin-bottom: vh_big_screen(16px);
       }
       &:last-child {
-        margin-top: vw_big_screen(16px);
+        margin-top: vh_big_screen(16px);
       }
+    }
+    &__content {
+      &:first-child {
+        margin-top: vh_big_screen(48px);
+      }
+    }
+    &__btn {
+      &:first-child {
+        margin-top: vh_big_screen(32px);
+      }
+      // &:last-child {
+      //   margin-bottom: vw_big_screen(32px);
+      // }
     }
   }
 </style>

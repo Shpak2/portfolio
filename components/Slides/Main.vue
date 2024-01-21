@@ -2,7 +2,20 @@
   <div class="container m-auto p-screen">
     <Decorative :content="'html'" :className="'tag-item__html'">
       <Decorative :content="'body'" :className="'tag-item__body'">
-        main
+        <Decorative :content="'h1'" :className="'tag-item__content'">
+          <h1 v-html="$t('mainTitle')"></h1>
+          <h2>{{$t('mainSubtitle')}}</h2>
+        </Decorative>
+        <Decorative :content="'button'" :className="'tag-item__btn'">
+          <button class="flex justify-center items-center rounded hover-effect btn-main" @click="toPortfolio">
+            {{$t('mainButton')}}
+            <span class="flex">
+              <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H23M23 7L17.375 1.5M23 7L17.375 12.5" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+        </Decorative>
       </Decorative>
     </Decorative>
   </div>
@@ -14,11 +27,43 @@
   export default {
     components: {
       Decorative
+    },
+    methods: {
+      toPortfolio() {
+        this.$store.commit('setActiveItem', 'portfolio');
+      }
     }
   };
 
 </script>
 
 <style lang="scss" scoped>
-
+  h2 {
+    margin: 0 0 vw_big_screen(12px);
+    color: var(--footer-color);
+    font-size: vw_big_screen(24px);
+    font-weight: 700;
+    line-height: vw_big_screen(28px);
+    max-width: vw_big_screen(433px);
+  }
+  .btn-main {
+    height: vw_big_screen(64px);
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    transition: 0.3s ease;
+    font-size: vw_big_screen(20px);
+    font-weight: 600;
+    padding: 0 vw_big_screen(32px);
+    margin: vw_big_screen(16px) 0;
+    & span {
+      width: vw_big_screen(22px);
+      margin-left: vw_big_screen(12px);
+      transform: translateY(10%);
+      & svg {
+        & path {
+          transition: 0.3s ease;
+        }
+      }
+    }
+  }
 </style>

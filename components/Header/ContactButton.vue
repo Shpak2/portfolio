@@ -1,11 +1,17 @@
 <template>
-  <button class="flex justify-center items-center rounded hover-effect btn-contact">
+  <button class="flex justify-center items-center rounded hover-effect btn-contact" @click="toContacts">
     {{ $t('contactButton') }}
   </button>
 </template>
 
-<script setup lang="ts">
-
+<script>
+  export default {
+    methods: {
+      toContacts() {
+        this.$store.commit('setActiveItem', 'contacts');
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

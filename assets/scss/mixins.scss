@@ -31,7 +31,7 @@
 	@return math.div($value, $vw-context) * 1vw;
 }
 @function vh_big_screen( $value ) {
-	$vw-context: 1080 * 0.01 * 1px;
+	$vw-context: 900 * 0.01 * 1px;
 	@return math.div($value, $vw-context) * 1vh;
 }
 @function vw_laptop( $value ) {

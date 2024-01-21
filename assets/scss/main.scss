@@ -23,8 +23,8 @@
 }
 
 @import 'fonts.scss';
-
 @import '@splidejs/vue-splide/css';
+
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -101,6 +101,19 @@ body {
         opacity: 1;
       }
     }
+  }
+}
+
+h1 {
+  font-size: vw_big_screen(60px);
+  line-height: vw_big_screen(72px);
+  font-weight: 900;
+  margin: vw_big_screen(4px) 0 vw_big_screen(17px);
+  & span {
+    background-color: var(--button-color);
+    transition: 0.3s ease;
+    padding: 0 vw_big_screen(14px);
+    color: #fff;
   }
 }
 

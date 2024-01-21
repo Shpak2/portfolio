@@ -11,6 +11,9 @@ export default defineI18nConfig(() => ({
       sidebarClients: 'Clients',
       sidebarReviews: 'Reviews',
       sidebarContacts: 'Contacts',
+      mainTitle: 'Hello,<br> I\'m <span class="rounded">Yevhenii Shpakov</span>',
+      mainSubtitle: 'Web developer specializing in frontend development.',
+      mainButton: 'My Portfolio',
     },
     uk: {
       contactButton: 'Зв\'яжіться зі мною!',
@@ -21,6 +24,9 @@ export default defineI18nConfig(() => ({
       sidebarClients: 'Клієнти',
       sidebarReviews: 'Відгуки',
       sidebarContacts: 'Контакти',
+      mainTitle: 'Привіт,<br> Я <span class="rounded">Євгеній Шпаков</span>',
+      mainSubtitle: 'Веб-розробник, що спеціалізується на розробці фронтенду.',
+      mainButton: 'Моє портфоліо',
     },
     pl: {
       contactButton: 'Skontaktuj się ze mną!',
@@ -31,6 +37,9 @@ export default defineI18nConfig(() => ({
       sidebarClients: 'Klienci',
       sidebarReviews: 'Opinie',
       sidebarContacts: 'Kontaktu',
+      mainTitle: 'Witam,<br> jestem <span class="rounded">Yevhenii Shpakov</span>',
+      mainSubtitle: 'Jestem programistą webowym specjalizującym się w tworzeniu front-endu.',
+      mainButton: 'Moje Portfolio',
     }
   }
 }))
