@@ -1,2 +1,3 @@
 <template>
+  hello main
 </template>

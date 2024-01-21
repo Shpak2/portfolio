@@ -1,0 +1,100 @@
+<template>
+  <Splide :options="splideOptions" class="slider-wrap" ref="splide">
+    <SplideSlide v-for="(slide, index) in slides" :key="index" class="slide-item">
+      <component :is="slide.component" :key="slide.key" />
+    </SplideSlide>
+  </Splide>
+</template>
+
+<script>
+  import { Splide, SplideSlide } from '@splidejs/vue-splide';
+  import MainSlide from '~/components/Slides/Main.vue';
+  import AboutSlide from '~/components/Slides/About.vue';
+  import ExperienceSlide from '~/components/Slides/Experience.vue';
+  import PortfolioSlide from '~/components/Slides/Portfolio.vue';
+  import ClientsSlide from '~/components/Slides/Clients.vue';
+  import ReviewsSlide from '~/components/Slides/Reviews.vue';
+  import ContactsSlide from '~/components/Slides/Contacts.vue';
+
+  export default {
+    data() {
+      return {
+        activeSlide: null,
+        splideOptions: {
+          // type       : 'fade',
+          wheelMinThreshold: 5,
+          wheelSleep: 1000,
+          direction   : 'ttb',
+          height      : '100vh',
+          perMove : 1,
+          pagination : false,
+          arrows     : false,
+          cover      : true,
+          wheel    : true
+          // breakpoints: {
+          //   600: {
+          //     heightRatio: 0.7,
+          //   },
+          //   800: {
+          //     heightRatio: 0.8,
+          //   },
+          // },
+        }
+      };
+    },
+    components: {
+      Splide,
+      SplideSlide,
+      MainSlide,
+      AboutSlide,
+      ExperienceSlide,
+      PortfolioSlide,
+      ClientsSlide,
+      ReviewsSlide,
+      ContactsSlide
+    },
+    computed: {
+      slides() {
+        return [
+          { component: MainSlide, key: 'home' },
+          { component: AboutSlide, key: 'about' },
+          { component: ExperienceSlide, key: 'experience' },
+          { component: PortfolioSlide, key: 'portfolio' },
+          { component: ClientsSlide, key: 'clients' },
+          { component: ReviewsSlide, key: 'reviews' },
+          { component: ContactsSlide, key: 'contacts' },
+        ];
+      },
+    },
+    mounted() {
+      this.$refs.splide.splide.on('move', this.handleSlideChange);
+    },
+    watch: {
+      '$store.state.activeItem'(newValue, oldValue) {
+        this.changeSlide(newValue);
+      },
+    },
+    methods: {
+      changeSlide(key) {
+        const slideIndex = this.slides.findIndex(slide => slide.key === key);
+        console.log(slideIndex)
+        this.$refs.splide.splide.go(slideIndex)
+      },
+      isActiveSlide(slideKey) {
+        return this.activeSlideKey === slideKey;
+      },
+      handleSlideChange(slideIndex) {
+        const currentIndex = slideIndex;
+        this.$store.commit('setActiveItem', this.slides[currentIndex].key);
+      },
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+  .slide-item {
+    // height: 100vh;
+    // background: red;
+    display: block;
+  }
+</style>

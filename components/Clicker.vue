@@ -17,7 +17,6 @@
 
         if (event.target.tagName.toLowerCase() === 'button') {
           const clickCircle = document.getElementById('click-circle');
-          console.log(clickCircle.offsetWidth/2)
           clickCircle.style.left = x - (clickCircle.offsetWidth/2) + 'px';
           clickCircle.style.top = y - (clickCircle.offsetWidth/2) + 'px';
 

@@ -30,9 +30,14 @@
 
 <style lang="scss" scoped>
   .header {
-    background-color: var(--primary-color);
+    background-color: var(--header-color);
     height: vw_big_screen(80px);
     border-bottom: vw_big_screen(1px) solid var(--border-color);
     transition: 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
   }
 </style>

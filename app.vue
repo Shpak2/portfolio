@@ -1,10 +1,5 @@
 <template>
-  <NuxtLayout>
-    <div>
-
-      <h4>hello world</h4>
-    </div>
-  </NuxtLayout>
+  <NuxtLayout />
 </template>
 
 <script setup lang="ts">
@@ -21,8 +16,9 @@
     htmlElement.setAttribute('data-theme', store.state.theme.darkMode ? 'dark' : 'light');
   };
 
+
+
   onMounted(() => {
-    // checkDarkMode();
     checkDarkMode()
     // setBodyClass();
   });
@@ -30,11 +26,4 @@
 
 
 <style lang="scss">
-  h4 {
-    font-size: vw_big_screen(60px);
-    color: $danger-color;
-    @include viewport(tabs) {
-      font-size: 20px;
-    }
-  }
 </style>

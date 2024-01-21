@@ -1,5 +1,31 @@
 <template>
-  <footer>
-    <p>Мій Футер</p>
+  <footer class="footer">
+    <div class="container flex items-center m-auto">
+      <Copyright />
+      <Social />
+    </div>
   </footer>
 </template>
+
+<script>
+  import Copyright from '~/components/Footer/Copyright.vue';
+  import Social from '~/components/Footer/Social.vue';
+
+  export default {
+    components: {
+      Copyright,
+      Social
+    }
+  };
+
+</script>
+
+<style lang="scss" scoped>
+  .footer {
+    position: absolute;
+    bottom: vw_big_screen(24px);
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+</style>

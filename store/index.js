@@ -6,3 +6,13 @@ export const store = createStore({
     theme,
   },
 });
+
+export const state = () => ({
+  activeItem: 'home',
+});
+
+export const mutations = {
+  setActiveItem(state, itemKey) {
+    state.activeItem = itemKey;
+  },
+};

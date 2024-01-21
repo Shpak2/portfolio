@@ -1,21 +1,28 @@
 :root {
   --primary-color: #ffffff;
+  --header-color: rgba(255,255,255,0.5);
   --secondary-color: #000000;
   --faded-color: #3F3846;
   --border-color: rgba(0,0,0,0.1);
   --button-color: #860CFB;
+  --footer-color: #565656;
+  --sidebar-color: rgba(0,0,0,0.25);
 }
 
 [data-theme="dark"] {
   --primary-color: #141216;
+  --header-color: rgba(20, 18, 22, 0.5);
   --secondary-color: #ffffff;
   --faded-color: #3F3846;
   --border-color: rgba(255,255,255,0.1);
   --button-color: #860CFB;
+  --footer-color: #929292;
+  --sidebar-color: rgba(255,255,255,0.25);
 }
 
 @import 'fonts.scss';
 
+@import '@splidejs/vue-splide/css';
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -23,6 +30,10 @@ body {
   font-size: vw_big_screen(14px);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: var(--primary-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--secondary-color);
+  overflow: hidden;
 }
 
 .flex {

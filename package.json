@@ -16,6 +16,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@splidejs/vue-splide": "^0.6.12",
     "nuxt3-vuex-module": "^1.0.14",
     "sass": "^1.69.7",
     "sass-loader": "^14.0.0"

@@ -1,2 +1,3 @@
 <template>
+  Reviews
 </template>
