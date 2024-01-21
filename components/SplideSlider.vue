@@ -3,6 +3,9 @@
     <SplideSlide v-for="(slide, index) in slides" :key="index" class="slide-item">
       <component :is="slide.component" :key="slide.key" />
     </SplideSlide>
+    <div class="splide__progress">
+    <div class="splide__progress__bar" />
+  </div>
   </Splide>
 </template>
 
@@ -30,7 +33,9 @@
           pagination : false,
           arrows     : false,
           cover      : true,
-          wheel    : true
+          wheel    : true,
+          easing : 'cubic-bezier(0.645,  0.045, 0.355, 1.000)'
+          // easing : 'cubic-bezier(0.215,  0.610, 0.355, 1.000)'
           // breakpoints: {
           //   600: {
           //     heightRatio: 0.7,
@@ -77,7 +82,7 @@
     methods: {
       changeSlide(key) {
         const slideIndex = this.slides.findIndex(slide => slide.key === key);
-        console.log(slideIndex)
+        // console.log(slideIndex)
         this.$refs.splide.splide.go(slideIndex)
       },
       isActiveSlide(slideKey) {

@@ -3,7 +3,7 @@
     <Header />
     <main>
       <SplideSlider />
-      <NuxtPage />
+      <!-- <NuxtPage /> -->
     </main>
     <Sidebar />
     <Footer />
