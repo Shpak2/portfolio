@@ -1,23 +1,21 @@
 <template>
-  <div class="container m-auto p-screen">
-    <Decorative :content="'html'" :className="'tag-item__html'">
-      <Decorative :content="'body'" :className="'tag-item__body'">
-        <Decorative :content="'h1'" :className="'tag-item__content'">
-          <h1 v-html="$t('mainTitle')"></h1>
-          <h2>{{$t('mainSubtitle')}}</h2>
-        </Decorative>
-        <Decorative :content="'button'" :className="'tag-item__btn'">
-          <button class="flex justify-center items-center rounded hover-effect btn-main" @click="toPortfolio">
-            {{$t('mainButton')}}
-            <span class="flex">
-              <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 7H23M23 7L17.375 1.5M23 7L17.375 12.5" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
-        </Decorative>
+  <div class="container m-auto flex items-center full-height">
+    <div class="content">
+      <Decorative :content="'h1'" :className="'tag-item__title'" :tag="'wrap'">
+        <h1 v-html="$t('mainTitle')"></h1>
+        <h2 v-html="$t('mainSubtitle')"></h2>
       </Decorative>
-    </Decorative>
+      <Decorative :content="'button'" :className="'tag-item__btn'" :tag="'wrap'">
+        <button class="flex justify-center items-center rounded btn-main" @click="toPortfolio">
+          {{$t('mainButton')}}
+          <span class="flex">
+            <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 7H23M23 7L17.375 1.5M23 7L17.375 12.5" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+      </Decorative>
+    </div>
   </div>
 </template>
 
@@ -37,14 +35,17 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   h2 {
     margin: 0 0 vw_big_screen(12px);
     color: var(--footer-color);
     font-size: vw_big_screen(24px);
     font-weight: 700;
     line-height: vw_big_screen(28px);
-    max-width: vw_big_screen(433px);
+    // max-width: vw_big_screen(433px);
+    & span {
+      color: var(--secondary-color);
+    }
   }
   .btn-main {
     height: vw_big_screen(64px);
@@ -58,12 +59,21 @@
     & span {
       width: vw_big_screen(22px);
       margin-left: vw_big_screen(12px);
-      transform: translateY(10%);
+      transform: translate(0%,10%);
       & svg {
         & path {
           transition: 0.3s ease;
         }
       }
     }
+    &:hover {
+      @include viewport(hover) {
+        animation: bounce .8s forwards;
+        & span {
+          animation: pulse 1s infinite;
+        }
+      }
+    }
   }
+
 </style>

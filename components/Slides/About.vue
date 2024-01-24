@@ -1,12 +1,11 @@
 <template>
-  <div class="container m-auto p-screen">
-    <Decorative :content="'html'" :className="'tag-item__html'">
-      <Decorative :content="'body'" :className="'tag-item__body'">
+  <div class="container m-auto flex items-center full-height">
+    <div class="content">
+      <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
         About Me
       </Decorative>
-    </Decorative>
+    </div>
   </div>
-
 </template>
 
 <script>

@@ -15,7 +15,7 @@
         const x = event.clientX;
         const y = event.clientY;
 
-        if (event.target.tagName.toLowerCase() === 'button') {
+        if (event.target.tagName.toLowerCase() === 'button' || event.target.classList[0] === 'sidebar-item') {
           const clickCircle = document.getElementById('click-circle');
           clickCircle.style.left = x - (clickCircle.offsetWidth/2) + 'px';
           clickCircle.style.top = y - (clickCircle.offsetWidth/2) + 'px';

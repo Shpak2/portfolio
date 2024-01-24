@@ -1,12 +1,13 @@
 <template>
+  <Decorative :content="'html'" :className="'tag-item__html'" :tag="'open'" />
+  <Decorative :content="'body'" :className="'tag-item__body tag-item__body-open'" :tag="'open'" />
   <Splide :options="splideOptions" class="slider-wrap" ref="splide">
     <SplideSlide v-for="(slide, index) in slides" :key="index" class="slide-item">
       <component :is="slide.component" :key="slide.key" />
     </SplideSlide>
-    <div class="splide__progress">
-    <div class="splide__progress__bar" />
-  </div>
   </Splide>
+  <Decorative :content="'body'" :className="'tag-item__body tag-item__body-close'" :tag="'close'" />
+  <Decorative :content="'html'" :className="'tag-item__html'" :tag="'close'" />
 </template>
 
 <script>
@@ -18,6 +19,7 @@
   import ClientsSlide from '~/components/Slides/Clients.vue';
   import ReviewsSlide from '~/components/Slides/Reviews.vue';
   import ContactsSlide from '~/components/Slides/Contacts.vue';
+  import Decorative from '~/components/DecorativeWrapper.vue';
 
   export default {
     data() {
@@ -56,7 +58,8 @@
       PortfolioSlide,
       ClientsSlide,
       ReviewsSlide,
-      ContactsSlide
+      ContactsSlide,
+      Decorative
     },
     computed: {
       slides() {

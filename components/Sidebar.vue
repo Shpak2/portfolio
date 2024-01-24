@@ -3,7 +3,7 @@
     <li
       v-for="item in sidebarItems"
       :key="item.key"
-      class="sidebar-item"
+      class="sidebar-item mono-font"
       :class="{ 'active': activeItem === item.key }"
       @click="setActiveItem(item.key)"
       :ref="item.key"
@@ -81,7 +81,6 @@
       height: 100%;
     }
     &-item {
-      font-family: 'SF Mono', sans-serif;
       font-size: vw_big_screen(12px);
       font-weight: 500;
       cursor: pointer;
