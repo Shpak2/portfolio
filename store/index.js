@@ -9,10 +9,14 @@ export const store = createStore({
 
 export const state = () => ({
   activeItem: 'home',
+  allowMouseScroll: true,
 });
 
 export const mutations = {
   setActiveItem(state, itemKey) {
     state.activeItem = itemKey;
+  },
+  setAllowMouseScroll(state, value) {
+    state.allowMouseScroll = value;
   },
 };

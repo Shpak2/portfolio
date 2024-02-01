@@ -25,7 +25,7 @@
           characters: 'uiopaqwertysdfghjklzxcvbnm',
           speed: 100
         });
-        baf.start().reveal(4000,this.animationDelay);
+        baf.start().text(text => this.content).reveal(4000,this.animationDelay);
       }
     },
     watch: {

@@ -1,6 +1,6 @@
 <template>
   <div class="container m-auto flex items-center full-height">
-    <div class="content">
+    <div class="content content-main">
       <Decorative :content="'h1'" :className="'tag-item__title'" :tag="'wrap'">
         <h1 v-html="$t('mainTitle')"></h1>
         <h2 v-html="$t('mainSubtitle')"></h2>
@@ -35,18 +35,7 @@
 
 </script>
 
-<style lang="scss">
-  h2 {
-    margin: 0 0 vw_big_screen(12px);
-    color: var(--footer-color);
-    font-size: vw_big_screen(24px);
-    font-weight: 700;
-    line-height: vw_big_screen(28px);
-    // max-width: vw_big_screen(433px);
-    & span {
-      color: var(--secondary-color);
-    }
-  }
+<style lang="scss" scoped>
   .btn-main {
     height: vw_big_screen(64px);
     color: var(--primary-color);

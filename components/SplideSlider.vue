@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { Splide, SplideSlide } from '@splidejs/vue-splide';
+  import {Splide, SplideSlide } from '@splidejs/vue-splide';
   import MainSlide from '~/components/Slides/Main.vue';
   import AboutSlide from '~/components/Slides/About.vue';
   import ExperienceSlide from '~/components/Slides/Experience.vue';
@@ -26,16 +26,19 @@
       return {
         activeSlide: null,
         splideOptions: {
-          // type       : 'fade',
+          type       : 'fade',
+          keyboard: 'global',
           wheelMinThreshold: 5,
           wheelSleep: 1000,
-          direction   : 'ttb',
+          // direction   : 'ttb',
           height      : '100vh',
           perMove : 1,
+          // rewind: true,
           pagination : false,
           arrows     : false,
           cover      : true,
-          wheel    : true,
+          releaseWheel: true,
+          wheel    : this.$store.state.allowMouseScroll,
           easing : 'cubic-bezier(0.645,  0.045, 0.355, 1.000)'
           // easing : 'cubic-bezier(0.215,  0.610, 0.355, 1.000)'
           // breakpoints: {
@@ -81,8 +84,23 @@
       '$store.state.activeItem'(newValue, oldValue) {
         this.changeSlide(newValue);
       },
+      '$store.state.allowMouseScroll'(newValue, oldValue) {
+        this.reinitSplide(newValue);
+        this.splideOptions.wheel = newValue
+      }
     },
     methods: {
+      reinitSplide(val){
+        // console.log(val)
+         // Отримання екземпляра Splide за допомогою $refs
+    const splideInstance = this.$refs.splide.splide;
+    this.splideOptions = {
+      wheel: val
+    }
+    console.log(splideInstance)
+
+    this.$refs.splide.splide.refresh();
+      },
       changeSlide(key) {
         const slideIndex = this.slides.findIndex(slide => slide.key === key);
         // console.log(slideIndex)
@@ -100,9 +118,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .slide-item {
-    // height: 100vh;
-    // background: red;
-    display: block;
-  }
+  // .splide__track--fade > .splide__list > .splide__slide.is-active {
+  //   opacity: 1;
+  // }
 </style>
