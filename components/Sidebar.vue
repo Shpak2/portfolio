@@ -69,6 +69,7 @@
     list-style: none;
     padding-left: vw_big_screen(9px);
     user-select: none;
+    z-index: 10;
     &::after {
       content: '';
       position: absolute;
