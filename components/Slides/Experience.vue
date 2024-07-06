@@ -3,7 +3,6 @@
     <div class="content">
       <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
         experience
-        <Vue3Lottie :animationData="logoLottie" :height="200" :width="200" />
       </Decorative>
     </div>
   </div>
@@ -11,18 +10,14 @@
 
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
-  import logoData from '~/assets/images/logo.json';
-
-  import { Vue3Lottie } from 'vue3-lottie'
 
   export default {
     components: {
-      Decorative,
-      Vue3Lottie
+      Decorative
     },
     data() {
       return {
-        logoLottie: logoData,
+        // logoLottie: logoData,
       }
     },
   };

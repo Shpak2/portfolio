@@ -23,8 +23,11 @@ export default defineNuxtConfig({
     routes: ['/', '/ua', '/pl'],
   },
   i18n: {
-    vueI18n: './i18n.config.ts',
+    vueI18n: '@/i18n.config.ts',
     locales: ['en', 'ua', 'pl'],
     defaultLocale: 'en',
   },
+  loading: {
+    color: 'var(--primary-color)'
+  }
 })
