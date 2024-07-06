@@ -7,9 +7,8 @@
       :class="{ 'active': activeItem === item.key }"
       @click="setActiveItem(item.key)"
       :ref="item.key"
-    >
-      {{ $t(item.translationKey) }}
-    </li>
+      v-html="$t(item.translationKey)"
+    />
     <li class="sidebar-border" ref="sidebarBorder" :style="{transform: `translateY(${borderY}px)`}"></li>
   </ul>
 </template>

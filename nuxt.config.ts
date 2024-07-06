@@ -20,11 +20,11 @@ export default defineNuxtConfig({
     '@/assets/scss/main.scss',
   ],
   generate: {
-    routes: ['/', '/uk', '/pl'],
+    routes: ['/', '/ua', '/pl'],
   },
   i18n: {
     vueI18n: './i18n.config.ts',
-    locales: ['en', 'uk', 'pl'],
+    locales: ['en', 'ua', 'pl'],
     defaultLocale: 'en',
   },
 })

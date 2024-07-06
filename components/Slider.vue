@@ -20,7 +20,6 @@
     :keyboard="true"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
-    :ref="fullSlide"
   >
     <swiper-slide v-for="(slide, index) in slides" :key="index" class="slide-item">
       <component :is="slide.component" :key="slide.key" />

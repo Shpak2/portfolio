@@ -3,12 +3,12 @@
     <div class="flex justify-between content-wrap">
       <div class="content content-about">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
-          <h2>{{$t('aboutTitle')}}</h2>
-          <div class="scrollable-container" v-html="$t('aboutContent')" @wheel="handleWheel" ref="scrollable"></div>
+          <h2 v-html="$t('aboutTitle')"/>
+          <div class="scrollable-container" v-html="$t('aboutContent')" @wheel="handleWheel" ref="scrollable"/>
         </Decorative>
       </div>
       <div class="content-img">
-        <img class="rounded" :src="myPhoto" width="350" height="286" alt="photo" loading="lazy">
+        <img class="rounded" :src="myPhoto" width="350" height="286" alt="photo" loading="lazy"/>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="language-wrap">
     <NuxtLink class="language-link" :class="{ 'active': $route.path === '/' }" to="/" @click="changeLanguage('en')">EN</NuxtLink>
-    <NuxtLink class="language-link" :class="{ 'active': $route.path === '/uk' }" to="/uk" @click="changeLanguage('uk')">UA</NuxtLink>
+    <NuxtLink class="language-link" :class="{ 'active': $route.path === '/ua' }" to="/ua" @click="changeLanguage('ua')">UA</NuxtLink>
     <NuxtLink class="language-link" :class="{ 'active': $route.path === '/pl' }" to="/pl" @click="changeLanguage('pl')">PL</NuxtLink>
   </div>
 </template>

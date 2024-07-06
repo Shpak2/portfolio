@@ -1,0 +1,15 @@
+export default {
+  contactButton: 'Contact me!',
+  sidebarHome: 'Home',
+  sidebarAbout: 'About',
+  sidebarExperience: 'Experience',
+  sidebarPortfolio: 'Portfolio',
+  sidebarClients: 'Clients',
+  sidebarReviews: 'Reviews',
+  sidebarContacts: 'Contacts',
+  mainTitle: 'Hello,<br> I\'m <span class="rounded">Yevhenii Shpakov</span>',
+  mainSubtitle: '<span>Web developer</span> specializing<br> in <span>frontend</span> development.',
+  mainButton: 'My Portfolio',
+  aboutTitle: 'My name is Yevhenii Shpakov,',
+  aboutContent: '<p>and I am a front-end developer with over five years of experience in web development. I create websites that help businesses find new customers and attract more potential buyers. If you\'re looking for a web developer who can bring your ideas to life, you\'ve found the right person!<\/p><p>With me, you can be sure that the website will look attractive and help you attract more customers. I always work with attention to detail and prioritize quality over quantity. Throughout my experience, I have learned to develop websites based on the needs of the client, helping them achieve their goals.<\/p><p>If you need a website that will impress your audience, I\'m up for the challenge. My goal is to create a website that not only reflects your company but also provides potential customers with useful information and convinces them to choose you.<\/p><p>In addition, I always keep up with the latest trends in the industry and use new technologies to ensure maximum efficiency and productivity for your website. If you want to take your business to the next level, please contact me, and let\'s get to work!<\/p>',
+}

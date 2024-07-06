@@ -1,7 +1,5 @@
 <template>
-  <button class="flex justify-center items-center rounded hover-effect btn-contact" @click="toContacts">
-    {{ $t('contactButton') }}
-  </button>
+  <button class="flex justify-center items-center rounded hover-effect btn-contact" @click="toContacts" v-html="$t('contactButton')" />
 </template>
 
 <script>
