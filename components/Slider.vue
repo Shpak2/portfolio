@@ -14,8 +14,8 @@
       }"
     :mousewheel="{
       invert: false,
-      thresholdDelta: 30,
-      thresholdTime: 500
+      thresholdDelta: 20,
+      thresholdTime: 100
       }"
     :keyboard="true"
     @swiper="onSwiper"
@@ -83,11 +83,11 @@
     watch: {
       '$store.state.activeItem'(newValue, oldValue) {
         this.changeSlide(newValue);
+        this.swiper.mousewheel.enable()
       },
-      // '$store.state.allowMouseScroll'(newValue, oldValue) {
-      //   this.reinitSplide(newValue);
-      //   this.splideOptions.wheel = newValue
-      // }
+      '$store.state.allowMouseScroll'(newValue, oldValue) {
+        newValue ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
+      }
     },
     methods: {
       onSwiper(swiper) {

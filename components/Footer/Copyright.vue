@@ -1,6 +1,6 @@
 <template>
   <span class="copyright">
-    Yevhenii Shpakov | 2023 - 2024
+    Yevhenii Shpakov | 2018 - 2024
   </span>
 </template>
 

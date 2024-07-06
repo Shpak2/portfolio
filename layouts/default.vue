@@ -1,6 +1,8 @@
 <template>
   <div>
     <Header />
+    <Gradient />
+
     <main>
       <Slider />
       <!-- <NuxtPage /> -->
@@ -17,7 +19,8 @@ import Clicker from '~/components/Clicker.vue';
 import Footer from '~/components/Footer.vue';
 import Sidebar from '~/components/Sidebar.vue';
 import Slider from '~/components/Slider.vue';
-// import SplideSlider from '~/components/SplideSlider.vue';
+import Gradient from '~/components/Gradient.vue';
+
 
 export default {
   components: {
@@ -25,8 +28,8 @@ export default {
     Clicker,
     Footer,
     Sidebar,
-    Slider
-    // SplideSlider
+    Slider,
+    Gradient
   }
 };
 </script>
