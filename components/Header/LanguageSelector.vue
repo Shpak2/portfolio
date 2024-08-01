@@ -1,8 +1,8 @@
 <template>
   <div class="language-wrap">
-    <NuxtLink class="language-link" :class="{ 'active': $route.path === '/' }" to="/" @click="changeLanguage('en')">EN</NuxtLink>
-    <NuxtLink class="language-link" :class="{ 'active': $route.path === '/ua' }" to="/ua" @click="changeLanguage('ua')">UA</NuxtLink>
-    <NuxtLink class="language-link" :class="{ 'active': $route.path === '/pl' }" to="/pl" @click="changeLanguage('pl')">PL</NuxtLink>
+    <button class="language-link" :class="{ 'active': $route.path === '/' }" to="/" @click="changeLanguage('en')">EN</button>
+    <button class="language-link" :class="{ 'active': $route.path === '/ua' }" to="/ua" @click="changeLanguage('ua')">UA</button>
+    <button class="language-link" :class="{ 'active': $route.path === '/pl' }" to="/pl" @click="changeLanguage('pl')">PL</button>
   </div>
 </template>
 
@@ -11,20 +11,22 @@
 
   export default {
     beforeMount() {
-      // const store = useStore();
-      // console.log(console.log(localStorage.darkMode))
-      // this.$store = store;
+      const store = useStore();
+      this.$store = store;
     },
     methods: {
-      changeLanguage: function() {
-
+      changeLanguage: async function(lang) {
+        this.$store.commit('preloader/setCompleteLoop', false);
+        this.$store.commit('preloader/setIsPlay', true);
+        await this.sleep(3000);
+        this.$store.commit('preloader/setCompleteLoop', true);
+        lang === 'en' ? this.$router.push('/') : this.$router.push(`/${lang}`)
+        await this.sleep(1000);
+        this.$store.commit('preloader/setIsPlay', false);
+      },
+      sleep: function(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
       }
-      // toggleTheme: function() {
-      //   this.$store.commit('theme/toggleDarkMode');
-      //   localStorage.setItem('darkMode', this.$store.state.theme.darkMode);
-      //   const htmlElement = document.documentElement;
-      //   htmlElement.setAttribute('data-theme', this.$store.state.theme.darkMode ? 'dark' : 'light');
-      // },
     },
   }
 </script>

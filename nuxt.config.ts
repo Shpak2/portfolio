@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     locales: ['en', 'ua', 'pl'],
     defaultLocale: 'en',
   },
-  loading: {
-    color: 'var(--primary-color)'
-  }
+  // loading: {
+  //   color: 'var(--primary-color)'
+  // }
 })

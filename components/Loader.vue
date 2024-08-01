@@ -7,7 +7,8 @@
       :loop="1"
       :animationData="checkTheme() ? logoBlack : logoWhite"
       :height="'30%'"
-      :width="'35%'"/>
+      :width="checkWidth() ? '70%' : '35%'"
+      />
   </div>
 </template>
 
@@ -32,13 +33,23 @@
     beforeMount() {
       const store = useStore();
       this.$store = store;
+      this.checkWidth()
+    },
+    watch: {
+      '$store.state.preloader.isPlay'(newValue) {
+        this.isPlay = newValue
+      },
+      '$store.state.preloader.completeLoop'(newValue) {
+        this.completeLoop = newValue
+      },
     },
     mounted() {
       // hack=)
       setTimeout(
         ()=>{
           setTimeout(this.loopComplete,3000)
-          this.isPlay = true
+          this.$store.commit('preloader/setIsPlay', true);
+
         }, 1)
     },
     methods: {
@@ -47,9 +58,14 @@
       },
       loopComplete: function () {
         this.completeLoop = true
+        this.$store.commit('preloader/setCompleteLoop', true);
+        // !!!! вшити в шаблон нові змінні і навчити їх мінятись глобально потім зробити прелодарер коли міняєш мову
         setTimeout(()=>{
-          this.isPlay = false
+          this.$store.commit('preloader/setIsPlay', false);
         }, 1000)
+      },
+      checkWidth: function () {
+        return screen.width <= 1440 ? true : false
       }
     }
   };

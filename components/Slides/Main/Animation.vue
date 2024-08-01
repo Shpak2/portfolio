@@ -23,7 +23,7 @@
       };
     },
     mounted() {
-      this.getPosition();
+      // this.getPosition();
       requestAnimationFrame(() => {
 
         this.drawCanvas();

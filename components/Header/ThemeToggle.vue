@@ -15,7 +15,7 @@
   export default {
     beforeMount() {
       const store = useStore();
-      console.log(console.log(localStorage.darkMode))
+      // console.log(console.log(localStorage.darkMode))
       this.$store = store;
     },
     methods: {

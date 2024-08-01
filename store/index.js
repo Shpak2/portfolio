@@ -1,9 +1,11 @@
 import { createStore } from 'vuex';
 import * as theme from './theme';
+import * as preloader from './preloader';
 
 export const store = createStore({
   modules: {
     theme,
+    preloader
   },
 });
 
