@@ -1,22 +1,22 @@
 <template>
   <div class="site-background full-height">
     <div class="gradient-item"
-      :style="{transform: position[0], width: size, height: size}">
+      :style="{transform: position[0], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
         <div class="gradient-block gradient-block-1 gradient-orange"></div>
         <div class="gradient-block gradient-block-2 gradient-orange"></div>
     </div>
     <div class="gradient-item"
-      :style="{transform: position[1], width: size, height: size}">
+      :style="{transform: position[1], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
         <div class="gradient-block gradient-block-1 gradient-blue"></div>
         <div class="gradient-block gradient-block-2 gradient-blue"></div>
     </div>
     <div class="gradient-item"
-      :style="{transform: position[2], width: size, height: size}">
+      :style="{transform: position[2], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
         <div class="gradient-block gradient-block-1 gradient-purple"></div>
         <div class="gradient-block gradient-block-2 gradient-purple"></div>
     </div>
     <div class="gradient-item"
-      :style="{transform: position[3], width: size, height: size}">
+      :style="{transform: position[3], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
         <div class="gradient-block gradient-block-1 gradient-green"></div>
         <div class="gradient-block gradient-block-2 gradient-green"></div>
     </div>
@@ -34,7 +34,8 @@
           'translate(-100%,0%)',
           'translate(0%,0%)'
         ],
-        size: 0
+        size: 0,
+        loaded: false
       };
     },
     watch: {
@@ -44,6 +45,9 @@
     },
     mounted() {
       this.size = `${screen.height}px`;
+      setTimeout(()=>{
+        this.loaded = true
+      },1000)
     },
     methods: {
       setPosiotion: function() {
@@ -76,7 +80,7 @@
     left: 50%;
     transition: cubic-bezier(0.15, 0.63, 0.57, 1) 0.3s;
     border-radius: 50%;
-    overflow: hidden;
+    // overflow: hidden;
     filter: blur(100px);
     backdrop-filter: blur(100px);
     opacity: 0.1;
