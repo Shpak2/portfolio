@@ -41,6 +41,15 @@ body {
   overflow: hidden;
 }
 
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer і Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari і Opera */
+}
+
 .flex {
   display: flex;
 }
@@ -143,6 +152,9 @@ body {
 .scrollable-container {
   max-height: vw_big_screen(320px);
   overflow: auto;
+  & * {
+    pointer-events: none;
+  }
 }
 
 .content-about {

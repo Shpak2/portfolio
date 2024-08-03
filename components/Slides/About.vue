@@ -4,7 +4,13 @@
       <div class="content content-about">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('aboutTitle')"/>
-          <div class="scrollable-container" v-html="$t('aboutContent')" @wheel="handleWheel" ref="scrollable"/>
+          <div class="scrollable-container"
+            v-html="$t('aboutContent')"
+            @wheel="handleWheel"
+            @mouseleave="enableSwiper"
+            @touchend="enableSwiper"
+            />
+            <!-- if mobile need add controll for touch @touchstart="disableSwiper" @touchend="enableSwiper" -->
         </Decorative>
       </div>
       <div class="content-img">
@@ -28,9 +34,9 @@
       Decorative
     },
     methods: {
-      handleWheel(event) {
+      handleWheel: function(event) {
         const deltaY = event.deltaY;
-        const targetElement = this.$refs.scrollable;
+        const targetElement = event.target;
         this.$store.commit('setAllowMouseScroll', false);
 
         const hasScrollableContent = targetElement.scrollHeight > targetElement.clientHeight;
@@ -40,6 +46,9 @@
         if (deltaY > 0 && hasScrollableContent && isAtBottom || deltaY < 0 && isAtTop) {
           this.$store.commit('setAllowMouseScroll', true);
         }
+      },
+      enableSwiper: function() {
+        this.$store.commit('setAllowMouseScroll', true);
       }
     }
   };
