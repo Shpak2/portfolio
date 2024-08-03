@@ -1,5 +1,6 @@
 export default {
   contactButton: 'Skontaktuj się ze mną!',
+  decorativeScroll: 'Scrolluj, aby odkrywać',
   sidebarHome: 'Główna',
   sidebarAbout: 'O mnie',
   sidebarExperience: 'Doświadczenie',

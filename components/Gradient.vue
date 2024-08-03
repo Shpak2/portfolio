@@ -58,7 +58,6 @@
         }
         this.position = shuffledArray;
       }
-
     },
   }
 </script>
@@ -80,7 +79,6 @@
     left: 50%;
     transition: cubic-bezier(0.15, 0.63, 0.57, 1) 0.3s;
     border-radius: 50%;
-    // overflow: hidden;
     filter: blur(100px);
     backdrop-filter: blur(100px);
     opacity: 0.1;

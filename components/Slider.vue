@@ -9,14 +9,18 @@
     :parallax="true"
     :observer="true"
     :effect="'fade'"
+    :scrollbar="{
+      dragSize: 'auto',
+      draggable: true
+    }"
     :fadeEffect= "{
       crossFade: true
-      }"
+    }"
     :mousewheel="{
       invert: false,
       thresholdDelta: 20,
-      thresholdTime: 100
-      }"
+      thresholdTime: 1000
+    }"
     :keyboard="true"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
@@ -25,14 +29,14 @@
       <component :is="slide.component" :key="slide.key" />
     </swiper-slide>
   </swiper>
-
+  <DecorMouse/>
   <Decorative :content="'body'" :className="'tag-item__body tag-item__body-close'" :tag="'close'" />
   <Decorative :content="'html'" :className="'tag-item__html'" :tag="'close'" />
 </template>
 
 <script>
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { Mousewheel, Keyboard, EffectFade, Parallax } from 'swiper/modules';
+  import { Mousewheel, Keyboard, EffectFade, Parallax, Scrollbar } from 'swiper/modules';
   import MainSlide from '~/components/Slides/Main.vue';
   import AboutSlide from '~/components/Slides/About.vue';
   import ExperienceSlide from '~/components/Slides/Experience.vue';
@@ -41,13 +45,14 @@
   import ReviewsSlide from '~/components/Slides/Reviews.vue';
   import ContactsSlide from '~/components/Slides/Contacts.vue';
   import Decorative from '~/components/DecorativeWrapper.vue';
+  import DecorMouse from '~/components/DecorMouse.vue';
 
   export default {
     data() {
       return {
         swiper: null,
         activeSlide: null,
-        modules: [Mousewheel, Keyboard, EffectFade, Parallax],
+        modules: [Mousewheel, Keyboard, EffectFade, Parallax, Scrollbar],
       };
     },
     components: {
@@ -60,7 +65,8 @@
       ClientsSlide,
       ReviewsSlide,
       ContactsSlide,
-      Decorative
+      Decorative,
+      DecorMouse
     },
 
     computed: {
@@ -95,31 +101,18 @@
       onSlideChange(swiper) {
         const itemKey = this.slides[swiper.activeIndex].key;
         this.$store.commit('setActiveItem', itemKey);
-        // this.changeSlide(this.slides[swiper.activeIndex].key)
-        // console.log(this.slides.findIndex(slide => slide.key === key));
       },
-    //   reinitSplide(val){
-    //     // console.log(val)
-    //      // Отримання екземпляра Splide за допомогою $refs
-    // const splideInstance = this.$refs.splide.splide;
-    // this.splideOptions = {
-    //   wheel: val
-    // }
-    // console.log(splideInstance)
-
-    // this.$refs.splide.splide.refresh();
-      // },
       changeSlide(key) {
         const slideIndex = this.slides.findIndex(slide => slide.key === key);
         this.swiper.slideTo(slideIndex)
       },
-      isActiveSlide(slideKey) {
-        // return this.activeSlideKey === slideKey;
-      },
-      handleSlideChange(slideIndex) {
-        const currentIndex = slideIndex;
-        // this.$store.commit('setActiveItem', this.slides[currentIndex].key);
-      },
+      // isActiveSlide(slideKey) {
+      //   // return this.activeSlideKey === slideKey;
+      // },
+      // handleSlideChange(slideIndex) {
+      //   const currentIndex = slideIndex;
+      //   // this.$store.commit('setActiveItem', this.slides[currentIndex].key);
+      // },
     },
   };
 </script>

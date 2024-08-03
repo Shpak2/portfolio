@@ -1,5 +1,6 @@
 export default {
   contactButton: 'Зв\'яжіться зі мною!',
+  decorativeScroll: 'Прокрутіть, щоб дослідити',
   sidebarHome: 'Головна',
   sidebarAbout: 'Про мене',
   sidebarExperience: 'Досвід',
