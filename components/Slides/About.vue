@@ -1,7 +1,7 @@
 <template>
   <div class="container m-auto flex items-center full-height" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
     <div class="flex justify-between content-wrap">
-      <div class="content content-about">
+      <div class="content">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('aboutTitle')"/>
           <div class="scrollable-container"
@@ -23,6 +23,7 @@
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
   import photoPath from '~/assets/images/main/photo.webp';
+  import { handleWheel, enableSwiper } from '~/utils/globalFunctions.js';
 
   export default {
     data() {
@@ -35,20 +36,10 @@
     },
     methods: {
       handleWheel: function(event) {
-        const deltaY = event.deltaY;
-        const targetElement = event.target;
-        this.$store.commit('setAllowMouseScroll', false);
-
-        const hasScrollableContent = targetElement.scrollHeight > targetElement.clientHeight;
-        const isAtBottom = targetElement.scrollTop + targetElement.clientHeight >= targetElement.scrollHeight;
-
-        const isAtTop = targetElement.scrollTop === 0;
-        if (deltaY > 0 && hasScrollableContent && isAtBottom || deltaY < 0 && isAtTop) {
-          this.$store.commit('setAllowMouseScroll', true);
-        }
+        handleWheel(event, this.$store);
       },
       enableSwiper: function() {
-        this.$store.commit('setAllowMouseScroll', true);
+        enableSwiper(this.$store);
       }
     }
   };
@@ -69,6 +60,7 @@
     }
     &-wrap {
       width: 100%;
+      position: relative;
     }
     &-img {
       width: vw_big_screen(350px);

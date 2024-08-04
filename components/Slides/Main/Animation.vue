@@ -26,7 +26,7 @@
       // this.getPosition();
       requestAnimationFrame(() => {
 
-        this.drawCanvas();
+        // this.drawCanvas();
       });
     },
     beforeDestroy() {
