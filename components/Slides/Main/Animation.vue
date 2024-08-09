@@ -23,10 +23,10 @@
       };
     },
     mounted() {
-      // this.getPosition();
+      this.getPosition();
       requestAnimationFrame(() => {
 
-        // this.drawCanvas();
+        this.drawCanvas();
       });
     },
     beforeDestroy() {
