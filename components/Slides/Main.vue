@@ -1,5 +1,5 @@
 <template>
-  <Animation />
+  <Animation2 />
   <div class="container m-auto flex items-center full-height" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
     <div class="content content-main">
       <Decorative :content="'h1'" :className="'tag-item__title'" :tag="'wrap'">
@@ -22,12 +22,13 @@
 
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
-  import Animation from '~/components/Slides/Main/Animation.vue';
+  // import Animation from '~/components/Slides/Main/Animation.vue';
+  import Animation2 from '~/components/Slides/Main/Animation2.vue';
 
   export default {
     components: {
       Decorative,
-      Animation
+      Animation2
     },
     methods: {
       toPortfolio() {
