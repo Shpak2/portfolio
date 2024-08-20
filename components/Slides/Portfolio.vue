@@ -135,7 +135,7 @@
       Swiper,
       SwiperSlide,
       // IconTool,
-      // IconDesktop
+      IconDesktop
       // DecorMouse
     },
   };
