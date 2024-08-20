@@ -3,7 +3,7 @@
 
     <Loader/>
     <Header v-if="!maskOn" />
-    <!-- <Gradient v-if="!maskOn" /> -->
+    <Gradient v-if="!maskOn" />
 
     <main v-if="!maskOn">
       <Slider />

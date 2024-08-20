@@ -88,15 +88,15 @@
     }
   }
 
-  @keyframes animateBg {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 33%; }
-  }
+  // @keyframes animateBg {
+  //   0% { background-position: 0% 0%; }
+  //   100% { background-position: 100% 33%; }
+  // }
 
   .gradient-block-1 {
     background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgb(64, 69, 149) 25%, rgba(10, 3, 15, 1) 50%, rgb(64, 69, 149) 75%, rgba(10, 3, 15, 1) 100%);
     z-index: 0;
-    animation: animateBg 4s linear infinite;
+    // animation: animateBg 4s linear infinite;
     background-size: 300% 200%;
     &.gradient-orange {
       background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgba(251, 41, 12, 1) 25%, rgba(10, 3, 15, 1) 50%, rgba(251, 41, 12, 1) 75%, rgba(10, 3, 15, 1) 100%);

@@ -213,6 +213,90 @@ body {
   }
 }
 
+.buttons-list {
+  transform: scale(1,0);
+  transform-origin: center bottom;
+  transition: transform 0.2s cubic-bezier(0.22, -0.01, 0.01, 1.02);
+  & button {
+    transform-origin: center bottom;
+    transform: translateY(50%) scale(1,1);
+    opacity: 0;
+    &:nth-child(1) {
+      transition: transform 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.15s, opacity 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.15s;
+    }
+    &:nth-child(2) {
+      transition: transform 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.2s, opacity 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.2s;
+    }
+    &:nth-child(3) {
+      transition: transform 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.25s, opacity 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.25s;
+    }
+  }
+}
+
+.swiper-creative {
+  & .swiper-slide {
+    &:hover {
+      & .buttons-list {
+        transform: scale(1,1);
+        & button {
+          transform: translateY(0) scale(1,1);
+          opacity: 1;
+        }
+      }
+    }
+    & .tags-wrap {
+      transform: scale(0,1);
+      transition: transform 0s;
+    }
+    & .body-inner {
+      box-shadow: 0 0 0 0 var(--shadow-slide);
+      transition: box-shadow 0s;
+    }
+    &-active {
+      & .tags-wrap {
+        transform: scale(1,1);
+        transition: transform 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.2s;
+      }
+      & .body-inner {
+        box-shadow: vw_big_screen(8px) vw_big_screen(14px) vw_big_screen(4px) 0 var(--shadow-slide);
+        transition: box-shadow 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.2s;
+      }
+    }
+  }
+}
+
+.swiper-pagination-bullet {
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  font-size: vw_big_screen(16px);
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: vw_big_screen(-4.5px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: vw_big_screen(4px);
+    height: vw_big_screen(4px);
+    background-color: var(--button-color);
+    opacity: 0;
+  }
+  &:hover {
+    @include viewport(hover) {
+      color: var(--secondary-color);
+    }
+  }
+  &:not(:last-child) {
+    margin-right: vw_big_screen(16px);
+  }
+  &.swiper-pagination-bullet-active {
+    color: var(--secondary-color);
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
 @keyframes bounce {
   0%,20%,40%,60%,80%,to {
     animation-timing-function: cubic-bezier(.215,.61,.355,1);
