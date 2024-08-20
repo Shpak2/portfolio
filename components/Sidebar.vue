@@ -7,6 +7,8 @@
       :class="{ 'active': activeItem === item.key }"
       @click="setActiveItem(item.key)"
       :ref="item.key"
+      @mouseover="handleMouse(true)"
+      @mouseleave="handleMouse(false)"
       v-html="$t(item.translationKey)"
     />
     <li class="sidebar-border" ref="sidebarBorder" :style="{transform: `translateY(${borderY}px)`}"></li>
@@ -42,6 +44,9 @@
           this.borderY = translateYValue
         }
       },
+      handleMouse(val) {
+        this.$store.commit('setHover', val);
+      }
     },
     computed: {
       activeItem() {

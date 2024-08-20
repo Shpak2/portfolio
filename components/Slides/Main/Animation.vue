@@ -19,13 +19,14 @@ export default {
           dark: ["#929292", "#FFFFFF"]
         },
       ],
-      mouseX: window.innerWidth / 2,
+      mouseX: (window.innerWidth / 4) * 3,
       mouseY: window.innerHeight / 2,
-      targetX: window.innerWidth / 2,
+      targetX: (window.innerWidth / 4) * 3,
       targetY: window.innerHeight / 2,
-      currentX: window.innerWidth / 2,
+      currentX: (window.innerWidth / 4) * 3,
       currentY: window.innerHeight / 2,
       isSearching: true,
+      hover: false,
       mouseStillTimeout: null,
       minRadius: 0.8,
       maxRadius: 1.2,
@@ -38,9 +39,11 @@ export default {
     '$store.state.theme.darkMode'() {
       this.updateColors();
     },
+    '$store.state.hoverElement'(val) {
+      this.hover = val
+    },
   },
   mounted() {
-    // this.getRandomColor();
     for (let i = 0; i < this.length; i++) {
       this.generateFigures();
     }
@@ -112,8 +115,7 @@ export default {
       const centerX = this.mouseX;
       const centerY = this.mouseY;
 
-      if (this.isSearching) {
-        // search mouse
+      if (this.isSearching || this.hover) {
         this.figures.forEach(figure => {
           figure.x += ((centerX + figure.radius * Math.cos(figure.angle)) - figure.x + figure.correct) * figure.speed;
           figure.y += ((centerY + figure.radius * Math.sin(figure.angle)) - figure.y + figure.correct) * figure.speed;
@@ -124,7 +126,7 @@ export default {
           figure.angle = targetAngle + Math.PI / 2;
           this.drawTriangle(ctx, figure);
 
-          figure.angle += figure.rotationSpeed;
+          this.hover ? figure.angle += figure.rotationSpeed-0.4 : figure.angle += figure.rotationSpeed;
 
           if (figure.angle >= 2 * Math.PI) {
             figure.angle -= 2 * Math.PI;
@@ -133,7 +135,6 @@ export default {
             figure.radius = newTargetRadius;
           }
           figure.radius += (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
-          figure.radius = Math.min(figure.radius, Math.min(window.innerWidth, window.innerHeight) / 2);
 
           figure.life -= 0.2
           if(figure.life <= 0) {

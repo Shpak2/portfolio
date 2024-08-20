@@ -12,6 +12,7 @@ export const store = createStore({
 export const state = () => ({
   activeItem: 'home',
   allowMouseScroll: true,
+  hoverElement: false
 });
 
 export const mutations = {
@@ -20,5 +21,8 @@ export const mutations = {
   },
   setAllowMouseScroll(state, value) {
     state.allowMouseScroll = value;
+  },
+  setHover(state, value) {
+    state.hoverElement = value;
   },
 };

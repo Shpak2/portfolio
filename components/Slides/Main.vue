@@ -7,7 +7,7 @@
         <h2 v-html="$t('mainSubtitle')"/>
       </Decorative>
       <Decorative :content="'button'" :className="'tag-item__btn'" :tag="'wrap'">
-        <button class="flex justify-center items-center rounded btn-main" @click="toPortfolio">
+        <button class="flex justify-center items-center rounded btn-main" @click="toPortfolio" @mouseover="handleMouse(true)" @mouseleave="handleMouse(false)">
           <p v-html="$t('mainButton')"/>
           <span class="flex">
             <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,6 @@
 
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
-  // import Animation from '~/components/Slides/Main/Animation.vue';
   import Animation from '~/components/Slides/Main/Animation.vue';
 
   export default {
@@ -33,6 +32,9 @@
     methods: {
       toPortfolio() {
         this.$store.commit('setActiveItem', 'portfolio');
+      },
+      handleMouse(val) {
+        this.$store.commit('setHover', val);
       }
     }
   };
