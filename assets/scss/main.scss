@@ -9,6 +9,8 @@
   --sidebar-color: rgba(0, 0, 0, 0.25);
   --code-color: rgba(134, 12, 251, 0.25);
   --tags-color: #860CFB;
+  --shadow-slide: rgba(0, 0, 0, 0.04);
+  --tags-bg: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -22,11 +24,14 @@
   --sidebar-color: rgba(255, 255, 255,0.25);
   --code-color: rgba(255, 168, 0, 0.3);
   --tags-color: #A25EE2;
+  --shadow-slide: rgba(255, 255, 255, 0.04);
+  --tags-bg: #000000;
 }
 
 @import 'fonts.scss';
 @import 'swiper/css';
 @import 'swiper/css/effect-fade';
+@import 'swiper/css/effect-creative';
 @import 'swiper/css/scrollbar';
 @import 'swiper/css/parallax';
 
