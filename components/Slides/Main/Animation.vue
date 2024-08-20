@@ -5,266 +5,207 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        figures: [],
-        colorFigures: [
-          {
-            light: ["#860CFB","#A25EE2"],
-            dark: ["#860CFB","#A25EE2"]
-          },
-          {
-            light: ["#565656","#000000"],
-            dark: ["#929292","#FFFFFF"]
-          },
-        ],
-        animationFrameId: null,
-      };
-    },
-    mounted() {
-      this.getPosition();
-      requestAnimationFrame(() => {
 
-        this.drawCanvas();
+export default {
+  data() {
+    return {
+      colorFigures: [
+        {
+          light: ["#860CFB", "#A25EE2"],
+          dark: ["#860CFB", "#A25EE2"]
+        },
+        {
+          light: ["#565656", "#000000"],
+          dark: ["#929292", "#FFFFFF"]
+        },
+      ],
+      mouseX: window.innerWidth / 2,
+      mouseY: window.innerHeight / 2,
+      targetX: window.innerWidth / 2,
+      targetY: window.innerHeight / 2,
+      currentX: window.innerWidth / 2,
+      currentY: window.innerHeight / 2,
+      isSearching: true,
+      mouseStillTimeout: null,
+      minRadius: 0.8,
+      maxRadius: 1.2,
+      targetRadius: 200,
+      figures: [],
+      length: 50
+    };
+  },
+  watch: {
+    '$store.state.theme.darkMode'() {
+      this.updateColors();
+    },
+  },
+  mounted() {
+    // this.getRandomColor();
+    for (let i = 0; i < this.length; i++) {
+      this.generateFigures();
+    }
+    this.initializeCanvas();
+    window.addEventListener('mousemove', this.handleMouseMove);
+  },
+  beforeDestroy() {
+    window.removeEventListener('mousemove', this.handleMouseMove);
+    clearTimeout(this.mouseStillTimeout);
+  },
+  methods: {
+    initializeCanvas() {
+      const canvas = this.$refs.myCanvas;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext("2d");
+      this.animate(ctx, canvas);
+    },
+    generateFigures(positionX = this.getRandomInteger(1, window.innerWidth), positionY = this.getRandomInteger(20, window.innerHeight)) {
+      const angle = Math.random() * 2 * Math.PI;
+      const color = this.getRandomColor();
+      this.figures.push({
+        x: positionX,
+        y: positionY,
+        size: this.getRandomInteger(20, 70),
+        angle: angle,
+        color: color,
+        scaleX: 1,
+        growing: true,
+        speed: 3/this.getRandomInteger(200, 300),
+        radius: this.getRandomInteger(140, 240),
+        correct: this.getRandomInteger(-20, 20),
+        rotationSpeed: 100/this.getRandomInteger(90, 110),
+        radiusChangeSpeed: 2/this.getRandomInteger(70, 110),
+        speedScale: 2/this.getRandomInteger(30, 40),
+        life: this.getRandomInteger(200, 600),
+        opacity: 1
       });
     },
-    beforeDestroy() {
-      cancelAnimationFrame(this.animationFrameId);
+    drawTriangle(ctx, figure) {
+      const svgPath1 = "M40.3466 31.3239L40.3466 20.4244L20.167 1.33514e-05L20.167 10.8996L40.3466 31.3239Z";
+      const svgPath2 = "M20.1675 1.59961e-05L20.1675 10.8996L0 31.3239L1.4293e-06 20.4244L20.1675 1.59961e-05Z";
+
+      const path1 = new Path2D(svgPath1);
+      const path2 = new Path2D(svgPath2);
+
+      const x = figure.x;
+      const y = figure.y;
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(figure.angle - 29.75);
+      ctx.scale(figure.scaleX, 1);
+      ctx.translate(-(figure.size/2), -(figure.size/2));
+
+      ctx.globalAlpha = figure.opacity;
+
+      ctx.fillStyle = figure.color[0];
+      ctx.fill(path1);
+
+      ctx.fillStyle = figure.color[1];
+      ctx.fill(path2);
+
+      ctx.restore();
     },
-    methods: {
-      getPosition() {
-        const $this = this
+    animate(ctx, canvas) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        let prevX, prevY;
-        let lastRecordedTime = 0;
-        const delay = 100;
+      const centerX = this.mouseX;
+      const centerY = this.mouseY;
 
-          window.addEventListener('mousemove', function(event) {
-            const currentTime = Date.now();
+      if (this.isSearching) {
+        // search mouse
+        this.figures.forEach(figure => {
+          figure.x += ((centerX + figure.radius * Math.cos(figure.angle)) - figure.x + figure.correct) * figure.speed;
+          figure.y += ((centerY + figure.radius * Math.sin(figure.angle)) - figure.y + figure.correct) * figure.speed;
+          const dx = this.targetX - figure.x;
+          const dy = this.targetY - figure.y;
 
-            if (currentTime - lastRecordedTime < delay) {
-                return;
+          const targetAngle = Math.atan2(dy, dx);
+          figure.angle = targetAngle + Math.PI / 2;
+          this.drawTriangle(ctx, figure);
+
+          figure.angle += figure.rotationSpeed;
+
+          if (figure.angle >= 2 * Math.PI) {
+            figure.angle -= 2 * Math.PI;
+
+            const newTargetRadius = figure.radius * (Math.random() * (this.maxRadius - this.minRadius) + this.minRadius);
+            figure.radius = newTargetRadius;
+          }
+          figure.radius += (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
+          figure.radius = Math.min(figure.radius, Math.min(window.innerWidth, window.innerHeight) / 2);
+
+          figure.life -= 0.2
+          if(figure.life <= 0) {
+            figure.opacity -= 0.05;
+            if (figure.opacity <= 0) {
+              this.figures = this.figures.filter(f => f !== figure);
+              this.generateFigures(this.targetX, this.targetY);
             }
-
-            if (typeof prevX !== 'undefined' && typeof prevY !== 'undefined') {
-            // Отримуємо поточні координати миші на вікні
-            const currentX = event.clientX;
-            const currentY = event.clientY;
-
-            // Обчислюємо різницю між поточними та попередніми координатами
-            const deltaX = currentX - prevX;
-            const deltaY = currentY - prevY;
-
-            // Обчислюємо кут в радіанах використовуючи арктангенс
-            const radians = Math.atan2(deltaY, deltaX);
-
-            // Перетворюємо радіани в градуси
-            const degrees = radians * (180 / Math.PI);
-
-            // Виводимо кут руху мишки
-            // console.log('Кут руху мишки: ' + degrees + ' градусів');
-
-            const currentColor = $this.getRandomInt();
-            const fill2 = $this.colorFigures[currentColor].light[1];
-            const fill1 = $this.colorFigures[currentColor].light[0];
-
-            prevX = currentX;
-            prevY = currentY;
-
-            $this.figures.push({
-              x: currentX,
-              y: currentY,
-              fill1: fill1,
-              fill2: fill2,
-              degrees: degrees,
-              opacity: 1,
-              speedX: Math.random() * 2 - 1,
-              speedY: Math.random() * 2 - 1,
-            });
-
-            console.log($this.figures)
-
-            lastRecordedTime = currentTime;
-            // $this.drawSVG(canvas.getContext('2d'), currentX, currentY, color1, color2)
-          } else {
-            prevX = event.clientX;
-            prevY = event.clientY;
           }
         });
-      },
-      drawSVG(context, offsetX, offsetY, color1, color2, opacity, degrees) {
-        // SVG-код і змінні для кольорів
-        const svgPath1 = "M40.3466 31.3239L40.3466 20.4244L20.167 1.33514e-05L20.167 10.8996L40.3466 31.3239Z";
-        const svgPath2 = "M20.1675 1.59961e-05L20.1675 10.8996L0 31.3239L1.4293e-06 20.4244L20.1675 1.59961e-05Z";
 
-        context.globalAlpha = opacity;
+      } else {
+        this.figures.forEach(figure => {
+          figure.x += (this.targetX - figure.x + figure.correct) * figure.speed;
+          figure.y += (this.targetY - figure.y + figure.correct) * figure.speed;
 
-        // // Малюємо перший трикутник
-        context.translate(offsetX, offsetY);
-        context.save();
-        context.rotate(degrees);
-        context.beginPath();
-        context.fillStyle = color1;
-        context.fill(new Path2D(svgPath1));
-        context.restore();
+          const dx = this.targetX - figure.x;
+          const dy = this.targetY - figure.y;
 
-        // // Зміщення для вставки другої фігури в нове місце
-        context.translate(-offsetX, -offsetY);
+          const targetAngle = Math.atan2(dy, dx);
+          figure.angle += (targetAngle - figure.angle);
 
-        // // Зміщення для вставки фігури в нове місце
-        context.translate(offsetX, offsetY);
+          this.drawTriangle(ctx, figure);
+          figure.life -= 15
+          if(figure.life <= 0) {
+            figure.opacity -= 0.05;
+            if (figure.opacity <= 0) {
+              this.figures = this.figures.filter(f => f !== figure);
+              this.generateFigures(this.targetX+this.getRandomInteger(-150, 150), this.targetY+this.getRandomInteger(-150, 150));
+            }
+          }
+        });
+      }
+      this.figures.forEach(figure => {
+        if (figure.growing) {
+          figure.scaleX += figure.speedScale;
+          if (figure.scaleX >= 1.2) figure.growing = false;
+        } else {
+          figure.scaleX -= figure.speedScale - 0.01;
+          if (figure.scaleX <= 0.6) figure.growing = true;
+        }
 
-        context.save();
-        context.rotate(degrees);
-        context.beginPath();
-        context.fillStyle = color2;
-        context.fill(new Path2D(svgPath2));
-        context.restore();
-
-        // // Зміщення для повернення контексту в початковий стан
-        context.translate(-offsetX, -offsetY);
-      },
-      drawCanvas() {
-        const canvas = this.$refs.myCanvas;
-        const context = canvas.getContext('2d');
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-
-        this.checkAndRemoveFigures();
-
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        this.figures.forEach((figure) => {
-        // Оновлюємо координати руху кожного об'єкта
-        figure.x += figure.speedX;
-        figure.y += figure.speedY;
-
-        // Малюємо об'єкт з оновленими координатами
-        this.drawSVG(context, figure.x, figure.y, figure.fill1, figure.fill2, figure.opacity, figure.degrees);
       });
 
-
-          requestAnimationFrame(() => {
-              this.drawCanvas();
-          });
-      },
-      checkAndRemoveFigures() {
-        const maxFigures = 30; // Максимальна кількість елементів
-        if (this.figures.length > maxFigures) {
-            // Зменшення опасіті та видалення зайвих елементів
-            this.figures.forEach((figure) => {
-                figure.opacity -= 0.01; // Зменшення опасіті на 0.02
-                if (figure.opacity <= 0) {
-                    const index = this.figures.indexOf(figure);
-                    this.figures.splice(index, 1); // Видалення елемента, якщо опасіті <= 0
-                }
-            });
-        }
-      },
-      getRandomInt() {
-        return Math.floor(Math.random() * 2);
-      },
-      // updateCoordinates() {
-      //   // Оновлення координат для анімації
-      //   this.positions = this.positions.map(({ x, y }) => ({
-      //     x: x + Math.random() * 2 - 1,  // Зміна координат на випадкову величину (-1 до 1)
-      //     y: y + Math.random() * 2 - 1,
-      //   }));
-      // },
-      //
-      // animateFigures() {
-      //   const canvas = this.$refs.myCanvas;
-      //   canvas.width = canvas.parentElement.clientWidth;
-      //   canvas.height = canvas.parentElement.clientHeight;
-      //   const context = canvas.getContext("2d");
-
-      //   const currentColor = this.getRandomInt();
-      //   const fill2 = this.colorFigures[currentColor].light[1];
-      //   const fill1 = this.colorFigures[currentColor].light[0];
-
-      //   // Координати курсору за замовчуванням
-      //   let mouseX = 0;
-      //   let mouseY = 0;
-
-      //   // Додамо обробник події для відстеження руху курсору
-      //   canvas.addEventListener('mousemove', (event) => {
-      //       // Отримуємо координати курсору відносно канвасу
-      //       mouseX = event.clientX - canvas.getBoundingClientRect().left;
-      //       mouseY = event.clientY - canvas.getBoundingClientRect().top;
-      //   });
-
-      //   // Змінні для анімації зжимання та розжимання
-      //   let scale = 1;
-      //   let direction = 1;
-
-      //   const animate = () => {
-      //       // Очищення канвасу перед кожним кадром
-      //       context.clearRect(0, 0, canvas.width, canvas.height);
-
-      //       // Анімація руху кожної фігури
-      //       this.positions.forEach(({ x, y }) => {
-      //           // Масштабуємо контекст для анімації
-      //           context.save();
-      //           context.scale(scale, scale);
-      //           // Малюємо та анімуємо трикутники, використовуючи координати курсору
-      //           this.drawSVG(context, x / scale + mouseX, y / scale + mouseY, fill1, fill2);
-      //           context.restore();
-      //       });
-
-      //       // Оновлюємо масштаб для наступного кадру анімації
-      //       scale += 0.01 * direction;
-
-      //       // Зміна напрямку зміни масштабу при досягненні максимального або мінімального значення
-      //       if (scale >= 1.2 || scale <= 0.8) {
-      //           direction *= -1;
-      //       }
-
-      //       // Викликаємо наступний кадр анімації
-      //       requestAnimationFrame(animate);
-      //   };
-
-      //   // Запускаємо анімацію
-      //   animate();
-      //   },
-      // drawSVG(context, offsetX, offsetY, color1, color2) {
-      //   // SVG-код і змінні для кольорів
-      //   const svgPath1 = "M40.3466 31.3239L40.3466 20.4244L20.167 1.33514e-05L20.167 10.8996L40.3466 31.3239Z";
-      //   const svgPath2 = "M20.1675 1.59961e-05L20.1675 10.8996L0 31.3239L1.4293e-06 20.4244L20.1675 1.59961e-05Z";
-      //   // const color1 = "#860CFB";
-      //   // const color2 = "#A25EE2";
-
-      //   // Зміщення для вставки фігури в нове місце
-      //   context.translate(offsetX, offsetY);
-
-      //   // Малюємо перший трикутник
-      //   context.beginPath();
-      //   context.fillStyle = color1;
-      //   context.fill(new Path2D(svgPath1));
-
-      //   // Зміщення для вставки другої фігури в нове місце
-      //   context.translate(-offsetX, -offsetY);
-
-      //   // Зміщення для вставки фігури в нове місце
-      //   context.translate(offsetX, offsetY);
-
-      //   // Малюємо другий трикутник
-      //   context.beginPath();
-      //   context.fillStyle = color2;
-      //   context.fill(new Path2D(svgPath2));
-
-      //   // Зміщення для повернення контексту в початковий стан
-      //   context.translate(-offsetX, -offsetY);
-      // },
-      // updateCoordinates() {
-      //   // Оновлення координат для анімації
-      //   this.positions = this.positions.map(({ x, y }) => ({
-      //     x: x + Math.random() * 2 - 1,  // Зміна координат на випадкову величину (-1 до 1)
-      //     y: y + Math.random() * 2 - 1,
-      //   }));
-      // },
+      requestAnimationFrame(() => this.animate(ctx, canvas));
     },
-  };
+    handleMouseMove(event) {
+      this.mouseX = event.clientX;
+      this.mouseY = event.clientY;
+      this.targetX = event.clientX;
+      this.targetY = event.clientY;
+      this.isSearching = false;
+
+      clearTimeout(this.mouseStillTimeout);
+      this.mouseStillTimeout = setTimeout(() => {
+        this.isSearching = true;
+      }, 500);
+    },
+    getRandomColor() {
+      const currentColor = Math.floor(Math.random() * this.colorFigures.length);
+      return !this.$store.state.theme.darkMode ? this.colorFigures[currentColor].light : this.colorFigures[currentColor].dark;
+    },
+    updateColors() {
+      this.figures.forEach(figure => {
+        figure.color = this.getRandomColor();
+      });
+    },
+    getRandomInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -274,7 +215,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    // z-index: 2000;
     pointer-events: none;
   }
   canvas {
