@@ -81,7 +81,7 @@ export default {
     }
     &-text {
       font-size: vw_big_screen(12px);
-      color: var(--faded-color);
+      color: var(--footer-color);
       font-weight: 600;
       margin-right: vw_big_screen(10px);
     }
