@@ -9,8 +9,11 @@
   --sidebar-color: rgba(0, 0, 0, 0.25);
   --code-color: rgba(134, 12, 251, 0.25);
   --tags-color: #860CFB;
-  --shadow-slide: rgba(0, 0, 0, 0.04);
+  --shadow-slide: #F1F1F1;
   --tags-bg: #ffffff;
+  --mask-popup: rgba(20, 18, 22, 0.6);
+  --emulate-color: #000000;
+  --popup-color: #FAFAFA;
 }
 
 [data-theme="dark"] {
@@ -26,6 +29,9 @@
   --tags-color: #A25EE2;
   --shadow-slide: rgba(255, 255, 255, 0.04);
   --tags-bg: #000000;
+  --mask-popup: rgba(71, 67, 74, 0.6);
+  --emulate-color: #3F3846;
+  --popup-color: #0F0F0F;
 }
 
 @import 'fonts.scss';
@@ -293,6 +299,75 @@ body {
     color: var(--secondary-color);
     &::after {
       opacity: 1;
+    }
+  }
+}
+
+.popup {
+  &-main {
+    & .svg-icon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      & svg {
+        & path {
+          fill: var(--emulate-color);
+        }
+      }
+    }
+    &.emulate-desktop {
+      & .svg-icon {
+        top: vw_big_screen(16px);
+        width: vw_big_screen(580px);
+      }
+    }
+    &.emulate-tablet {
+      & .svg-icon {
+        top: vw_big_screen(16px);
+        width: vw_big_screen(360px);
+      }
+    }
+    &.emulate-mobile {
+      & .svg-icon {
+        top: vw_big_screen(16px);
+        width: vw_big_screen(290px);
+      }
+    }
+  }
+  &-aside {
+    &-buttons {
+      & button {
+        transition: 0.2s ease-in;
+        & svg path {
+          transition: 0.2s ease-in;
+        }
+        &.icon-desktop svg {
+          width: vw_big_screen(24px);
+        }
+        &.icon-tablet svg {
+          width: vw_big_screen(18px);
+        }
+        &.icon-mobile svg {
+          width: vw_big_screen(13.4px);
+        }
+        &:hover, &.active {
+          background-color: var(--button-color) !important;
+          & svg path {
+            fill: #fff !important;
+          }
+        }
+        &.active {
+          pointer-events: none;
+        }
+      }
+    }
+    &-content {
+      & p {
+        font-size: vw_big_screen(14px);
+        margin: vw_big_screen(12px) 0;
+        text-indent: 0.8em;
+      }
     }
   }
 }

@@ -13,6 +13,7 @@
     <Footer v-if="!maskOn" />
     <Clicker v-if="!maskOn" />
     <div v-if="maskOn" class="mask"></div>
+    <Popup v-if="!maskOn && showPopup" />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Sidebar from '~/components/Sidebar.vue';
 import Slider from '~/components/Slider.vue';
 import Gradient from '~/components/Gradient.vue';
 import Loader from '~/components/Loader.vue';
+import Popup from '~/components/Popup.vue';
 
 
 export default {
@@ -34,12 +36,19 @@ export default {
     Sidebar,
     Slider,
     Gradient,
-    Loader
+    Loader,
+    Popup
   },
   data() {
     return {
       maskOn: true,
+      showPopup: false
     }
+  },
+  watch: {
+    '$store.state.popup.show'(val) {
+      this.showPopup = val
+    },
   },
   mounted() {
     setTimeout(this.removeMask,1000)

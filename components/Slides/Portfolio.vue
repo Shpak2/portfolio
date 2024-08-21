@@ -5,7 +5,7 @@
         <div class="swiper-pagination-title">Projects:</div>
         <div class="swiper-pagination"></div>
       </div>
-      <div class="swiper-navigation flex items-center" style="z-index: 10;">
+      <div class="swiper-navigation flex items-center">
         <div class="swiper-button-prev flex">
           <svg width="40" height="21" viewBox="0 0 40 21" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scale(-1,1);">
             <path d="M1 10.5H39M39 10.5L29.5 1M39 10.5L29.5 20" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -40,282 +40,48 @@
           }"
           :keyboard="true"
         >
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
+          <swiper-slide v-for="(project, index) in data" :key="index">
+            <div class="slide-header mono-font flex items-center justify-between">
+              <h4>{{(index + 1).toString().padStart(2, '0')}}. {{ project.name }}</h4>
+              <div class="rounded flex items-center tags-wrap">
+                <IconTool />
+                <div class="tags flex items-center ">
+                  <span v-for="(tool, index) in project.tools" :key="index" style="white-space: pre;">
+                    {{ tool }}<span v-if="index < project.tools.length - 1">, </span>
+                  </span>
                 </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
               </div>
             </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
+            <div class="rounded body-inner">
+              <div class="buttons-list flex items-center justify-center">
+                <button v-if="project.img.desktop" class="flex flex-col items-center"
+                  @mouseover="fillDesktop = '#fff'"
+                  @mouseleave="fillDesktop = '#860CFB'"
+                  @click="showPopup(index,'desktop')"
+                  >
+                    <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
+                    <b>Desktop</b>
+                </button>
+                <button v-if="project.img.tablet" class="flex flex-col items-center"
+                  @mouseover="fillTablet = '#fff'"
+                  @mouseleave="fillTablet = '#860CFB'"
+                  @click="showPopup(index,'tablet')"
+                  >
+                    <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
+                    <b>Tablet</b>
+                </button>
+                <button v-if="project.img.mobile" class="flex flex-col items-center"
+                  @mouseover="fillMobile = '#fff'"
+                  @mouseleave="fillMobile = '#860CFB'"
+                  @click="showPopup(index,'mobile')"
+                  >
+                    <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
+                    <b>Mobile</b>
+                </button>
               </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
+              <img class="flex" :src="project.img.main" :alt="project.name" loading="lazy">
             </div>
           </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div>
-              <div class="slide-header mono-font flex items-center justify-between">
-                <h4>01. hello</h4>
-                <div class="rounded flex items-center tags-wrap">
-                  <IconTool />
-                  <div class="tags flex items-center ">
-                    Vue, Nuxt, Contentful, GSAP
-                  </div>
-                </div>
-              </div>
-              <div class="rounded body-inner">
-                <div class="buttons-list flex items-center justify-center">
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillDesktop = '#fff'"
-                    @mouseleave="fillDesktop = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                      <b>Desktop</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillTablet = '#fff'"
-                    @mouseleave="fillTablet = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                      <b>Tablet</b>
-                  </button>
-                  <button class="flex flex-col items-center"
-                    @mouseover="fillMobile = '#fff'"
-                    @mouseleave="fillMobile = '#860CFB'"
-                    >
-                      <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                      <b>Mobile</b>
-                  </button>
-                </div>
-                <img class="flex" :src="myPhoto" alt="asd" loading="lazy">
-              </div>
-            </div>
-          </swiper-slide>
-          <!-- <swiper-slide v-for="(slide, index) in slides" :key="index">
-            <component :is="slide.component" :key="slide.key" />
-          </swiper-slide> -->
         </swiper>
       </Decorative>
     </div>
@@ -329,15 +95,17 @@
   import IconDesktop from '~/components/Svg/Desktop.vue';
   import IconTablet from '~/components/Svg/Tablet.vue';
   import IconMobile from '~/components/Svg/Mobile.vue';
+
+  import { useStore } from 'vuex';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Keyboard, EffectCreative, Pagination, Navigation } from 'swiper/modules';
 
-  import photoPath from '~/assets/images/portfolio/projects/pyrpose/main.webp'
+  import { data } from '~/data/projects'
 
   export default {
     data() {
       return {
-        myPhoto: photoPath,
+        data,
         modules: [Keyboard, EffectCreative, Pagination, Navigation],
         fillDesktop: '#860CFB',
         fillTablet: '#860CFB',
@@ -369,7 +137,18 @@
           paginationEl.setAttribute('title', 'Номер сторінки');
         }
       });
-    }
+    },
+    beforeMount() {
+      const store = useStore();
+      this.$store = store;
+    },
+    methods: {
+      showPopup(project, mode) {
+        this.$store.commit('popup/setShowPopup', true);
+        this.$store.commit('popup/setProjectPopup', project);
+        this.$store.commit('popup/setModePopup', mode);
+      },
+    },
   };
 
 </script>

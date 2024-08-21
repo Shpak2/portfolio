@@ -19,7 +19,7 @@
       this.$store = store;
     },
     methods: {
-      toggleTheme: function() {
+      toggleTheme() {
         this.$store.commit('theme/toggleDarkMode');
         localStorage.setItem('darkMode', this.$store.state.theme.darkMode);
         const htmlElement = document.documentElement;

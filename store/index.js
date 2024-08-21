@@ -1,11 +1,13 @@
 import { createStore } from 'vuex';
 import * as theme from './theme';
 import * as preloader from './preloader';
+import * as popup from './popup';
 
 export const store = createStore({
   modules: {
     theme,
-    preloader
+    preloader,
+    popup
   },
 });
 
