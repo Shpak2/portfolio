@@ -15,6 +15,7 @@
   --emulate-color: #000000;
   --popup-color: #FAFAFA;
   --tools-color: #F1F1F1;
+  --danger-color: #E82626;
 }
 
 [data-theme="dark"] {
@@ -34,6 +35,7 @@
   --emulate-color: #3F3846;
   --popup-color: #0F0F0F;
   --tools-color: #1C1C1C;
+  --danger-color: #FF5959;
 }
 
 @import 'fonts.scss';
@@ -42,6 +44,8 @@
 @import 'swiper/css/effect-creative';
 @import 'swiper/css/scrollbar';
 @import 'swiper/css/parallax';
+@import 'swiper/css/free-mode';
+@import 'swiper/css/scrollbar';
 @import 'animation';
 
 $fontMono: 'SF Mono', sans-serif;
@@ -168,14 +172,13 @@ body {
 }
 
 .scrollable-container {
-  max-height: vw_big_screen(320px);
-  overflow: auto;
+  padding-right: vw_big_screen(10px);
   & * {
     pointer-events: none;
   }
 }
 
-.swiper-vertical > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-vertical {
+.swiper-vertical > .swiper-scrollbar.custom-scrollbar, .swiper-scrollbar.custom-scrollbar.swiper-scrollbar-vertical {
   height: vw_big_screen(150px);
   bottom: vw_big_screen(70px);
   right: vw_big_screen(184px);

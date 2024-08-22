@@ -59,7 +59,6 @@
       loopComplete: function () {
         this.completeLoop = true
         this.$store.commit('preloader/setCompleteLoop', true);
-        // !!!! вшити в шаблон нові змінні і навчити їх мінятись глобально потім зробити прелодарер коли міняєш мову
         setTimeout(()=>{
           this.$store.commit('preloader/setIsPlay', false);
         }, 1000)

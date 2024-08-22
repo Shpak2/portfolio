@@ -10,6 +10,7 @@
     :observer="true"
     :effect="'fade'"
     :scrollbar="{
+      el: '.swiper-scrollbar.custom-scrollbar',
       dragSize: 'auto',
       draggable: true
     }"
@@ -29,6 +30,7 @@
       <component :is="slide.component" :key="slide.key" />
     </swiper-slide>
   </swiper>
+  <div class="swiper-scrollbar custom-scrollbar"></div>
   <DecorMouse/>
   <Decorative :content="'body'" :className="'tag-item__body tag-item__body-close'" :tag="'close'" />
   <Decorative :content="'html'" :className="'tag-item__html'" :tag="'close'" />

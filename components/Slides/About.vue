@@ -4,13 +4,21 @@
       <div class="content">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('aboutTitle')"/>
-          <div class="scrollable-container"
-            v-html="$t('aboutContent')"
-            @wheel="handleWheel"
-            @mouseleave="enableSwiper"
-            @touchend="enableSwiper"
-            />
-            <!-- if mobile need add controll for touch @touchstart="disableSwiper" @touchend="enableSwiper" -->
+          <swiper
+            :direction="'vertical'"
+            :slidesPerView="'auto'"
+            :freeMode="true"
+            :scrollbar="true"
+            :mousewheel="true"
+            :modules="modules"
+            class="mySwiper"
+          >
+            <swiper-slide>
+              <div class="scrollable-container"
+              v-html="$t('aboutContent')"
+              />
+            </swiper-slide>
+          </swiper>
         </Decorative>
       </div>
       <div class="content-img">
@@ -23,30 +31,31 @@
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
   import photoPath from '~/assets/images/main/photo.webp';
-  import { handleWheel, enableSwiper } from '~/utils/globalFunctions.js';
+
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
 
   export default {
     data() {
       return {
         myPhoto: photoPath,
+        modules: [FreeMode, Scrollbar, Mousewheel],
       }
     },
     components: {
-      Decorative
-    },
-    methods: {
-      handleWheel: function(event) {
-        handleWheel(event, this.$store);
-      },
-      enableSwiper: function() {
-        enableSwiper(this.$store);
-      }
+      Decorative,
+      Swiper,
+      SwiperSlide
     }
   };
 
 </script>
 
 <style lang="scss" scoped>
+  .swiper {
+    width: vw_big_screen(636px);
+    max-height: vw_big_screen(320px);
+  }
   h2 {
     font-size: vw_big_screen(32px);
     line-height: vw_big_screen(52px);
@@ -54,7 +63,6 @@
     font-weight: 900;
   }
   .content {
-    max-width: vw_big_screen(636px);
     & h2, & p {
       color: var(--secondary-color);
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-auto">
+  <div class="container m-auto" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
     <div class="content">
       <div class="swiper-pagination-wrapper mono-font flex items-center">
         <div class="swiper-pagination-title">Projects:</div>

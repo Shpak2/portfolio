@@ -4,12 +4,21 @@
       <div class="content">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('expirienceTitle')"/>
-          <div class="scrollable-container"
+          <swiper
+            :direction="'vertical'"
+            :slidesPerView="'auto'"
+            :freeMode="true"
+            :scrollbar="true"
+            :mousewheel="true"
+            :modules="modules"
+            class="mySwiper"
+          >
+            <swiper-slide>
+              <div class="scrollable-container"
               v-html="$t('expirienceContent')"
-              @wheel="handleWheel"
-              @mouseleave="enableSwiper"
-              @touchend="enableSwiper"
               />
+            </swiper-slide>
+          </swiper>
         </Decorative>
       </div>
       <Cloud/>
@@ -20,31 +29,31 @@
 <script>
   import Decorative from '~/components/DecorativeWrapper.vue';
   import Cloud from '~/components/Slides/Experience/Cloud.vue';
-  import { handleWheel, enableSwiper } from '~/utils/globalFunctions.js';
+
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
 
   export default {
     components: {
       Decorative,
-      Cloud
+      Cloud,
+      Swiper,
+      SwiperSlide
     },
     data() {
       return {
-        // logoLottie: logoData,
+        modules: [FreeMode, Scrollbar, Mousewheel],
       }
     },
-    methods: {
-      handleWheel: function(event) {
-        handleWheel(event, this.$store);
-      },
-      enableSwiper: function() {
-        enableSwiper(this.$store);
-      }
-    }
   };
 
 </script>
 
 <style lang="scss" scoped>
+  .swiper {
+    width: vw_big_screen(636px);
+    max-height: vw_big_screen(320px);
+  }
   h2 {
     font-size: vw_big_screen(32px);
     line-height: vw_big_screen(52px);
