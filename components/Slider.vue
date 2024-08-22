@@ -41,7 +41,7 @@
   import AboutSlide from '~/components/Slides/About.vue';
   import ExperienceSlide from '~/components/Slides/Experience.vue';
   import PortfolioSlide from '~/components/Slides/Portfolio.vue';
-  import ClientsSlide from '~/components/Slides/Clients.vue';
+  // import ClientsSlide from '~/components/Slides/Clients.vue';
   import ReviewsSlide from '~/components/Slides/Reviews.vue';
   import ContactsSlide from '~/components/Slides/Contacts.vue';
   import Decorative from '~/components/DecorativeWrapper.vue';
@@ -62,7 +62,7 @@
       AboutSlide,
       ExperienceSlide,
       PortfolioSlide,
-      ClientsSlide,
+      // ClientsSlide,
       ReviewsSlide,
       ContactsSlide,
       Decorative,
@@ -76,7 +76,7 @@
           { component: AboutSlide, key: 'about' },
           { component: ExperienceSlide, key: 'experience' },
           { component: PortfolioSlide, key: 'portfolio' },
-          { component: ClientsSlide, key: 'clients' },
+          // { component: ClientsSlide, key: 'clients' },
           { component: ReviewsSlide, key: 'reviews' },
           { component: ContactsSlide, key: 'contacts' },
         ];

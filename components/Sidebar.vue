@@ -25,7 +25,7 @@
           { key: 'about', translationKey: 'sidebarAbout' },
           { key: 'experience', translationKey: 'sidebarExperience' },
           { key: 'portfolio', translationKey: 'sidebarPortfolio' },
-          { key: 'clients', translationKey: 'sidebarClients' },
+          // { key: 'clients', translationKey: 'sidebarClients' },
           { key: 'reviews', translationKey: 'sidebarReviews' },
           { key: 'contacts', translationKey: 'sidebarContacts' },
         ],

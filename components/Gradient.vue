@@ -2,23 +2,19 @@
   <div class="site-background full-height">
     <div class="gradient-item"
       :style="{transform: position[0], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
-        <div class="gradient-block gradient-block-1 gradient-orange"></div>
-        <div class="gradient-block gradient-block-2 gradient-orange"></div>
+        <div class="gradient-block gradient-block gradient-orange"></div>
     </div>
     <div class="gradient-item"
       :style="{transform: position[1], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
-        <div class="gradient-block gradient-block-1 gradient-blue"></div>
-        <div class="gradient-block gradient-block-2 gradient-blue"></div>
+        <div class="gradient-block gradient-block gradient-blue"></div>
     </div>
     <div class="gradient-item"
       :style="{transform: position[2], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
-        <div class="gradient-block gradient-block-1 gradient-purple"></div>
-        <div class="gradient-block gradient-block-2 gradient-purple"></div>
+        <div class="gradient-block gradient-block gradient-purple"></div>
     </div>
     <div class="gradient-item"
       :style="{transform: position[3], width: size, height: size, overflow: loaded ? 'hidden' : ''}">
-        <div class="gradient-block gradient-block-1 gradient-green"></div>
-        <div class="gradient-block gradient-block-2 gradient-green"></div>
+        <div class="gradient-block gradient-block gradient-green"></div>
     </div>
   </div>
 </template>
@@ -88,48 +84,19 @@
     }
   }
 
-  // @keyframes animateBg {
-  //   0% { background-position: 0% 0%; }
-  //   100% { background-position: 100% 33%; }
-  // }
-
-  .gradient-block-1 {
-    background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgb(64, 69, 149) 25%, rgba(10, 3, 15, 1) 50%, rgb(64, 69, 149) 75%, rgba(10, 3, 15, 1) 100%);
-    z-index: 0;
-    // animation: animateBg 4s linear infinite;
-    background-size: 300% 200%;
+  .gradient-block {
     &.gradient-orange {
       background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgba(251, 41, 12, 1) 25%, rgba(10, 3, 15, 1) 50%, rgba(251, 41, 12, 1) 75%, rgba(10, 3, 15, 1) 100%);
-      background-size: 300% 200%;
     }
     &.gradient-blue {
       background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgba(12, 151, 251, 1) 25%, rgba(10, 3, 15, 1) 50%, rgba(12, 151, 251, 1) 75%, rgba(10, 3, 15, 1) 100%);
-      background-size: 300% 200%;
     }
     &.gradient-purple {
       background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgba(134, 12, 251, 1) 25%, rgba(10, 3, 15, 1) 50%, rgba(134, 12, 251, 1) 75%, rgba(10, 3, 15, 1) 100%);
-      background-size: 300% 200%;
     }
     &.gradient-green {
       background: linear-gradient(70deg, rgba(10, 3, 15, 1) 0%, rgba(146, 251, 12, 1) 25%, rgba(10, 3, 15, 1) 50%, rgba(146, 251, 12, 1) 75%, rgba(10, 3, 15, 1) 100%);
-      background-size: 300% 200%;
     }
   }
 
-  .gradient-block-2 {
-    background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(207, 204, 205) 55%, rgb(70, 9, 144) 100%);
-    mix-blend-mode: color-dodge;
-    &.gradient-orange {
-      background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(207, 204, 205) 55%, rgb(183, 29, 9) 100%);
-    }
-    &.gradient-blue {
-      background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(207, 204, 205) 55%, rgb(4, 125, 211) 100%);
-    }
-    &.gradient-purple {
-      background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(207, 204, 205) 55%, rgb(131, 1, 253) 100%);
-    }
-    &.gradient-green {
-      background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(207, 204, 205) 55%, rgb(114, 202, 0) 100%);
-    }
-  }
 </style>
