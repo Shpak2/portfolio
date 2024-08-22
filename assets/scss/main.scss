@@ -16,6 +16,7 @@
   --popup-color: #FAFAFA;
   --tools-color: #F1F1F1;
   --danger-color: #E82626;
+  --review-color: #FFFFFF;
 }
 
 [data-theme="dark"] {
@@ -36,6 +37,7 @@
   --popup-color: #0F0F0F;
   --tools-color: #1C1C1C;
   --danger-color: #FF5959;
+  --review-color: #3F3846;
 }
 
 @import 'fonts.scss';
@@ -379,6 +381,17 @@ body {
         margin: vw_big_screen(12px) 0;
         text-indent: 0.8em;
       }
+    }
+  }
+}
+
+.review {
+  &-content {
+    user-select: none;
+    & p {
+      font-size: vw_big_screen(14px);
+      font-weight: 400;
+      margin: vw_big_screen(4px) 0;
     }
   }
 }
