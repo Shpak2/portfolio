@@ -40,48 +40,45 @@
           }"
           :keyboard="true"
         >
-          <swiper-slide v-for="(project, index) in data" :key="index">
-            <div class="slide-header mono-font flex items-center justify-between">
-              <h4>{{(index + 1).toString().padStart(2, '0')}}. {{ project.name }}</h4>
-              <div class="rounded flex items-center tags-wrap">
-                <IconTool />
-                <div class="tags flex items-center ">
-                  <span v-for="(tool, index) in project.tools" :key="index" style="white-space: pre;">
-                    {{ tool }}<span v-if="index < project.tools.length - 1">, </span>
-                  </span>
-                </div>
+        <swiper-slide v-for="(project, index) in data" :key="index">
+          <div class="slide-header mono-font flex items-center justify-between">
+            <h4>{{ (index + 1).toString().padStart(2, '0') }}. {{ project.name }}</h4>
+            <div class="rounded flex items-center tags-wrap"
+              @mouseenter="handleMouseEnter(index)"
+              @mouseleave="handleMouseLeave(index)">
+              <IconTool />
+              <div class="tags flex items-center">
+                <span :ref="'tagsText' + index">{{ project.tools.join(', ') }}</span>
               </div>
             </div>
-            <div class="rounded body-inner">
-              <div class="buttons-list flex items-center justify-center">
-                <button v-if="project.img.desktop" class="flex flex-col items-center"
-                  @mouseover="fillDesktop = '#fff'"
-                  @mouseleave="fillDesktop = '#860CFB'"
-                  @click="showPopup(index,'desktop')"
-                  >
-                    <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop"/></span>
-                    <b>Desktop</b>
-                </button>
-                <button v-if="project.img.tablet" class="flex flex-col items-center"
-                  @mouseover="fillTablet = '#fff'"
-                  @mouseleave="fillTablet = '#860CFB'"
-                  @click="showPopup(index,'tablet')"
-                  >
-                    <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet"/></span>
-                    <b>Tablet</b>
-                </button>
-                <button v-if="project.img.mobile" class="flex flex-col items-center"
-                  @mouseover="fillMobile = '#fff'"
-                  @mouseleave="fillMobile = '#860CFB'"
-                  @click="showPopup(index,'mobile')"
-                  >
-                    <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile"/></span>
-                    <b>Mobile</b>
-                </button>
-              </div>
-              <img class="flex" :src="project.img.main" :alt="project.name" loading="lazy">
+          </div>
+          <div class="rounded body-inner">
+            <div class="buttons-list flex items-center justify-center">
+              <button v-if="project.img.desktop" class="flex flex-col items-center"
+                @mouseover="fillDesktop = '#fff'"
+                @mouseleave="fillDesktop = '#860CFB'"
+                @click="showPopup(index, 'desktop')">
+                <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop" /></span>
+                <b>Desktop</b>
+              </button>
+              <button v-if="project.img.tablet" class="flex flex-col items-center"
+                @mouseover="fillTablet = '#fff'"
+                @mouseleave="fillTablet = '#860CFB'"
+                @click="showPopup(index, 'tablet')">
+                <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet" /></span>
+                <b>Tablet</b>
+              </button>
+              <button v-if="project.img.mobile" class="flex flex-col items-center"
+                @mouseover="fillMobile = '#fff'"
+                @mouseleave="fillMobile = '#860CFB'"
+                @click="showPopup(index, 'mobile')">
+                <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile" /></span>
+                <b>Mobile</b>
+              </button>
             </div>
-          </swiper-slide>
+            <img class="flex" :src="project.img.main" :alt="project.name" loading="lazy">
+          </div>
+        </swiper-slide>
         </swiper>
       </Decorative>
     </div>
@@ -143,6 +140,42 @@
       this.$store = store;
     },
     methods: {
+      handleMouseEnter(index) {
+        this.adjustTextOverflow(true, index);
+      },
+      handleMouseLeave(index) {
+        this.adjustTextOverflow(false, index);
+      },
+      adjustTextOverflow(isHover, index) {
+        this.$nextTick(() => {
+          const tagsContainer = this.$el.querySelector('.tags');
+          const tagsText = this.$refs['tagsText' + index][0];
+
+          if (tagsText && tagsContainer) {
+            const textWidth = tagsText.scrollWidth;
+            const containerWidth = tagsContainer.clientWidth - 24;
+
+            if (textWidth > containerWidth) {
+              if (isHover) {
+                const overflowWidth = textWidth - containerWidth;
+                const transformValue = -overflowWidth;
+
+                const maxTransitionDuration = 1.5;
+                const percentage = Math.min(1, overflowWidth / containerWidth);
+                const duration = 1+percentage * maxTransitionDuration;
+
+                tagsText.style.transition = `transform ${duration}s linear`;
+                tagsText.style.transform = `translateX(${transformValue}px)`;
+              } else {
+                tagsText.style.transition = `transform 0.4s linear`;
+                tagsText.style.transform = 'translateX(0)';
+              }
+            } else {
+              tagsText.style.transform = 'translateX(0)';
+            }
+          }
+        });
+      },
       showPopup(project, mode) {
         this.$store.commit('popup/setShowPopup', true);
         this.$store.commit('popup/setProjectPopup', project);
@@ -154,6 +187,7 @@
 </script>
 
 <style lang="scss" scoped>
+
   .content {
     margin-top: 20vh;
     margin-bottom: auto;
@@ -202,28 +236,67 @@
     &:hover {
       @include viewport(hover) {
         opacity: 0.7;
+        & svg {
+          animation: pulseNext 1s infinite;
+        }
       }
+    }
+    &:active {
+      transform: scale(0.8);
+    }
+    &.swiper-button-disabled {
+      opacity: 0.25;
+      pointer-events: none;
     }
   }
 
   .swiper-button-prev {
-    &.swiper-button-disabled {
-      opacity: 0.25;
+    &:hover {
+      @include viewport(hover) {
+        & svg {
+          animation: pulsePrev 1s infinite;
+        }
+      }
     }
   }
 
   .swiper-button-next {
     margin-left: vw_big_screen(16px);
-    &.swiper-button-disabled {
-      opacity: 0.25;
+    &:hover {
+      @include viewport(hover) {
+        & svg {
+          animation: pulseNext 1s infinite;
+        }
+      }
     }
   }
 
   .tags {
     padding: 0 vw_big_screen(12px);
-    font-size: vw_big_screen(12px);
     background-color: var(--tags-bg);
     height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    max-width: vw_big_screen(248px);
+    &::after {
+      content: '...';
+      position: absolute;
+      right: 0;
+      padding: 0 vw_big_screen(5px) 0 0;
+      background-color: var(--tags-bg);
+      font-size: vw_big_screen(12px);
+      letter-spacing: -0.36em;
+    }
+    & span {
+      font-size: vw_big_screen(12px);
+      display: inline-block;
+    }
+    &:hover::after {
+      transition: opacity 0.1s ease-in-out;
+      opacity: 0;
+    }
     &-wrap {
       height: vw_big_screen(32px);
       transform-origin: center right;

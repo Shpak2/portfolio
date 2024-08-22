@@ -96,7 +96,7 @@
               <IconMobile/>
             </button>
           </div>
-          <div class="popup-aside-tags rounded flex items-center"  @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+          <div class="popup-aside-tags rounded flex items-center" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
             <IconTool />
             <div class="flex tags mono-font items-center">
               <span ref="tagsText">{{ data[project].tools.join(', ') }}</span>
@@ -147,41 +147,41 @@
     },
     methods: {
       handleMouseEnter() {
-      this.adjustTextOverflow(true);
-    },
-    handleMouseLeave() {
-      this.adjustTextOverflow(false);
-    },
-    adjustTextOverflow(isHover) {
-      this.$nextTick(() => {
-        const tagsContainer = this.$el.querySelector('.tags');
-        const tagsText = this.$refs.tagsText;
+        this.adjustTextOverflow(true);
+      },
+      handleMouseLeave() {
+        this.adjustTextOverflow(false);
+      },
+      adjustTextOverflow(isHover) {
+        this.$nextTick(() => {
+          const tagsContainer = this.$el.querySelector('.tags');
+          const tagsText = this.$refs.tagsText;
 
-        if (tagsText && tagsContainer) {
-          const textWidth = tagsText.scrollWidth;
-          const containerWidth = tagsContainer.clientWidth - 24;
+          if (tagsText && tagsContainer) {
+            const textWidth = tagsText.scrollWidth;
+            const containerWidth = tagsContainer.clientWidth - 24;
 
-          if (textWidth > containerWidth) {
-            if (isHover) {
-              const overflowWidth = textWidth - containerWidth;
-              const transformValue = -overflowWidth;
+            if (textWidth > containerWidth) {
+              if (isHover) {
+                const overflowWidth = textWidth - containerWidth;
+                const transformValue = -overflowWidth;
 
-              const maxTransitionDuration = 1.5;
-              const percentage = Math.min(1, overflowWidth / containerWidth);
-              const duration = 1+percentage * maxTransitionDuration;
+                const maxTransitionDuration = 1.5;
+                const percentage = Math.min(1, overflowWidth / containerWidth);
+                const duration = 1+percentage * maxTransitionDuration;
 
-              tagsText.style.transition = `transform ${duration}s linear`;
-              tagsText.style.transform = `translateX(${transformValue}px)`;
+                tagsText.style.transition = `transform ${duration}s linear`;
+                tagsText.style.transform = `translateX(${transformValue}px)`;
+              } else {
+                tagsText.style.transition = `transform 0.4s linear`;
+                tagsText.style.transform = 'translateX(0)';
+              }
             } else {
-              tagsText.style.transition = `transform 0.4s linear`;
               tagsText.style.transform = 'translateX(0)';
             }
-          } else {
-            tagsText.style.transform = 'translateX(0)';
           }
-        }
-      });
-    },
+        });
+      },
       closePopup() {
         this.$store.commit('popup/setShowPopup', false);
       },
@@ -248,6 +248,10 @@
         & button {
           color: var(--footer-color);
           position: relative;
+          transition: transform 0.2s ease;
+          &:active {
+            transform: scale(0.8);
+          }
           &::after {
             content: '';
             position: absolute;
@@ -272,6 +276,29 @@
         margin-right: vw_big_screen(80px);
         & button {
           width: vw_big_screen(38px);
+          transition: transform 0.2s ease;
+          &:active {
+            transform: scale(0.8);
+            & svg {
+              animation: none !important;
+            }
+          }
+          &:first-child {
+            &:hover {
+              @include viewport(hover) {
+                & svg {
+                  animation: pulsePrev 1s infinite;
+                }
+              }
+            }
+          }
+          &:last-child:hover {
+            @include viewport(hover) {
+              & svg {
+                animation: pulseNext 1s infinite;
+              }
+            }
+          }
         }
       }
     }
@@ -322,6 +349,10 @@
           height: vw_big_screen(48px);
           background-color: #fff;
           padding: 0;
+          transition: transform 0.2s ease;
+          &:active {
+            transform: scale(0.8);
+          }
         }
       }
       &-tags {
@@ -376,5 +407,12 @@
   .btn-close {
     width: vw_big_screen(32px);
     height: vw_big_screen(32px);
+    transition: transform 0.2s ease;
+    &:active {
+      transform: scale(0.8);
+    }
+    &:hover svg {
+      animation: closeHover 0.6s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+    }
   }
 </style>

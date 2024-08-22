@@ -42,6 +42,7 @@
 @import 'swiper/css/effect-creative';
 @import 'swiper/css/scrollbar';
 @import 'swiper/css/parallax';
+@import 'animation';
 
 $fontMono: 'SF Mono', sans-serif;
 
@@ -278,6 +279,8 @@ body {
   transition: 0.2s ease-in;
   font-size: vw_big_screen(16px);
   position: relative;
+  transition: transform 0.2s ease;
+  display: inline-block;
   &::after {
     content: '';
     position: absolute;
@@ -288,6 +291,9 @@ body {
     height: vw_big_screen(4px);
     background-color: var(--button-color);
     opacity: 0;
+  }
+  &:active {
+    transform: scale(0.8);
   }
   &:hover {
     @include viewport(hover) {
@@ -371,47 +377,5 @@ body {
         text-indent: 0.8em;
       }
     }
-  }
-}
-
-@keyframes bounce {
-  0%,20%,40%,60%,80%,to {
-    animation-timing-function: cubic-bezier(.215,.61,.355,1);
-  }
-  0% {
-    transform:scaleX(1);
-  }
-  20% {
-    transform:scale3d(1.1,.9,1);
-  }
-  40% {
-    transform:scale3d(.95,1.02,1);
-  }
-  60% {
-    transform: scale3d(1.05,.9,1);
-  }
-  80% {
-    transform:scale3d(.98,1.01,1);
-  }
-  to {
-    transform:scaleX(1);
-  }
-}
-
-@keyframes pulse {
-  0%,10%,40%,60%,100% {
-    animation-timing-function: cubic-bezier(.215,.61,.355,1);
-  }
-  0%,100% {
-    transform: translate(0%,10%);
-  }
-  10% {
-    transform: translate(15%,10%);
-  }
-  40% {
-    transform: translate(-5%,10%);
-  }
-  60% {
-    transform: translate(10%,10%);
   }
 }

@@ -11,6 +11,7 @@ export const data = [
       'SCSS/CSS',
       'JavaScript',
       'Vue.js',
+      'Canvas',
     ],
     img: {
       main: 'images/portfolio/szklaki/main.webp',
