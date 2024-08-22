@@ -337,7 +337,7 @@
         }
         & .tags {
           padding: 0 vw_big_screen(12px);
-          background-color: var(--shadow-slide);
+          background-color: var(--tools-slide);
           height: 100%;
           overflow: hidden;
           white-space: nowrap;
@@ -349,7 +349,7 @@
             position: absolute;
             right: 0;
             padding: 0 vw_big_screen(5px) 0 0;
-            background-color: var(--shadow-slide);
+            background-color: var(--tools-color);
             font-size: vw_big_screen(12px);
             letter-spacing: -0.36em;
           }
