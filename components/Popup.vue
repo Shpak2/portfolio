@@ -368,7 +368,7 @@
         }
         & .tags {
           padding: 0 vw_big_screen(12px);
-          background-color: var(--tools-slide);
+          background-color: var(--tools-color);
           height: 100%;
           overflow: hidden;
           white-space: nowrap;

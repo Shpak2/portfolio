@@ -90,9 +90,9 @@ export class TagsCloud {
 
   #onMouseMove(e) {
     const rootRect = this.#root.getBoundingClientRect();
-    const deltaX = e.clientX - (rootRect.left + this.#root.offsetWidth / 2);
+    const deltaX = (e.clientX <= window.innerWidth/2 ? 960 : e.clientX) - (rootRect.left + this.#root.offsetWidth / 2);
     const deltaY = e.clientY - (rootRect.top + this.#root.offsetHeight / 2);
-    const a = Math.atan2(deltaX, deltaY) - Math.PI / 2;
+    const a = Math.atan2(deltaX-1, deltaY-1) - Math.PI / 2;
     const axis = [Math.sin(a), Math.cos(a), 0];
     const delta = Math.sqrt(deltaX ** 2 + deltaY ** 2);
     const speed = delta / Math.max(window.innerHeight, window.innerWidth) / 15;
