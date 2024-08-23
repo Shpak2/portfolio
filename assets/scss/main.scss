@@ -394,4 +394,37 @@ body {
       margin: vw_big_screen(4px) 0;
     }
   }
+  &-slider {
+    & .swiper-wrapper {
+      mask-image: linear-gradient(90deg,transparent 0,#000 2%,#000 98%,transparent);
+    }
+  }
+  &-bullet {
+    width: vw_big_screen(10px);
+    height: vw_big_screen(10px);
+    background-color: var(--button-color);
+    border-radius: vw_big_screen(2px);
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    &.active {
+      background-color: var(--button-color);
+      pointer-events: none;
+      & ~ .review-bullet {
+        background-color: var(--sidebar-color) !important; /* Колір для елементів після активного */
+      }
+
+    }
+    &:hover {
+      @include viewport(hover) {
+        background-color: var(--button-color);
+        opacity: 0.8;
+      }
+    }
+    &:active {
+      transform: scale(0.8);
+    }
+    &:not(:last-child) {
+      margin-right: vw_big_screen(12px);
+    }
+  }
 }
