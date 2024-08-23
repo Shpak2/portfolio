@@ -27,7 +27,14 @@ export default defineNuxtConfig({
     locales: ['en', 'ua', 'pl'],
     defaultLocale: 'en',
   },
-  // loading: {
-  //   color: 'var(--primary-color)'
-  // }
+  runtimeConfig: {
+    smtpHost: process.env.SMTP_HOST,
+    smtpPort: process.env.SMTP_PORT,
+    smtpUser: process.env.SMTP_USER,
+    smtpPassword: process.env.SMTP_PASSWORD,
+    recaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY,
+    public: {
+      recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
+    }
+  }
 })

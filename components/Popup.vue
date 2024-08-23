@@ -134,13 +134,6 @@
       IconTablet,
       IconMobile
     },
-    // props: {
-    //   project: ,
-    //   mode: $store.state.popup.mode
-    // },
-    mounted() {
-
-    },
     beforeMount() {
       const store = useStore();
       this.$store = store;

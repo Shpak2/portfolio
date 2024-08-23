@@ -394,11 +394,6 @@ body {
       margin: vw_big_screen(4px) 0;
     }
   }
-  &-slider {
-    & .swiper-wrapper {
-      mask-image: linear-gradient(90deg,transparent 0,#000 2%,#000 98%,transparent);
-    }
-  }
   &-bullet {
     width: vw_big_screen(10px);
     height: vw_big_screen(10px);
@@ -410,7 +405,7 @@ body {
       background-color: var(--button-color);
       pointer-events: none;
       & ~ .review-bullet {
-        background-color: var(--sidebar-color) !important; /* Колір для елементів після активного */
+        background-color: var(--sidebar-color) !important;
       }
 
     }
