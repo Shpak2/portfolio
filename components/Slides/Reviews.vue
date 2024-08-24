@@ -9,9 +9,6 @@
           :freeMode="true"
           :parallax="true"
           :modules="modules"
-          :mousewheel="{
-            thresholdDelta: 40,
-          }"
           :navigation="{
             disabledClass: 'disable',
             nextEl: '.review-button-next',

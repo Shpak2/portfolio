@@ -16,7 +16,6 @@ export default defineEventHandler(async (event) => {
     },
   })
 
-  // HTML шаблон листа
   const htmlTemplate = `
     <html>
       <head>
@@ -46,7 +45,7 @@ export default defineEventHandler(async (event) => {
     from: email,
     to: 'zhenya19880307@gmail.com',
     subject: `New Message from ${name}: ${subject}`,
-    html: htmlTemplate,  // Використовуйте HTML шаблон тут
+    html: htmlTemplate,
   }
 
   try {

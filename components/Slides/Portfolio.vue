@@ -247,6 +247,9 @@
     &.swiper-button-disabled {
       opacity: 0.25;
       pointer-events: none;
+      & svg {
+        animation: none !important;
+      }
     }
   }
 
