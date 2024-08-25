@@ -15,5 +15,12 @@ export default {
   aboutContent: '<p>and I am a front-end developer with over five years of experience in web development. I create websites that help businesses find new customers and attract more potential buyers. If you\'re looking for a web developer who can bring your ideas to life, you\'ve found the right person!<\/p><p>With me, you can be sure that the website will look attractive and help you attract more customers. I always work with attention to detail and prioritize quality over quantity. Throughout my experience, I have learned to develop websites based on the needs of the client, helping them achieve their goals.<\/p><p>If you need a website that will impress your audience, I\'m up for the challenge. My goal is to create a website that not only reflects your company but also provides potential customers with useful information and convinces them to choose you.<\/p><p>In addition, I always keep up with the latest trends in the industry and use new technologies to ensure maximum efficiency and productivity for your website. If you want to take your business to the next level, please contact me, and let\'s get to work!<\/p>',
   expirienceTitle: 'My web development experience',
   expirienceContent: '<p>includes working with various technologies and platforms. I have worked with <b>Vue.js<\/b> and <b>Nuxt.js<\/b>, which help create fast and efficient websites. Additionally, I have experience working with <b>WordPress<\/b>, which allows for highly functional and flexible websites.<\/p><p>In my experience, I have developed calculators for construction companies and online stores. I also have experience solving problems related to website loading speed and optimizing content for Google PageSpeed metrics. With this experience, I can ensure high performance and efficiency for your website.<\/p><p>I always stay up-to-date with the latest technological trends and continuously develop my skills to provide the best possible results for my clients. I am ready to take on any task to help you achieve your goals and take your business to the next level.<\/p>',
+  reviewTitle: 'Reviews',
+  contactTitle: 'Contact Me',
   contactDescription: 'Do you have questions or want to discuss a project? Leave your message, and I will get back to you shortly.',
+  formName: 'Name',
+  formEmail: 'Email',
+  formSubject: 'Subject',
+  formMessage: 'Message',
+  formSubmit: 'Send message',
 }

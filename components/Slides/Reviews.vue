@@ -2,7 +2,7 @@
   <div class="container m-auto flex items-center full-height" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
     <div class="container">
       <Decorative :content="'main'" :className="'tag-item__text'" :tag="'wrap'">
-        <h2>Reviews</h2>
+        <h2 v-html="$t('reviewTitle')"></h2>
         <swiper
           :direction="'vertical'"
           :slidesPerView="'auto'"
@@ -145,6 +145,8 @@
     font-size: vw_big_screen(32px);
     margin: vw_big_screen(14px);
     font-weight: 900;
+    width: 100%;
+    text-align: center;
   }
   .container {
     position: relative;
