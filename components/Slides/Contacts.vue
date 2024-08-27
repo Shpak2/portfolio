@@ -26,7 +26,6 @@
               :placeholder="$t('formName')" />
               <span v-if="errors.name" class="error-message flex items-center">
                 <IconError/>{{ errors.name }}
-
               </span>
           </div>
 
@@ -48,7 +47,6 @@
               :placeholder="$t('formEmail')" />
               <span v-if="errors.email" class="error-message flex items-center">
                 <IconError/>{{ errors.email }}
-
               </span>
           </div>
 
@@ -70,7 +68,6 @@
               :placeholder="$t('formSubject')" />
               <span v-if="errors.subject" class="error-message flex items-center">
                 <IconError/>{{ errors.subject }}
-
               </span>
           </div>
 
@@ -93,7 +90,6 @@
               @mouseout="handleMouseOut" />
               <span v-if="errors.message" class="error-message flex items-center">
                 <IconError/>{{ errors.message }}
-
               </span>
           </div>
 
@@ -108,9 +104,6 @@
             </svg>
           </button>
         </form>
-
-        <p v-if="success" class="success-message">Message sent successfully!</p>
-        <p v-if="error" class="error-message">There was an error sending your message.</p>
       </Decorative>
     </div>
   </div>
@@ -121,6 +114,7 @@ import Decorative from '~/components/DecorativeWrapper.vue'
 import IconError from '~/components/Svg/Error.vue'
 import { messages } from '~/data/errors-message';
 import { useFetch } from '#app'
+import { useStore } from 'vuex';
 
 export default {
   components: {
@@ -147,41 +141,52 @@ export default {
       isSubjectFocused: false,
       isMessageFocused: false,
       loading: false,
-      success: false,
-      error: false,
       correct: false
     }
   },
+  beforeMount() {
+    const store = useStore();
+    this.$store = store;
+  },
   methods: {
     async submitForm() {
-      if (this.correct) {
+    if (this.correct) {
 
-        this.loading = true
-        this.success = false
-        this.error = false
+      this.$store.commit('setlogoLoader', true);
+      this.$store.commit('setFormPopup', true);
 
-        try {
-          const { data, error: fetchError } = await useFetch('/api/send-email', {
-            method: 'POST',
-            body: this.form,
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          })
+      this.loading = true;
 
-          if (fetchError.value) {
-            this.error = true
-          } else {
-            this.success = true
-            this.resetForm()
+      try {
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          body: JSON.stringify(this.form),
+          headers: {
+            'Content-Type': 'application/json',
           }
-        } catch (err) {
-          this.error = true
-        } finally {
-          this.loading = false
+        });
+
+        const data = await response.json();
+
+        this.$store.commit('setMessagePopup', data.body?.message);
+
+        if (response.status !== 200 || !data.body?.success) {
+          this.$store.commit('setError', true);
+          this.$store.commit('setMessagePopup', data.body?.message || 'Unknown error');
+        } else {
+          this.$store.commit('setError', false);
+          this.resetForm();
         }
+        this.$store.commit('setlogoLoader', false);
+      } catch (err) {
+        this.$store.commit('setMessagePopup', err || 'Unknown error');
+        this.$store.commit('setError', true);
+      } finally {
+        this.loading = false;
+        this.$store.commit('setlogoLoader', false);
       }
-    },
+    }
+  },
     resetForm() {
       this.form = {
         name: '',
@@ -326,6 +331,14 @@ export default {
       transition: .2s ease-in;
       color: var(--secondary-color);
       display: flex;
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: var(--secondary-color);
+        box-shadow: inset 0 0 vw_big_screen(40px) vw_big_screen(40px) var(--review-color);
+      }
       &::placeholder {
         font-size: vw_big_screen(16px);
         line-height: vw_big_screen(20px);
@@ -370,10 +383,5 @@ export default {
       transform: translateY(50%) rotateX(0deg);
     }
   }
-
-.success-message {
-  color: green;
-  margin-top: 10px;
-}
 
 </style>

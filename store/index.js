@@ -14,7 +14,11 @@ export const store = createStore({
 export const state = () => ({
   activeItem: 'home',
   allowMouseScroll: true,
-  hoverElement: false
+  hoverElement: false,
+  formPopup: false,
+  logoLoader: false,
+  hasError: false,
+  messagePopup: '',
 });
 
 export const mutations = {
@@ -26,5 +30,17 @@ export const mutations = {
   },
   setHover(state, value) {
     state.hoverElement = value;
+  },
+  setFormPopup(state, value) {
+    state.formPopup = value;
+  },
+  setlogoLoader(state, value) {
+    state.logoLoader = value;
+  },
+  setError(state, value) {
+    state.hasError = value;
+  },
+  setMessagePopup(state, value) {
+    state.messagePopup = value;
   },
 };

@@ -50,9 +50,15 @@ export default defineEventHandler(async (event) => {
 
   try {
     await transporter.sendMail(mailOptions)
-    return { success: true }
+    return {
+      statusCode: 200,
+      body: { success: true }
+    }
   } catch (error) {
-    console.error(error)
-    return { success: false }
+    console.error('Error sending mail:', error.message)
+    return {
+      statusCode: 500,
+      body: { success: false, message: error.message }
+    }
   }
 })

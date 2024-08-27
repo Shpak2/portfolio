@@ -23,4 +23,8 @@ export default {
   formSubject: 'Тема',
   formMessage: 'Повідомлення',
   formSubmit: 'Відправити повідомлення',
+  popupSuccessTitle: 'Дякую!',
+  popupSuccessMessage: 'Я зв\'яжусь з вами незабаром.',
+  popupErrorTitle: 'Ой...',
+  popupErrorBtn: 'Спробуй ще раз',
 }

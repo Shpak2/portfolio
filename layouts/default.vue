@@ -14,6 +14,11 @@
     <Clicker v-if="!maskOn" />
     <div v-if="maskOn" class="mask"></div>
     <Popup v-if="!maskOn && showPopup" />
+    <FormPopup
+      v-if="!maskOn && showFormPopup"
+      :error="isError"
+      :message="messagePopup"
+    />
   </div>
 </template>
 
@@ -26,6 +31,7 @@ import Slider from '~/components/Slider.vue';
 import Gradient from '~/components/Gradient.vue';
 import Loader from '~/components/Loader.vue';
 import Popup from '~/components/Popup.vue';
+import FormPopup from '~/components/FormPopup.vue';
 
 
 export default {
@@ -37,17 +43,33 @@ export default {
     Slider,
     Gradient,
     Loader,
-    Popup
+    Popup,
+    FormPopup
   },
   data() {
     return {
       maskOn: true,
-      showPopup: false
+      showPopup: false,
+      showFormPopup: false,
+      isError: false,
+      messagePopup: ''
     }
   },
   watch: {
+    '$store.state.formPopup'(val) {
+      this.FormPopup = val
+    },
     '$store.state.popup.show'(val) {
       this.showPopup = val
+    },
+    '$store.state.formPopup'(val) {
+      this.showFormPopup = val
+    },
+    '$store.state.hasError'(val) {
+      this.isError = val
+    },
+    '$store.state.messagePopup'(val) {
+      this.messagePopup = val
     },
   },
   mounted() {
@@ -73,6 +95,6 @@ export default {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
-    background-color: var(--primary-color)
+    background-color: var(--primary-color);
   }
 </style>

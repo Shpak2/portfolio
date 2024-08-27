@@ -23,4 +23,8 @@ export default {
   formSubject: 'Subject',
   formMessage: 'Message',
   formSubmit: 'Send message',
+  popupSuccessTitle: 'Thank you!',
+  popupSuccessMessage: 'I will contact you soon.',
+  popupErrorTitle: 'Oopsie...',
+  popupErrorBtn: 'Try again',
 }

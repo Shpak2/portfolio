@@ -1,5 +1,7 @@
 <template>
-  <div class="popup-wrap flex items-center justify-center">
+  <div
+    :class="{hide: hidePopup}"
+    class="popup-wrap flex items-center justify-center">
     <div class="popup-inner rounded">
       <div class="popup-header mono-font flex items-center">
         <h4 :style="{transform: !handleTitle ? 'scale(1,0)' : ''}">{{(project + 1).toString().padStart(2, '0')}}. {{ data[project].name }}</h4>
@@ -125,7 +127,8 @@
         project: this.$store.state.popup.project,
         mode: this.$store.state.popup.mode,
         handleTitle: true,
-        handleDisplay: true
+        handleDisplay: true,
+        hidePopup: false
       }
     },
     components: {
@@ -176,7 +179,11 @@
         });
       },
       closePopup() {
-        this.$store.commit('popup/setShowPopup', false);
+        this.hidePopup = true
+        setTimeout(()=>{
+          this.$store.commit('popup/setShowPopup', false);
+          this.hidePopup = false
+        },300)
       },
       changeActive(val) {
         this.handleTitle = false
@@ -219,6 +226,12 @@
     z-index: 101;
     background: rgba(20, 18, 22, 0.6);
     backdrop-filter: blur(5px);
+    transform-origin: center bottom;
+    transform: scale(1,0);
+    animation: show 0.3s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+    &.hide {
+      animation: hide 0.3s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+    }
   }
 
   .popup {
@@ -406,6 +419,21 @@
     }
     &:hover svg {
       animation: closeHover 0.6s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+    }
+  }
+
+  @keyframes show {
+    to {
+      transform: scale(1,1);
+    }
+  }
+
+  @keyframes hide {
+    from {
+      transform: scale(1,1);
+    }
+    to {
+      transform: scale(1,0);
     }
   }
 </style>
