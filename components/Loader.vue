@@ -7,7 +7,7 @@
       :loop="1"
       :animationData="checkTheme() ? logoBlack : logoWhite"
       :height="'30%'"
-      :width="checkWidth() ? '70%' : '35%'"
+      :width="width"
       />
   </div>
 </template>
@@ -28,6 +28,7 @@
         logoBlack: logoJsonBlack,
         isPlay: false,
         completeLoop: false,
+        width: '70%',
       }
     },
     beforeMount() {
@@ -64,7 +65,7 @@
         }, 1000)
       },
       checkWidth: function () {
-        return screen.width <= 1440 ? true : false
+        this.width = screen.width <= 1024 ? '70%' : ((40 * window.innerWidth) / 1920) + '%'
       }
     }
   };

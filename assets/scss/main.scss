@@ -220,10 +220,10 @@ body {
 .container {
   width: vw_big_screen(1076px);
   @include viewport(tabs) {
-    width: vw_tabs(728px);
+    width: vw_tabs(696px);
   }
   @include viewport(mobile) {
-    width: vmin_mobile(335px);
+    width: vmin_mobile(351px);
   }
 }
 

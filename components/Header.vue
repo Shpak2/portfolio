@@ -39,5 +39,12 @@
     left: 0;
     width: 100%;
     z-index: 100;
+    @include viewport(tabs) {
+      height: vw_tabs(80px);
+      border-bottom-width: 1px;
+    }
+    @include viewport(mobile) {
+      height: vmin_mobile(80px);
+    }
   }
 </style>

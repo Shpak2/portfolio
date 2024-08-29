@@ -28,6 +28,12 @@
 <style lang="scss" scoped>
   .logo-header {
     width: vw_big_screen(180px);
+    @include viewport(tabs) {
+      width: vw_tabs(180px);
+    }
+    @include viewport(mobile) {
+      width: vmin_mobile(180px);
+    }
   }
   path {
     transition: 0.3s ease;

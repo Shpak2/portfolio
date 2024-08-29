@@ -72,13 +72,16 @@ export default {
         angle: angle,
         color: color,
         scaleX: 1,
+        scaleY: 1,
+        initialWidth: window.innerWidth <= 1024 ? 30 : (40 * window.innerWidth) / 1920,
+        initialHeight: window.innerWidth <= 1024 ? 23 : (31 * window.innerWidth) / 1920,
         growing: true,
-        speed: 3/this.getRandomInteger(200, 300),
+        speed: 3 / this.getRandomInteger(200, 300),
         radius: this.getRandomInteger(140, 240),
         correct: this.getRandomInteger(-20, 20),
-        rotationSpeed: 100/this.getRandomInteger(90, 110),
-        radiusChangeSpeed: 2/this.getRandomInteger(70, 110),
-        speedScale: 2/this.getRandomInteger(30, 40),
+        rotationSpeed: 100 / this.getRandomInteger(90, 110),
+        radiusChangeSpeed: 2 / this.getRandomInteger(70, 110),
+        speedScale: 2 / this.getRandomInteger(30, 40),
         life: this.getRandomInteger(200, 600),
         opacity: 1
       });
@@ -96,8 +99,13 @@ export default {
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(figure.angle - 29.75);
-      ctx.scale(figure.scaleX, 1);
-      ctx.translate(-(figure.size/2), -(figure.size/2));
+
+      // Масштабування на основі початкових розмірів
+      const scaleX = figure.scaleX * (figure.initialWidth / 40);
+      const scaleY = figure.scaleY * (figure.initialHeight / 31);
+      ctx.scale(scaleX, scaleY);
+
+      ctx.translate(-(figure.size / 2), -(figure.size / 2));
 
       ctx.globalAlpha = figure.opacity;
 
@@ -126,7 +134,7 @@ export default {
           figure.angle = targetAngle + Math.PI / 2;
           this.drawTriangle(ctx, figure);
 
-          this.hover ? figure.angle += figure.rotationSpeed-0.4 : figure.angle += figure.rotationSpeed;
+          this.hover ? figure.angle += figure.rotationSpeed - 0.4 : figure.angle += figure.rotationSpeed;
 
           if (figure.angle >= 2 * Math.PI) {
             figure.angle -= 2 * Math.PI;
@@ -137,7 +145,7 @@ export default {
           figure.radius += (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
 
           figure.life -= 0.2
-          if(figure.life <= 0) {
+          if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
               this.figures = this.figures.filter(f => f !== figure);
@@ -159,11 +167,11 @@ export default {
 
           this.drawTriangle(ctx, figure);
           figure.life -= 15
-          if(figure.life <= 0) {
+          if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
               this.figures = this.figures.filter(f => f !== figure);
-              this.generateFigures(this.targetX+this.getRandomInteger(-150, 150), this.targetY+this.getRandomInteger(-150, 150));
+              this.generateFigures(this.targetX + this.getRandomInteger(-150, 150), this.targetY + this.getRandomInteger(-150, 150));
             }
           }
         });
@@ -208,6 +216,7 @@ export default {
   }
 };
 </script>
+
 
 <style lang="scss" scoped>
   div {
