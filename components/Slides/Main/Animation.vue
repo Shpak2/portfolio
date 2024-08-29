@@ -1,11 +1,10 @@
 <template>
-  <div class="site-background full-height">
+  <div class="full-height">
     <canvas ref="myCanvas" />
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -32,7 +31,8 @@ export default {
       maxRadius: 1.2,
       targetRadius: 200,
       figures: [],
-      length: 50
+      length: 50,
+      animationFrameId: null
     };
   },
   watch: {
@@ -40,7 +40,7 @@ export default {
       this.updateColors();
     },
     '$store.state.hoverElement'(val) {
-      this.hover = val
+      this.hover = val;
     },
   },
   mounted() {
@@ -49,18 +49,32 @@ export default {
     }
     this.initializeCanvas();
     window.addEventListener('mousemove', this.handleMouseMove);
+    window.addEventListener('resize', this.handleResize);
   },
   beforeDestroy() {
     window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('resize', this.handleResize);
     clearTimeout(this.mouseStillTimeout);
+    cancelAnimationFrame(this.animationFrameId);
   },
   methods: {
     initializeCanvas() {
       const canvas = this.$refs.myCanvas;
+
+      if (!canvas) return;
+
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       const ctx = canvas.getContext("2d");
+
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+
       this.animate(ctx, canvas);
+    },
+    handleResize() {
+      this.initializeCanvas();
     },
     generateFigures(positionX = this.getRandomInteger(1, window.innerWidth), positionY = this.getRandomInteger(20, window.innerHeight)) {
       const angle = Math.random() * 2 * Math.PI;
@@ -100,7 +114,6 @@ export default {
       ctx.translate(x, y);
       ctx.rotate(figure.angle - 29.75);
 
-      // Масштабування на основі початкових розмірів
       const scaleX = figure.scaleX * (figure.initialWidth / 40);
       const scaleY = figure.scaleY * (figure.initialHeight / 31);
       ctx.scale(scaleX, scaleY);
@@ -144,7 +157,7 @@ export default {
           }
           figure.radius += (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
 
-          figure.life -= 0.2
+          figure.life -= 0.2;
           if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
@@ -153,7 +166,6 @@ export default {
             }
           }
         });
-
       } else {
         this.figures.forEach(figure => {
           figure.x += (this.targetX - figure.x + figure.correct) * figure.speed;
@@ -166,7 +178,7 @@ export default {
           figure.angle += (targetAngle - figure.angle);
 
           this.drawTriangle(ctx, figure);
-          figure.life -= 15
+          figure.life -= 15;
           if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
@@ -184,10 +196,9 @@ export default {
           figure.scaleX -= figure.speedScale - 0.01;
           if (figure.scaleX <= 0.6) figure.growing = true;
         }
-
       });
 
-      requestAnimationFrame(() => this.animate(ctx, canvas));
+      this.animationFrameId = requestAnimationFrame(() => this.animate(ctx, canvas));
     },
     handleMouseMove(event) {
       this.mouseX = event.clientX;

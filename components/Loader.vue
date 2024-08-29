@@ -65,7 +65,7 @@
         }, 1000)
       },
       checkWidth: function () {
-        this.width = screen.width <= 1024 ? '70%' : ((40 * window.innerWidth) / 1920) + '%'
+        this.width = screen.width <= 1024 ? '70%' : ((500 * window.innerWidth) / 1920) + 'px'
       }
     }
   };
