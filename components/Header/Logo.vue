@@ -39,7 +39,3 @@
     transition: 0.3s ease;
   }
 </style>
-
-<script lang="ts">
-</script>
-

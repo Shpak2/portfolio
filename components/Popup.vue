@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{hide: hidePopup}"
+    :class="{show: showPopup, hide: hidePopup}"
     class="popup-wrap flex items-center justify-center">
     <div class="popup-inner rounded">
       <div class="popup-header mono-font flex items-center">
@@ -128,7 +128,8 @@
         mode: this.$store.state.popup.mode,
         handleTitle: true,
         handleDisplay: true,
-        hidePopup: false
+        showPopup: true,
+        hidePopup: false,
       }
     },
     components: {
@@ -183,7 +184,7 @@
         setTimeout(()=>{
           this.$store.commit('popup/setShowPopup', false);
           this.hidePopup = false
-        },300)
+        },500)
       },
       changeActive(val) {
         this.handleTitle = false
@@ -226,11 +227,16 @@
     z-index: 101;
     background: rgba(20, 18, 22, 0.6);
     backdrop-filter: blur(5px);
-    transform-origin: center bottom;
-    transform: scale(1,0);
-    animation: show 0.3s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+    opacity: 0;
+    transition: 0.3s ease-in;
+    transform: scale(2);
+    &.show {
+      animation: show 0.2s ease-in-out forwards;
+    }
     &.hide {
-      animation: hide 0.3s cubic-bezier(0.44, 1.2, 0.54, 0.31) forwards;
+      opacity: 1;
+      transform: scale(1);
+      animation: hide 0.2s ease-in 0.2s forwards;
     }
   }
 
@@ -240,6 +246,17 @@
       height: 80%;
       background-color: var(--primary-color);
       overflow: hidden;
+      transition: 0.3s ease-in;
+      opacity: 0;
+      transform: scale(2);
+      .popup-wrap.show & {
+        animation: show 0.2s ease-in-out 0.2s forwards;
+      }
+      .popup-wrap.hide & {
+        opacity: 1;
+        transform: scale(1);
+        animation: hide 0.2s ease-in forwards;
+      }
     }
     &-header {
       width: 100%;
@@ -424,16 +441,22 @@
 
   @keyframes show {
     to {
-      transform: scale(1,1);
+      filter: blur(0);
+      opacity: 1;
+      transform: scale(1);
     }
   }
 
   @keyframes hide {
     from {
-      transform: scale(1,1);
+      filter: blur(0);
+      opacity: 1;
+      transform: scale(1);
     }
     to {
-      transform: scale(1,0);
+      filter: blur(100px);
+      opacity: 0;
+      transform: scale(2);
     }
   }
 </style>

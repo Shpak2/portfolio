@@ -29,17 +29,17 @@ export default {
       mouseStillTimeout: null,
       minRadius: 0.8,
       maxRadius: 1.2,
-      targetRadius: 200,
+      targetRadius: window.innerWidth <= 1024 ? (200 * window.innerWidth) / 768 : 200,
       figures: [],
-      length: 50,
+      length: window.innerWidth <= 1024 ? (50 * window.innerWidth) / 768 : 50,
       animationFrameId: null
     };
   },
   watch: {
-    '$store.state.theme.darkMode'() {
+    "$store.state.theme.darkMode"() {
       this.updateColors();
     },
-    '$store.state.hoverElement'(val) {
+    "$store.state.hoverElement"(val) {
       this.hover = val;
     },
   },
@@ -48,12 +48,18 @@ export default {
       this.generateFigures();
     }
     this.initializeCanvas();
-    window.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("mousemove", this.handleMouseMove);
+    window.addEventListener("resize", this.handleResize);
+
+    window.addEventListener("touchstart", this.handleTouchMove);
+    window.addEventListener("touchmove", this.handleTouchMove);
   },
   beforeDestroy() {
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("mousemove", this.handleMouseMove);
+    window.removeEventListener("resize", this.handleResize);
+
+    window.removeEventListener("touchstart", this.handleTouchMove);
+    window.removeEventListener("touchmove", this.handleTouchMove);
     clearTimeout(this.mouseStillTimeout);
     cancelAnimationFrame(this.animationFrameId);
   },
@@ -76,7 +82,31 @@ export default {
     handleResize() {
       this.initializeCanvas();
     },
-    generateFigures(positionX = this.getRandomInteger(1, window.innerWidth), positionY = this.getRandomInteger(20, window.innerHeight)) {
+    handleMouseMove(event) {
+      this.updateMousePosition(event.clientX, event.clientY);
+    },
+    handleTouchMove(event) {
+      if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        this.updateMousePosition(touch.clientX, touch.clientY);
+      }
+    },
+    updateMousePosition(x, y) {
+      this.mouseX = x;
+      this.mouseY = y;
+      this.targetX = x;
+      this.targetY = y;
+      this.isSearching = false;
+
+      clearTimeout(this.mouseStillTimeout);
+      this.mouseStillTimeout = setTimeout(() => {
+        this.isSearching = true;
+      }, 500);
+    },
+    generateFigures(
+      positionX = this.getRandomInteger(1, window.innerWidth),
+      positionY = this.getRandomInteger(20, window.innerHeight)
+    ) {
       const angle = Math.random() * 2 * Math.PI;
       const color = this.getRandomColor();
       this.figures.push({
@@ -137,9 +167,17 @@ export default {
       const centerY = this.mouseY;
 
       if (this.isSearching || this.hover) {
-        this.figures.forEach(figure => {
-          figure.x += ((centerX + figure.radius * Math.cos(figure.angle)) - figure.x + figure.correct) * figure.speed;
-          figure.y += ((centerY + figure.radius * Math.sin(figure.angle)) - figure.y + figure.correct) * figure.speed;
+        this.figures.forEach((figure) => {
+          figure.x +=
+            ((centerX + figure.radius * Math.cos(figure.angle)) -
+              figure.x +
+              figure.correct) *
+            figure.speed;
+          figure.y +=
+            ((centerY + figure.radius * Math.sin(figure.angle)) -
+              figure.y +
+              figure.correct) *
+            figure.speed;
           const dx = this.targetX - figure.x;
           const dy = this.targetY - figure.y;
 
@@ -147,48 +185,59 @@ export default {
           figure.angle = targetAngle + Math.PI / 2;
           this.drawTriangle(ctx, figure);
 
-          this.hover ? figure.angle += figure.rotationSpeed - 0.4 : figure.angle += figure.rotationSpeed;
+          this.hover
+            ? (figure.angle += figure.rotationSpeed - 0.4)
+            : (figure.angle += figure.rotationSpeed);
 
           if (figure.angle >= 2 * Math.PI) {
             figure.angle -= 2 * Math.PI;
 
-            const newTargetRadius = figure.radius * (Math.random() * (this.maxRadius - this.minRadius) + this.minRadius);
+            const newTargetRadius =
+              figure.radius *
+              (Math.random() * (this.maxRadius - this.minRadius) +
+                this.minRadius);
             figure.radius = newTargetRadius;
           }
-          figure.radius += (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
+          figure.radius +=
+            (this.targetRadius - figure.radius) * figure.radiusChangeSpeed;
 
           figure.life -= 0.2;
           if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
-              this.figures = this.figures.filter(f => f !== figure);
+              this.figures = this.figures.filter((f) => f !== figure);
               this.generateFigures(this.targetX, this.targetY);
             }
           }
         });
       } else {
-        this.figures.forEach(figure => {
-          figure.x += (this.targetX - figure.x + figure.correct) * figure.speed;
-          figure.y += (this.targetY - figure.y + figure.correct) * figure.speed;
+        this.figures.forEach((figure) => {
+          const correctSpeed = window.innerWidth <= 1024 ? 5 : 1;
+
+          figure.x += (this.targetX - figure.x + figure.correct) * (figure.speed * correctSpeed);
+          figure.y += (this.targetY - figure.y + figure.correct) * (figure.speed * correctSpeed);
 
           const dx = this.targetX - figure.x;
           const dy = this.targetY - figure.y;
 
           const targetAngle = Math.atan2(dy, dx);
-          figure.angle += (targetAngle - figure.angle);
+          figure.angle += targetAngle - figure.angle;
 
           this.drawTriangle(ctx, figure);
           figure.life -= 15;
           if (figure.life <= 0) {
             figure.opacity -= 0.05;
             if (figure.opacity <= 0) {
-              this.figures = this.figures.filter(f => f !== figure);
-              this.generateFigures(this.targetX + this.getRandomInteger(-150, 150), this.targetY + this.getRandomInteger(-150, 150));
+              this.figures = this.figures.filter((f) => f !== figure);
+              this.generateFigures(
+                this.targetX + this.getRandomInteger(-150, 150),
+                this.targetY + this.getRandomInteger(-150, 150)
+              );
             }
           }
         });
       }
-      this.figures.forEach(figure => {
+      this.figures.forEach((figure) => {
         if (figure.growing) {
           figure.scaleX += figure.speedScale;
           if (figure.scaleX >= 1.2) figure.growing = false;
@@ -198,36 +247,27 @@ export default {
         }
       });
 
-      this.animationFrameId = requestAnimationFrame(() => this.animate(ctx, canvas));
-    },
-    handleMouseMove(event) {
-      this.mouseX = event.clientX;
-      this.mouseY = event.clientY;
-      this.targetX = event.clientX;
-      this.targetY = event.clientY;
-      this.isSearching = false;
-
-      clearTimeout(this.mouseStillTimeout);
-      this.mouseStillTimeout = setTimeout(() => {
-        this.isSearching = true;
-      }, 500);
+      this.animationFrameId = requestAnimationFrame(() =>
+        this.animate(ctx, canvas)
+      );
     },
     getRandomColor() {
       const currentColor = Math.floor(Math.random() * this.colorFigures.length);
-      return !this.$store.state.theme.darkMode ? this.colorFigures[currentColor].light : this.colorFigures[currentColor].dark;
+      return !this.$store.state.theme.darkMode
+        ? this.colorFigures[currentColor].light
+        : this.colorFigures[currentColor].dark;
     },
     updateColors() {
-      this.figures.forEach(figure => {
+      this.figures.forEach((figure) => {
         figure.color = this.getRandomColor();
       });
     },
     getRandomInteger(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    },
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
   div {

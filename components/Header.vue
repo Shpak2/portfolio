@@ -5,7 +5,7 @@
       <ContactButton />
       <ThemeToggle />
       <LanguageSelector />
-
+      <ToggleButton />
     </div>
   </header>
 </template>
@@ -16,13 +16,15 @@
   import ContactButton from '~/components/Header/ContactButton.vue';
   import ThemeToggle from '~/components/Header/ThemeToggle.vue';
   import LanguageSelector from '~/components/Header/LanguageSelector.vue';
+  import ToggleButton from '~/components/Header/ToggleButton.vue';
 
   export default {
     components: {
       Logo,
       ThemeToggle,
       ContactButton,
-      LanguageSelector
+      LanguageSelector,
+      ToggleButton
     }
   };
 
