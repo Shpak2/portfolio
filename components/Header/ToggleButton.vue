@@ -23,23 +23,29 @@
     methods: {
       toggleMenu() {
         this.active = !this.active
+        this.$store.commit('setMenuActive', this.active);
       }
+    },
+    watch: {
+      '$store.state.menuActive'(val) {
+        this.active = val
+      },
     },
   }
 </script>
 
 <style lang="scss" scoped>
   .btn-toggle {
-    width: vw_tabs(52px);
-    height: vw_tabs(52px);
+    width: vw_tabs(44px);
+    height: vw_tabs(44px);
     display: none;
+    padding: 0;
     @include viewport(tabs) {
       display: flex;
     }
     & svg {
       pointer-events: none;
-      width: 90%;
-      height: auto;
+      transform: scale(1.22);
     }
   }
   .menuexpanded {

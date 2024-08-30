@@ -1,17 +1,19 @@
 <template>
-  <ul class="sidebar">
+  <ul :class="isMenu ? 'mobile-sidebar' : 'sidebar'">
     <li
       v-for="item in sidebarItems"
       :key="item.key"
       class="sidebar-item mono-font"
-      :class="{ 'active': activeItem === item.key }"
+      :class="{
+        'active': activeItem === item.key
+      }"
       @click="setActiveItem(item.key)"
       :ref="item.key"
       @mouseover="handleMouse(true)"
       @mouseleave="handleMouse(false)"
       v-html="$t(item.translationKey)"
     />
-    <li class="sidebar-border" ref="sidebarBorder" :style="{transform: `translateY(${borderY}px)`}"></li>
+    <li v-if="!isMenu" class="sidebar-border" ref="sidebarBorder" :style="{transform: `translateY(${borderY}px)`}"></li>
   </ul>
 </template>
 
@@ -31,9 +33,15 @@
         ],
       };
     },
+    props: {
+      isMenu: false
+    },
     methods: {
       setActiveItem(itemKey) {
         this.$store.commit('setActiveItem', itemKey);
+        if (this.isMenu) {
+          this.$store.commit('setMenuActive', false);
+        }
       },
       calculateTranslateY() {
         const refName = this.$store.state.activeItem;
@@ -74,6 +82,9 @@
     padding-left: vw_big_screen(9px);
     user-select: none;
     z-index: 10;
+    @include viewport(tabs) {
+      display: none;
+    }
     &::after {
       content: '';
       position: absolute;
@@ -84,6 +95,9 @@
       transition: 0.3s ease;
       width: vw_big_screen(1px);
       height: 100%;
+      @include viewport(tabs) {
+        content: none;
+      }
     }
     &-item {
       font-size: vw_big_screen(12px);
@@ -93,6 +107,13 @@
       transition: 0.3s ease;
       color: var(--sidebar-color);
       position: relative;
+      @include viewport(tabs) {
+        width: fit-content;
+        text-align: center;
+        padding: vw_tabs(12px) 0;
+        font-size: vw_tabs(32px);
+        transition: unset;
+      }
       @include viewport(hover) {
         &:hover {
           color: var(--secondary-color);
@@ -100,6 +121,21 @@
       }
       &.active {
         color: var(--secondary-color);
+        &:after {
+          @include viewport(tabs) {
+            content: '';
+          }
+        }
+      }
+      &:after {
+        position: absolute;
+        left: 50%;
+        bottom: vw_tabs(6px);
+        transform: translateX(-50%);
+        background-color: var(--secondary-color);
+        width: 100%;
+        height: 2px;
+        border-radius: 8px;
       }
     }
     &-border {
@@ -111,6 +147,19 @@
       background-color: var(--secondary-color);
       border-radius: vw_big_screen(2px);
       transition: 0.3s ease;
+    }
+  }
+
+
+  .mobile-sidebar {
+    @include viewport(tabs) {
+      list-style: none;
+      padding: 0;
+      margin: auto 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
   }
 </style>

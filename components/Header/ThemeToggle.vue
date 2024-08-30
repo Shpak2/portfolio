@@ -34,11 +34,21 @@
     width: vw_big_screen(44px);
     height: vw_big_screen(44px);
     margin-left: vw_big_screen(8px);
-    background-color: var(--faded-color);
+    background-color: #3F3846;
+    padding: 0;
+    @include viewport(tabs) {
+      margin-left: auto;
+      width: vw_tabs(40px);
+      height: vw_tabs(40px);
+      margin-right: vw_tabs(14px);
+    }
     & svg {
       pointer-events: none;
       width: vw_big_screen(20px);
       height: auto;
+      @include viewport(tabs) {
+        width: 60%;
+      }
     }
   }
 </style>

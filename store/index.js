@@ -19,6 +19,7 @@ export const state = () => ({
   logoLoader: false,
   hasError: false,
   messagePopup: '',
+  menuActive: false
 });
 
 export const mutations = {
@@ -42,5 +43,8 @@ export const mutations = {
   },
   setMessagePopup(state, value) {
     state.messagePopup = value;
+  },
+  setMenuActive(state, value) {
+    state.menuActive = value;
   },
 };

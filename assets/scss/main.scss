@@ -1,45 +1,3 @@
-:root {
-  --primary-color: #ffffff;
-  --header-color: rgba(255, 255, 255, 0.5);
-  --secondary-color: #000000;
-  --faded-color: #3F3846;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --button-color: #860CFB;
-  --footer-color: #565656;
-  --sidebar-color: rgba(0, 0, 0, 0.25);
-  --code-color: rgba(134, 12, 251, 0.25);
-  --tags-color: #860CFB;
-  --shadow-slide: rgba(0, 0, 0, 0.04);
-  --tags-bg: #ffffff;
-  --mask-popup: rgba(20, 18, 22, 0.6);
-  --emulate-color: #000000;
-  --popup-color: #FAFAFA;
-  --tools-color: #F1F1F1;
-  --danger-color: #E82626;
-  --review-color: #FFFFFF;
-}
-
-[data-theme="dark"] {
-  --primary-color: #141216;
-  --header-color: rgba(20, 18, 22, 0.5);
-  --secondary-color: #ffffff;
-  --faded-color: #3F3846;
-  --border-color: rgba(255, 255, 255,0.1);
-  --button-color: #860CFB;
-  --footer-color: #929292;
-  --sidebar-color: rgba(255, 255, 255,0.25);
-  --code-color: rgba(255, 168, 0, 0.3);
-  --tags-color: #A25EE2;
-  --shadow-slide: rgba(255, 255, 255, 0.04);
-  --tags-bg: #000000;
-  --mask-popup: rgba(71, 67, 74, 0.6);
-  --emulate-color: #3F3846;
-  --popup-color: #0F0F0F;
-  --tools-color: #1C1C1C;
-  --danger-color: #FF5959;
-  --review-color: #3F3846;
-}
-
 @import 'fonts.scss';
 @import 'swiper/css';
 @import 'swiper/css/effect-fade';
@@ -121,6 +79,9 @@ body {
 
 .rounded {
   border-radius: vw_big_screen(8px);
+  @include viewport(tabs) {
+    border-radius: vw_tabs(6px);
+  }
 }
 
 .mono-font {
@@ -186,10 +147,18 @@ body {
   right: vw_big_screen(184px);
   top: unset;
   background-color: var(--border-color);
+  @include viewport(tabs) {
+    right: vw_tabs(36px);
+    bottom: vw_tabs(80px);
+    height: vw_tabs(200px);
+  }
   &:hover .swiper-scrollbar-drag {
     width: vw_big_screen(5px);
     left: -1px;
     background: var(--secondary-color);
+    @include viewport(tabs) {
+      width: vw_tabs(5px);
+    }
   }
 }
 

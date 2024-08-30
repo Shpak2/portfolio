@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
     <div class="container flex items-center m-auto">
-      <Copyright />
-      <Social />
+      <Copyright :isMenu="false" />
+      <Social :isMenu="false" />
     </div>
   </footer>
 </template>
@@ -26,6 +26,9 @@
     bottom: vw_big_screen(24px);
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 90;
+    @include viewport(tabs) {
+      bottom: vw_tabs(24px);
+    }
   }
 </style>

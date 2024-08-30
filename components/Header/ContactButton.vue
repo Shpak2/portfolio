@@ -21,5 +21,8 @@
     font-weight: 600;
     background-color: var(--button-color);
     color: #fff;
+    @include viewport(tabs) {
+      display: none;
+    }
   }
 </style>

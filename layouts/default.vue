@@ -9,15 +9,19 @@
       <Slider />
       <!-- <NuxtPage /> -->
     </main>
-    <Sidebar v-if="!maskOn" />
+    <Sidebar v-if="!maskOn" :isMenu="false"/>
     <Footer v-if="!maskOn" />
     <Clicker v-if="!maskOn" />
     <div v-if="maskOn" class="mask"></div>
     <Popup v-if="!maskOn && showPopup" />
     <FormPopup
-      v-if="!maskOn && showFormPopup"
+    v-if="!maskOn && showFormPopup"
       :error="isError"
       :message="messagePopup"
+    />
+    <MobileMenu
+      v-if="!maskOn && menuActive"
+      :hide="menuHide"
     />
   </div>
 </template>
@@ -32,6 +36,7 @@ import Gradient from '~/components/Gradient.vue';
 import Loader from '~/components/Loader.vue';
 import Popup from '~/components/Popup.vue';
 import FormPopup from '~/components/FormPopup.vue';
+import MobileMenu from '~/components/MobileMenu.vue';
 
 
 export default {
@@ -44,7 +49,8 @@ export default {
     Gradient,
     Loader,
     Popup,
-    FormPopup
+    FormPopup,
+    MobileMenu
   },
   data() {
     return {
@@ -52,6 +58,8 @@ export default {
       showPopup: false,
       showFormPopup: false,
       isError: false,
+      menuActive: false,
+      menuHide: false,
       messagePopup: ''
     }
   },
@@ -71,6 +79,9 @@ export default {
     '$store.state.messagePopup'(val) {
       this.messagePopup = val
     },
+    '$store.state.menuActive'(val) {
+      this.handleMenu(val)
+    },
   },
   mounted() {
     setTimeout(this.removeMask,1000)
@@ -78,6 +89,17 @@ export default {
   methods: {
     removeMask: function () {
       this.maskOn = false
+    },
+    handleMenu(value) {
+      if (value) {
+        this.menuActive = value
+      }else {
+        this.menuHide = !value
+        setTimeout(() => {
+          this.menuActive = value
+          this.menuHide = value
+        },300)
+      }
     }
   }
 };

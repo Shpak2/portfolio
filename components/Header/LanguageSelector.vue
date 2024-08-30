@@ -1,5 +1,5 @@
 <template>
-  <div class="language-wrap">
+  <div class="language-wrap" :class="{'menu-language': isMenu }">
     <button class="language-link" :class="{ 'active': $route.path === '/' }" to="/" @click="changeLanguage('en')">EN</button>
     <button class="language-link" :class="{ 'active': $route.path === '/ua' }" to="/ua" @click="changeLanguage('ua')">UA</button>
     <button class="language-link" :class="{ 'active': $route.path === '/pl' }" to="/pl" @click="changeLanguage('pl')">PL</button>
@@ -10,6 +10,9 @@
   import { useStore } from 'vuex';
 
   export default {
+    props: {
+      isMenu: false
+    },
     beforeMount() {
       const store = useStore();
       this.$store = store;
@@ -34,7 +37,26 @@
 <style lang="scss" scoped>
   .language-wrap {
     margin-left: vw_big_screen(32px);
+    @include viewport(tabs) {
+      display: none;
+    }
+    &.menu-language {
+      @include viewport(tabs) {
+        margin-left: 0;
+        margin-top: auto;
+        display: flex;
+      }
+    }
   }
+
+  button {
+    font-size: vw_big_screen(16px);
+    padding: 0;
+    @include viewport(tabs) {
+      font-size: vw_tabs(20px);
+    }
+  }
+
   .language-link {
     text-decoration: none;
     text-transform: uppercase;
@@ -44,6 +66,9 @@
     position: relative;
     &:not(:first-child) {
       margin-left: vw_big_screen(16px);
+      @include viewport(tabs) {
+        margin-left: vw_tabs(16px);
+      }
     }
     &:hover {
       @include viewport(hover) {
@@ -60,6 +85,11 @@
       height: vw_big_screen(4px);
       background-color: var(--button-color);
       opacity: 0;
+      @include viewport(tabs) {
+        bottom: vw_tabs(-6px);
+        width: vw_tabs(6px);
+        height: vw_tabs(6px);
+      }
     }
     &.active {
       opacity: 1;

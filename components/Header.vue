@@ -4,7 +4,7 @@
       <Logo />
       <ContactButton />
       <ThemeToggle />
-      <LanguageSelector />
+      <LanguageSelector :isMenu="false" />
       <ToggleButton />
     </div>
   </header>
@@ -41,6 +41,7 @@
     left: 0;
     width: 100%;
     z-index: 100;
+    max-width: 100vw;
     @include viewport(tabs) {
       height: vw_tabs(80px);
       border-bottom-width: 1px;

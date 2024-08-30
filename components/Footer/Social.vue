@@ -1,5 +1,5 @@
 <template>
-  <div class="flex social-wrap">
+  <div class="flex social-wrap" :class="{'menu-social': isMenu}">
     <a href="https://linkedin.com/in/evgeniy-shpakov-888a44188" class="social-item" target="_blank">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0ZM16.3186 17.6625C17.1061 17.6438 17.8749 17.6438 18.6624 17.6625C18.8311 17.6625 18.8686 17.6063 18.8686 17.4563V12.975C18.8686 12.6188 18.8499 12.2625 18.7936 11.9063C18.5686 10.4063 17.6686 9.43129 16.2624 9.20629C15.0436 9.01879 14.0124 9.31879 13.2811 10.3875L13.1874 10.4813V9.52504C13.1874 9.37504 13.1499 9.33754 12.9999 9.33754H10.5999C10.4499 9.33754 10.4124 9.37504 10.4124 9.54379C10.4311 10.9875 10.4311 12.45 10.4311 13.9125C10.4311 15.1125 10.4311 16.2938 10.4124 17.475C10.4124 17.625 10.4499 17.6625 10.5999 17.6625H12.9999C13.1311 17.6813 13.2061 17.6438 13.1874 17.4938C13.1748 17.368 13.1791 17.2507 13.1833 17.1362C13.1853 17.0799 13.1874 17.0244 13.1874 16.9688V13.0313C13.1874 12.4688 13.3561 12 13.7874 11.6625C14.5936 11.0063 15.7186 11.3625 15.9999 12.3375C16.0936 12.6375 16.1124 12.9563 16.1124 13.275V17.4563C16.1124 17.625 16.1499 17.6625 16.3186 17.6625ZM8.9125 13.5V17.4375C8.9125 17.6063 8.875 17.6625 8.70625 17.6625C8.18125 17.65 7.65625 17.6542 7.13125 17.6584C6.86875 17.6604 6.60625 17.6625 6.34375 17.6625C6.19375 17.6625 6.15625 17.625 6.15625 17.475V9.52502C6.15625 9.39377 6.19375 9.33752 6.34375 9.33752H8.7625C8.93125 9.33752 8.95 9.39377 8.95 9.54377C8.9125 10.8563 8.9125 12.1688 8.9125 13.5ZM7.20622 8.19376C8.08747 8.34376 8.85622 7.91251 9.04372 7.16251C9.28747 6.16876 8.59372 5.32501 7.54372 5.34376C6.84997 5.32501 6.30622 5.66251 6.08122 6.22501C5.74372 7.12501 6.26872 8.04376 7.20622 8.19376Z" fill="var(--footer-color)"/>
@@ -19,11 +19,20 @@
   </div>
 </template>
 
-<script></script>
+<script>
+  export default {
+    props: {
+      isMenu: false,
+    },
+  };
+</script>
 
 <style lang="scss" scoped>
   .social-item {
     width: vw_big_screen(24px);
+    @include viewport(tabs) {
+      width: vw_tabs(24px);
+    }
     @include viewport(hover) {
       &:hover {
         & svg path {
@@ -33,10 +42,32 @@
     }
     &:not(:last-child) {
       margin-right: vw_big_screen(8px);
+      @include viewport(tabs) {
+        margin-right: vw_tabs(8px);
+      }
     }
   }
   .social-wrap {
     margin-left: vw_big_screen(24px);
+    @include viewport(tabs) {
+      margin-left: vw_tabs(24px);
+    }
+    &.menu-social {
+      @include viewport(tabs) {
+        margin-left: 0;
+        margin-top: vw_tabs(28px);
+      }
+      & .social-item {
+        @include viewport(tabs) {
+          width: vw_tabs(38px);
+        }
+        &:not(:last-child) {
+          @include viewport(tabs) {
+            margin-right: vw_tabs(16px);
+          }
+        }
+      }
+    }
   }
   svg path {
     transition: 0.3s ease;
