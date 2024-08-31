@@ -3,7 +3,7 @@
 
     <Loader/>
     <Header v-if="!maskOn" />
-    <!-- <Gradient v-if="!maskOn" /> -->
+    <Gradient v-if="!maskOn" />
 
     <main v-if="!maskOn">
       <Slider />
@@ -85,6 +85,8 @@ export default {
   },
   mounted() {
     setTimeout(this.removeMask,1000)
+    this.checkVH()
+    window.addEventListener("resize", this.checkVH);
   },
   methods: {
     removeMask: function () {
@@ -100,6 +102,10 @@ export default {
           this.menuHide = value
         },300)
       }
+    },
+    checkVH() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
   }
 };

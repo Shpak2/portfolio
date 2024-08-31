@@ -14,24 +14,26 @@
     data() {
       return {
         tags: [
-          'Pug',
-          'CSS',
-          'HTML',
-          'LESS',
-          'PostCSS',
-          'RSCSS',
-          'SVG',
-          'Javascript',
-          'Gulp',
-          'Webpack',
-          'Canvas',
-          'WebGL',
-          'Three.js',
-          'Anime.js',
-          'Barba.js',
+          'HTML5',
+          'CSS3',
+          'Sass/SCSS',
+          'JavaScript',
+          'Vue.js',
+          'Nuxt.js',
+          'GSAP',
+          'Bootstrap',
+          'Tailwind CSS',
+          'CSS-in-JS',
+          'Docker',
           'Git',
-          'Linux',
-          'Math',
+          'Webpack',
+          'Gulp',
+          'Babel',
+          'Vite',
+          'Figma',
+          'Photoshop',
+          'Sketch',
+          'Jira',
         ],
       };
     },
@@ -55,8 +57,8 @@
     position: absolute;
     top: 50%;
     right: vw_big_screen(-20px);
-    height: 50vmin;
-    width: 50vmin;
+    height: vw_big_screen(412px);
+    width: vw_big_screen(412px);
     transform: translateY(-50%);
     list-style: none;
     & .tag {

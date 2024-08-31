@@ -345,10 +345,27 @@ body {
       }
     }
     &-content {
+      max-height: 80%;
+      overflow: auto;
+      padding-right: vw_big_screen(4px);
+      margin-top: vw_big_screen(12px);
       & p {
+        margin: 0;
         font-size: vw_big_screen(14px);
-        margin: vw_big_screen(12px) 0;
-        text-indent: 0.8em;
+        &:not(:last-child) {
+          margin: 0 0 vw_big_screen(12px);
+        }
+      }
+      & ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 vw_big_screen(12px);
+        padding-left: vw_big_screen(12px);
+        & li {
+          &:not(:last-child) {
+            // margin: 0 0 vw_big_screen(12px);
+          }
+        }
       }
     }
   }
