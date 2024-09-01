@@ -23,6 +23,10 @@
       v-if="!maskOn && menuActive"
       :hide="menuHide"
     />
+    <Head>
+      <Title>{{ $t('title') }}</Title>
+      <Meta name="description" :content="$t('description')"/>
+    </Head>
   </div>
 </template>
 

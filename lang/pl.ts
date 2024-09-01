@@ -1,4 +1,6 @@
 export default {
+  title: 'Frontend Developer - Profesjonalne Tworzenie Interfejsów | Jewhenii Szpakow',
+  description: 'Doświadczony frontend developer specjalizujący się w tworzeniu intuicyjnych i efektywnych rozwiązań internetowych. Dowiedz się więcej o moich projektach, używanych technologiach i podejściu do tworzenia stron.',
   contactButton: 'Skontaktuj się ze mną!',
   decorativeScroll: 'Scrolluj, aby odkrywać',
   sidebarHome: 'Główna',

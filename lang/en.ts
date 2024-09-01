@@ -1,4 +1,6 @@
 export default {
+  title: 'Frontend Developer - Professional Interface Development | Yevhenii Shpakov',
+  description: 'An experienced frontend developer specializing in creating intuitive and effective web solutions. Learn more about my projects, technologies used, and development approach.',
   contactButton: 'Contact me!',
   decorativeScroll: 'Scroll to Explore',
   sidebarHome: 'Home',
