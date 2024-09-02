@@ -106,6 +106,13 @@
       SwiperSlide,
       IconUser
     },
+    watch: {
+      '$store.state.preloader.isPlay'(newValue) {
+        if(!newValue) {
+          this.swiper.update()
+        }
+      },
+    },
     mounted() {
       // window.addEventListener('wheel',(e)=>{
       //   const deltaChange = e.deltaY < 0

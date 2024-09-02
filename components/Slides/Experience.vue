@@ -9,8 +9,12 @@
             :slidesPerView="'auto'"
             :freeMode="true"
             :scrollbar="true"
-            :mousewheel="true"
             :modules="modules"
+            @reachEnd="handleFullSlider(true)"
+            @reachBeginning="handleFullSlider(true)"
+            @mouseenter="handleFullSlider(false)"
+            @mouseleave="handleFullSlider(true)"
+            @swiper="onSwiper"
             class="mySwiper"
           >
             <swiper-slide>
@@ -34,17 +38,36 @@
   import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
 
   export default {
+    data() {
+      return {
+        modules: [FreeMode, Scrollbar, Mousewheel],
+        swiper: null,
+      }
+    },
     components: {
       Decorative,
       Cloud,
       Swiper,
       SwiperSlide
     },
-    data() {
-      return {
-        modules: [FreeMode, Scrollbar, Mousewheel],
-      }
+    watch: {
+      '$store.state.preloader.isPlay'(newValue) {
+        if(!newValue) {
+          this.swiper.update()
+        }
+      },
     },
+    methods: {
+      onSwiper(swiper) {
+        this.swiper = swiper;
+      },
+      handleFullSlider: function(val) {
+        setTimeout(()=>{
+          this.$store.commit('setAllowMouseScroll', val);
+          !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
+        },300)
+      },
+    }
   };
 
 </script>

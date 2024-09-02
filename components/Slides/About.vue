@@ -9,8 +9,12 @@
             :slidesPerView="'auto'"
             :freeMode="true"
             :scrollbar="true"
-            :mousewheel="true"
             :modules="modules"
+            @reachEnd="handleFullSlider(true)"
+            @reachBeginning="handleFullSlider(true)"
+            @mouseenter="handleFullSlider(false)"
+            @mouseleave="handleFullSlider(true)"
+            @swiper="onSwiper"
             class="mySwiper"
           >
             <swiper-slide>
@@ -38,6 +42,7 @@
   export default {
     data() {
       return {
+        swiper: null,
         myPhoto: photoPath,
         modules: [FreeMode, Scrollbar, Mousewheel],
       }
@@ -46,6 +51,24 @@
       Decorative,
       Swiper,
       SwiperSlide
+    },
+    watch: {
+      '$store.state.preloader.isPlay'(newValue) {
+        if(!newValue) {
+          this.swiper.update()
+        }
+      },
+    },
+    methods: {
+      onSwiper(swiper) {
+        this.swiper = swiper;
+      },
+      handleFullSlider: function(val) {
+        setTimeout(()=>{
+          this.$store.commit('setAllowMouseScroll', val);
+          !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
+        },300)
+      },
     }
   };
 
