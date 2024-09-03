@@ -19,7 +19,8 @@ export const state = () => ({
   logoLoader: false,
   hasError: false,
   messagePopup: '',
-  menuActive: false
+  menuActive: false,
+  isMobile: false
 });
 
 export const mutations = {
@@ -46,5 +47,8 @@ export const mutations = {
   },
   setMenuActive(state, value) {
     state.menuActive = value;
+  },
+  setIsMobile(state, value) {
+    state.isMobile = value;
   },
 };

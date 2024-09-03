@@ -51,6 +51,18 @@
     font-weight: 600;
     padding: 0 vw_big_screen(32px);
     margin: vw_big_screen(16px) 0;
+    @include viewport(tabs) {
+      height: vw_tabs(64px);
+      font-size: vw_tabs(20px);
+      padding: 0 vw_tabs(32px);
+      margin: vw_tabs(16px) 0;
+    }
+    @include viewport(swap_tabs) {
+      height: vw_tabs(52px);
+      font-size: vw_tabs(16px);
+      padding: 0 vw_tabs(28px);
+      margin: vw_tabs(4px) 0;
+    }
     & span {
       width: vw_big_screen(22px);
       margin-left: vw_big_screen(12px);

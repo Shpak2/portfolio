@@ -3,6 +3,7 @@
   <Decorative :content="'body'" :className="'tag-item__body tag-item__body-open'" :tag="'open'" />
 
   <swiper
+    v-if="!isMobile"
     :slides-per-view="1"
     :modules="modules"
     :direction="'vertical'"
@@ -30,6 +31,11 @@
       <component :is="slide.component" :key="slide.key" />
     </swiper-slide>
   </swiper>
+  <div v-if="isMobile" class="wrapper">
+    <div v-for="(slide, index) in slides" :key="index" class="slide-item">
+      <component :is="slide.component" :key="slide.key" :isMobile="isMobile" />
+    </div>
+  </div>
   <div class="swiper-scrollbar custom-scrollbar"></div>
   <DecorMouse/>
   <Decorative :content="'body'" :className="'tag-item__body tag-item__body-close'" :tag="'close'" />
@@ -70,7 +76,9 @@
       Decorative,
       DecorMouse
     },
-
+    props: {
+      isMobile: false,
+    },
     computed: {
       slides() {
         return [
@@ -94,7 +102,11 @@
       },
       '$store.state.allowMouseScroll'(newValue, oldValue) {
         newValue ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
-      }
+      },
+      // '$store.state.isMobile'(val) {
+      //   this.isMobile = val
+      //   console.log('val',val)
+      // }
     },
     methods: {
       onSwiper(swiper) {

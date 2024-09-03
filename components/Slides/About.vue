@@ -5,6 +5,7 @@
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('aboutTitle')"/>
           <swiper
+            v-if="!isMobile"
             :direction="'vertical'"
             :slidesPerView="'auto'"
             :freeMode="true"
@@ -23,6 +24,11 @@
               />
             </swiper-slide>
           </swiper>
+          <div v-if="isMobile" class="wrapper">
+            <div class="scrollable-container"
+              v-html="$t('aboutContent')"
+              />
+          </div>
         </Decorative>
       </div>
       <div class="content-img">
@@ -47,6 +53,9 @@
         modules: [FreeMode, Scrollbar, Mousewheel],
       }
     },
+    props: {
+      isMobile: false
+    },
     components: {
       Decorative,
       Swiper,
@@ -54,7 +63,7 @@
     },
     watch: {
       '$store.state.preloader.isPlay'(newValue) {
-        if(!newValue) {
+        if(!newValue && this.swiper) {
           this.swiper.update()
         }
       },

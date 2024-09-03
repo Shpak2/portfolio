@@ -6,7 +6,7 @@
     <Gradient v-if="!maskOn" />
 
     <main v-if="!maskOn">
-      <Slider />
+      <Slider :isMobile="mobile" />
       <!-- <NuxtPage /> -->
     </main>
     <Sidebar v-if="!maskOn" :isMenu="false"/>
@@ -64,7 +64,8 @@ export default {
       isError: false,
       menuActive: false,
       menuHide: false,
-      messagePopup: ''
+      messagePopup: '',
+      mobile: false
     }
   },
   watch: {
@@ -90,7 +91,11 @@ export default {
   mounted() {
     setTimeout(this.removeMask,1000)
     this.checkVH()
-    window.addEventListener("resize", this.checkVH);
+    this.checkMobile()
+    window.addEventListener("resize", ()=>{
+      this.checkVH()
+      this.checkMobile()
+    });
   },
   methods: {
     removeMask: function () {
@@ -110,10 +115,16 @@ export default {
     checkVH() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
+    },
+    checkMobile() {
+      let isMobile = window.matchMedia("(max-width: 1024px) and (max-height: 584px) and (orientation: landscape)").matches
+        || window.matchMedia("(max-width: 584px) and (orientation: portrait)").matches;
+        // console.log('isMobile',isMobile)
+        // this.$store.commit('setIsMobile', isMobile);
+        this.mobile = isMobile
     }
   }
 };
-
 </script>
 
 <style lang="scss" scoped>

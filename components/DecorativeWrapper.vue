@@ -56,6 +56,9 @@
     margin: 0;
     color: var(--sidebar-color);
     transition: color 0.3s ease;
+    @include viewport(tabs) {
+      font-size: vw_tabs(12px);
+    }
     & span {
       color: var(--code-color);
     }
@@ -64,11 +67,21 @@
       position: absolute;
       width: vw_big_screen(1076px);
       left: calc(vw_big_screen(-20px) + 50%);
+      @include viewport(tabs) {
+        width: vw_tabs(696px);
+        left: calc(vw_tabs(-16px) + 50%);
+      }
       &:first-child {
         top: vh_big_screen(114px);
+        @include viewport(tabs) {
+          top: vw_tabs(104px);
+        }
       }
       &:last-child {
         bottom: vh_big_screen(24px);
+        @include viewport(tabs) {
+          bottom: vw_tabs(24px);
+        }
       }
     }
     &__body {
@@ -76,16 +89,31 @@
       width: vw_big_screen(1076px);
       left: 50%;
       transform: translateX(-50%);
+      @include viewport(tabs) {
+        width: vw_tabs(696px);
+      }
       &-open {
         top: vh_big_screen(144px);
+        @include viewport(tabs) {
+          top: vw_tabs(134px);
+        }
       }
       &-close {
         bottom: vh_big_screen(54px);
+        @include viewport(tabs) {
+          bottom: vw_tabs(54px);
+        }
       }
     }
     &__title {
       &:nth-child(even) {
         margin-bottom: vh_big_screen(48px);
+        @include viewport(tabs) {
+          margin-bottom: vw_tabs(32px);
+        }
+        @include viewport(swap_tabs) {
+          margin-bottom: vw_tabs(8px);
+        }
       }
     }
   }

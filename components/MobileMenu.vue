@@ -2,10 +2,12 @@
   <div
     :class="{show: showMenu, hide: hide}"
     class="menu-wrap items-center justify-center">
-      <Sidebar :isMenu="true"/>
-      <LanguageSelector :isMenu="true"/>
-      <Social :isMenu="true"/>
-      <Copyright :isMenu="true"/>
+      <div class="menu-inner flex items-center justify-center flex-col">
+        <Sidebar :isMenu="true"/>
+        <LanguageSelector :isMenu="true"/>
+        <Social :isMenu="true"/>
+        <Copyright :isMenu="true"/>
+      </div>
   </div>
 </template>
 
@@ -55,31 +57,37 @@
 </script>
 
 <style lang="scss" scoped>
-  .menu-wrap {
-    position: fixed;
-    inset: 0;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    z-index: 99;
-    background: var(--primary-color);
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    transition: 0.3s ease-in;
-    transform: scale(2);
-    display: none;
-    // max-height: 100vh;
-    @include viewport(tabs) {
-      display: flex;
-      flex-direction: column;
+  .menu {
+    &-wrap {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+      background: var(--primary-color);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transition: 0.3s ease-in;
+      transform: scale(2);
+      display: none;
+      // max-height: 100vh;
+      @include viewport(tabs) {
+        display: flex;
+        flex-direction: column;
+      }
+      &.show {
+        animation: show 0.2s ease-in-out forwards;
+      }
+      &.hide {
+        opacity: 1;
+        transform: scale(1);
+        animation: hide 0.2s ease-in forwards;
+      }
     }
-    &.show {
-      animation: show 0.2s ease-in-out forwards;
-    }
-    &.hide {
-      opacity: 1;
-      transform: scale(1);
-      animation: hide 0.2s ease-in forwards;
+    &-inner {
+      height: 100%;
+      overflow: auto;
     }
   }
 
