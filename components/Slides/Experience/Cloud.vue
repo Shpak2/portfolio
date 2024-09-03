@@ -61,6 +61,22 @@
     width: vw_big_screen(412px);
     transform: translateY(-50%);
     list-style: none;
+    @include viewport(tabs) {
+      right: 50%;
+      top: unset;
+      height: vw_tabs(320px);
+      width: vw_tabs(320px);
+      transform: translateX(50%);
+      bottom: vw_tabs(100px);
+    }
+    @include viewport(swap_tabs) {
+      right: vw_tabs(30px);
+      top: 50%;
+      height: vw_tabs(220px);
+      width: vw_tabs(220px);
+      transform: translateY(-50%);
+      bottom: unset;
+    }
     & .tag {
       position: absolute;
       top: 50%;
@@ -69,6 +85,12 @@
       font-weight: 600;
       transition: transform .5s linear, opacity .5s linear;
       color: var(--tags-color);
+      @include viewport(tabs) {
+        font-size: vw_tabs(18px);
+      }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(14px);
+      }
       & .wrap {
         display: inline-block;
         transform: translateX(-50%) translateY(-50%);

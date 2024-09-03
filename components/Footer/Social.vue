@@ -61,9 +61,15 @@
         @include viewport(tabs) {
           width: vw_tabs(38px);
         }
+        @include viewport(swap_tabs) {
+          width: vw_tabs(30px);
+        }
         &:not(:last-child) {
           @include viewport(tabs) {
             margin-right: vw_tabs(16px);
+          }
+          @include viewport(swap_tabs) {
+            margin-right: vw_tabs(14px);
           }
         }
       }

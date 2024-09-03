@@ -21,6 +21,9 @@
       changeLanguage: async function(lang) {
         this.$store.commit('preloader/setCompleteLoop', false);
         this.$store.commit('preloader/setIsPlay', true);
+        if (this.isMenu) {
+          this.$store.commit('setMenuActive', false);
+        }
         await this.sleep(3000);
         this.$store.commit('preloader/setCompleteLoop', true);
         lang === 'en' ? this.$router.push('/') : this.$router.push(`/${lang}`)
@@ -54,6 +57,9 @@
     padding: 0;
     @include viewport(tabs) {
       font-size: vw_tabs(20px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(16px);
     }
   }
 

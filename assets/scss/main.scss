@@ -158,6 +158,9 @@ body {
 
 .scrollable-container {
   padding-right: vw_big_screen(10px);
+  @include viewport(tabs) {
+    padding-right: vw_tabs(8px);
+  }
   & * {
     pointer-events: none;
   }
@@ -223,6 +226,9 @@ body {
     margin: 0;
     &:not(:first-child) {
       margin: vw_big_screen(14px) 0 0;
+      @include viewport(tabs) {
+        margin: vw_tabs(14px) 0 0;
+      }
     }
   }
 }
@@ -300,6 +306,9 @@ body {
   position: relative;
   transition: transform 0.2s ease;
   display: inline-block;
+  @include viewport(tabs) {
+    font-size: vw_tabs(16px);
+  }
   &::after {
     content: '';
     position: absolute;
@@ -310,6 +319,11 @@ body {
     height: vw_big_screen(4px);
     background-color: var(--button-color);
     opacity: 0;
+    @include viewport(tabs) {
+      bottom: vw_tabs(-4.5px);
+      width: vw_tabs(4px);
+      height: vw_tabs(4px);
+    }
   }
   &:active {
     transform: scale(0.8);
@@ -321,6 +335,9 @@ body {
   }
   &:not(:last-child) {
     margin-right: vw_big_screen(16px);
+    @include viewport(tabs) {
+      margin-right: vw_tabs(16px);
+    }
   }
   &.swiper-pagination-bullet-active {
     color: var(--secondary-color);
@@ -347,18 +364,42 @@ body {
       & .svg-icon {
         top: vw_big_screen(16px);
         width: vw_big_screen(580px);
+        @include viewport(tabs) {
+          top: vw_tabs(6px);
+          width: vw_tabs(580px);
+        }
+        @include viewport(swap_tabs) {
+          top: vw_tabs(10px);
+          width: vw_tabs(367px);
+        }
       }
     }
     &.emulate-tablet {
       & .svg-icon {
         top: vw_big_screen(16px);
         width: vw_big_screen(360px);
+        @include viewport(tabs) {
+          top: vw_tabs(6px);
+          width: vw_tabs(360px);
+        }
+        @include viewport(swap_tabs) {
+          top: vw_tabs(10px);
+          width: vw_tabs(228px);
+        }
       }
     }
     &.emulate-mobile {
       & .svg-icon {
         top: vw_big_screen(16px);
         width: vw_big_screen(290px);
+        @include viewport(tabs) {
+          top: vw_tabs(6px);
+          width: vw_tabs(290px);
+        }
+        @include viewport(swap_tabs) {
+          top: vw_tabs(10px);
+          width: vw_tabs(184px);
+        }
       }
     }
   }
@@ -371,12 +412,30 @@ body {
         }
         &.icon-desktop svg {
           width: vw_big_screen(24px);
+          @include viewport(tabs) {
+            width: vw_tabs(24px);
+          }
+          @include viewport(swap_tabs) {
+            width: vw_tabs(15px);
+          }
         }
         &.icon-tablet svg {
           width: vw_big_screen(18px);
+          @include viewport(tabs) {
+            width: vw_tabs(18px);
+          }
+          @include viewport(swap_tabs) {
+            width: vw_tabs(12px);
+          }
         }
         &.icon-mobile svg {
           width: vw_big_screen(13.4px);
+          @include viewport(tabs) {
+            width: vw_tabs(13.4px);
+          }
+          @include viewport(swap_tabs) {
+            width: vw_tabs(9.4px);
+          }
         }
         &:hover, &.active {
           background-color: var(--button-color) !important;
@@ -394,11 +453,31 @@ body {
       overflow: auto;
       padding-right: vw_big_screen(4px);
       margin-top: vw_big_screen(12px);
+      font-size: vw_big_screen(14px);
+      @include viewport(tabs) {
+        max-height: vw_tabs(150px);
+        font-size: vw_tabs(14px);
+        padding-right: vw_tabs(4px);
+        margin-top: vw_tabs(12px);
+        order: 3;
+      }
+      @include viewport(swap_tabs) {
+        max-height: 80%;
+        font-size: vw_tabs(9px);
+        padding-right: vw_tabs(3px);
+        margin-top: vw_tabs(8px);
+        order: unset;
+      }
       & p {
         margin: 0;
-        font-size: vw_big_screen(14px);
         &:not(:last-child) {
           margin: 0 0 vw_big_screen(12px);
+          @include viewport(tabs) {
+            margin-bottom: vw_tabs(12px);
+          }
+          @include viewport(swap_tabs) {
+            margin-bottom: vw_tabs(8px);
+          }
         }
       }
       & ul {
@@ -406,10 +485,13 @@ body {
         padding: 0;
         margin: 0 0 vw_big_screen(12px);
         padding-left: vw_big_screen(12px);
-        & li {
-          &:not(:last-child) {
-            // margin: 0 0 vw_big_screen(12px);
-          }
+        @include viewport(tabs) {
+          margin-bottom: vw_tabs(12px);
+          padding-left: vw_tabs(12px);
+        }
+        @include viewport(swap_tabs) {
+          margin-bottom: vw_tabs(8px);
+          padding-left: vw_tabs(8px);
         }
       }
     }

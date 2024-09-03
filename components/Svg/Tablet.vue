@@ -21,6 +21,12 @@
 <style lang="scss" scoped>
   div {
     width: vw_big_screen(24px);
+    @include viewport(tabs) {
+      width: vw_tabs(24px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(16px);
+    }
   }
   svg {
     transition: 0.2s ease-in;

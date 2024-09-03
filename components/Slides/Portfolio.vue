@@ -192,11 +192,23 @@
     margin-top: 10vh;
     position: relative;
     width: 100%;
+    @include viewport(tabs) {
+      margin-top: unset;
+    }
+    @include viewport(swap_tabs) {
+      margin-top: 12vh;
+    }
   }
 
   .slide-header {
     font-weight: 500;
     margin-bottom: vw_big_screen(8px);
+    @include viewport(tabs) {
+      margin: vw_tabs(8px) 0;
+    }
+    @include viewport(swap_tabs) {
+      margin: vw_tabs(5px) 0;
+    }
   }
 
   .body-inner {
@@ -206,6 +218,12 @@
   h4 {
     margin: 0;
     font-size: vw_big_screen(16px);
+    @include viewport(tabs) {
+      font-size: vw_tabs(16px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(10px);
+    }
   }
 
   .swiper-pagination {
@@ -216,10 +234,31 @@
       right: 0;
       font-weight: 500;
       user-select: none;
+      z-index: 10;
+      @include viewport(tabs) {
+        top: unset;
+        right: unset;
+        left: 0;
+        bottom: vw_tabs(120px);
+      }
+      @include viewport(swap_tabs) {
+        top: vw_tabs(-50px);
+        right: 0;
+        left: unset;
+        bottom: unset;
+      }
     }
     &-title {
       font-size: vw_big_screen(12px);
       margin-right: vw_big_screen(8px);
+      @include viewport(tabs) {
+        font-size: vw_tabs(14px);
+        margin-right: vw_tabs(8px);
+      }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(10px);
+        margin-right: vw_tabs(5px);
+      }
     }
   }
 
@@ -227,12 +266,31 @@
     position: absolute;
     top: vw_big_screen(-10px);
     right: 0;
+    z-index: 10;
+    @include viewport(tabs) {
+      top: unset;
+      right: unset;
+      left: 0;
+      bottom: vw_tabs(80px);
+    }
+    @include viewport(swap_tabs) {
+      top: vw_tabs(-10px);
+      right: 0;
+      left: unset;
+      bottom: unset;
+    }
   }
 
   .swiper-button-next, .swiper-button-prev {
     width: vw_big_screen(38px);
     cursor: pointer;
     transition: 0.2s ease-in;
+    @include viewport(tabs) {
+      width: vw_tabs(38px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(24px);
+    }
     &:hover {
       @include viewport(hover) {
         opacity: 0.7;
@@ -265,6 +323,12 @@
 
   .swiper-button-next {
     margin-left: vw_big_screen(16px);
+    @include viewport(tabs) {
+      margin-left: vw_tabs(16px);
+    }
+    @include viewport(swap_tabs) {
+      margin-left: vw_tabs(10px);
+    }
     &:hover {
       @include viewport(hover) {
         & svg {
@@ -283,6 +347,14 @@
     text-overflow: ellipsis;
     position: relative;
     max-width: vw_big_screen(248px);
+    @include viewport(tabs) {
+      padding: 0 vw_tabs(12px);
+      max-width: vw_tabs(248px);
+    }
+    @include viewport(swap_tabs) {
+      padding: 0 vw_tabs(8px);
+      max-width: vw_tabs(158px);
+    }
     &::after {
       content: '...';
       position: absolute;
@@ -291,10 +363,24 @@
       background-color: var(--tags-bg);
       font-size: vw_big_screen(12px);
       letter-spacing: -0.36em;
+      @include viewport(tabs) {
+        padding-right: vw_tabs(5px);
+        font-size: vw_tabs(12px);
+      }
+      @include viewport(swap_tabs) {
+        padding-right: vw_tabs(3px);
+        font-size: vw_tabs(8px);
+      }
     }
     & span {
       font-size: vw_big_screen(12px);
       display: inline-block;
+      @include viewport(tabs) {
+        font-size: vw_tabs(12px);
+      }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(8px);
+      }
     }
     &:hover::after {
       transition: opacity 0.1s ease-in-out;
@@ -303,6 +389,12 @@
     &-wrap {
       height: vw_big_screen(32px);
       transform-origin: center right;
+      @include viewport(tabs) {
+        height: vw_tabs(32px);
+      }
+      @include viewport(swap_tabs) {
+        height: vw_tabs(20px);
+      }
     }
   }
 
@@ -315,6 +407,16 @@
     margin-left: 0;
     overflow: unset;
     padding-bottom: vw_big_screen(14px);
+    @include viewport(tabs) {
+      width: 100%;
+      padding-bottom: vw_tabs(140px);
+      overflow: hidden;
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(380px);
+      padding-bottom: vw_tabs(4px);
+      overflow: unset;
+    }
   }
 
   .swiper-slide {
@@ -333,6 +435,12 @@
     height: 100%;
     background-color: rgba(20, 18, 22, 0.6);
     gap: vw_big_screen(20px);
+    @include viewport(tabs) {
+      gap: vw_tabs(20px);
+    }
+    @include viewport(swap_tabs) {
+      gap: vw_tabs(14px);
+    }
     & button {
       padding: 0;
       &:hover span {
@@ -344,12 +452,24 @@
       height: vw_big_screen(80px);
       background-color: #fff;
       transition: 0.2s ease-in;
+      @include viewport(tabs) {
+        width: vw_tabs(80px);
+        height: vw_tabs(80px);
+      }
+      @include viewport(swap_tabs) {
+        width: vw_tabs(50px);
+        height: vw_tabs(50px);
+      }
     }
     & b {
       font-size: vw_big_screen(12px);
       font-weight: 600;
       color: #fff;
       margin-top: vw_big_screen(6px);
+      @include viewport(tabs) {
+        font-size: vw_tabs(12px);
+        margin-top: vw_tabs(6px);
+      }
     }
   }
 

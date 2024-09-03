@@ -84,17 +84,51 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .content-wrap {
+    @include viewport(tabs) {
+      flex-direction: column-reverse;
+      margin: vw_tabs(140px) 0 auto;
+    }
+    @include viewport(swap_tabs) {
+      flex-direction: unset;
+      margin: vw_tabs(160px) 0 auto;
+    }
+  }
   .swiper {
     width: vw_big_screen(636px);
     max-height: vw_big_screen(320px);
+    @include viewport(tabs) {
+      width: 100%;
+      max-height: unset;
+    }
+    @include viewport(swap_tabs) {
+      max-height: vw_tabs(220px);
+    }
   }
   h2 {
     font-size: vw_big_screen(32px);
     line-height: vw_big_screen(52px);
     margin: vw_big_screen(4px) 0 vw_big_screen(12px);
     font-weight: 900;
+    @include viewport(tabs) {
+      font-size: vw_tabs(32px);
+      line-height: vw_tabs(52px);
+      margin: 0 0 vw_tabs(12px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(24px);
+      line-height: vw_tabs(40px);
+      margin: 0 0 vw_tabs(8px);
+    }
   }
   .content {
+    @include viewport(tabs) {
+      width: 100%;
+    }
+    @include viewport(swap_tabs) {
+      width: 70%;
+    }
     & h2, & p {
       color: var(--secondary-color);
     }
@@ -105,6 +139,17 @@
     &-img {
       width: vw_big_screen(350px);
       padding-top: vw_big_screen(64px);
+      @include viewport(tabs) {
+        width: vw_tabs(240px);
+        padding-top: vw_tabs(44px);
+        transform: scale(-1, 1);
+        margin-bottom: vw_tabs(20px);
+      }
+      @include viewport(swap_tabs) {
+        width: vw_tabs(200px);
+        transform: unset;
+        margin-right: vw_tabs(10px);
+      }
     }
   }
 </style>

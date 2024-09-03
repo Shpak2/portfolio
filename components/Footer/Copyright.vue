@@ -26,6 +26,9 @@
         font-size: vw_tabs(14px);
         margin: vw_tabs(18px) 0 vw_tabs(24px);
       }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(12px);
+      }
     }
   }
 </style>

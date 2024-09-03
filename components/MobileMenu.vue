@@ -71,6 +71,7 @@
       transition: 0.3s ease-in;
       transform: scale(2);
       display: none;
+      padding-top: vw_tabs(80px);
       // max-height: 100vh;
       @include viewport(tabs) {
         display: flex;

@@ -114,6 +114,10 @@
         font-size: vw_tabs(32px);
         transition: unset;
       }
+      @include viewport(swap_tabs) {
+        padding: vw_tabs(8px) 0;
+        font-size: vw_tabs(24px);
+      }
       @include viewport(hover) {
         &:hover {
           color: var(--secondary-color);

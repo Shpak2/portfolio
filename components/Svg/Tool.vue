@@ -10,10 +10,22 @@
 <style lang="scss" scoped>
   div {
     background-color: var(--button-color);
-    width: vw_big_screen(32px);
     height: 100%;
+    width: vw_big_screen(32px);
+    @include viewport(tabs) {
+      width: vw_tabs(32px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(20px);
+    }
   }
   svg {
     width: vw_big_screen(20px);
+    @include viewport(tabs) {
+      width: vw_tabs(20px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(14px);
+    }
   }
 </style>

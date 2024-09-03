@@ -36,15 +36,23 @@ export class TagsCloud {
     this.#sphere = new FibonacciSphere(this.#tags.length);
     this.#rotationAxis = [1, 0, 0];
     this.#rotationAngle = 0;
-    this.#rotationSpeed = 0;
+
+    this.#rotationSpeed = 0.002;
+
     this.#updatePositions();
     this.#initEventListeners();
     this.#root.classList.add('-loaded');
+
+    this.start();
   }
 
   #initEventListeners() {
     window.addEventListener('resize', this.#updatePositions.bind(this));
     document.addEventListener('mousemove', this.#onMouseMove.bind(this));
+
+    this.#root.addEventListener('touchstart', this.#onTouchStart.bind(this), { passive: true });
+    this.#root.addEventListener('touchmove', this.#onTouchMove.bind(this), { passive: true });
+    this.#root.addEventListener('touchend', this.#onTouchEnd.bind(this), { passive: true });
   }
 
   #updatePositions() {
@@ -55,19 +63,19 @@ export class TagsCloud {
     const uz = this.#rotationAxis[2];
     const rotationMatrix = [
       [
-          cos + (ux ** 2) * (1 - cos),
-          ux * uy * (1 - cos) - uz * sin,
-          ux * uz * (1 - cos) + uy * sin,
+        cos + (ux ** 2) * (1 - cos),
+        ux * uy * (1 - cos) - uz * sin,
+        ux * uz * (1 - cos) + uy * sin,
       ],
       [
-          uy * ux * (1 - cos) + uz * sin,
-          cos + (uy ** 2) * (1 - cos),
-          uy * uz * (1 - cos) - ux * sin,
+        uy * ux * (1 - cos) + uz * sin,
+        cos + (uy ** 2) * (1 - cos),
+        uy * uz * (1 - cos) - ux * sin,
       ],
       [
-          uz * ux * (1 - cos) - uy * sin,
-          uz * uy * (1 - cos) + ux * sin,
-          cos + (uz ** 2) * (1 - cos)
+        uz * ux * (1 - cos) - uy * sin,
+        uz * uy * (1 - cos) + ux * sin,
+        cos + (uz ** 2) * (1 - cos)
       ]
     ];
     const N = this.#tags.length;
@@ -90,14 +98,30 @@ export class TagsCloud {
 
   #onMouseMove(e) {
     const rootRect = this.#root.getBoundingClientRect();
-    const deltaX = (e.clientX <= window.innerWidth/2 ? 960 : e.clientX) - (rootRect.left + this.#root.offsetWidth / 2);
+    const deltaX = (e.clientX <= window.innerWidth / 2 ? window.innerWidth / 2 : e.clientX) - (rootRect.left + this.#root.offsetWidth / 2);
     const deltaY = e.clientY - (rootRect.top + this.#root.offsetHeight / 2);
-    const a = Math.atan2(deltaX-1, deltaY-1) - Math.PI / 2;
+    const a = Math.atan2(deltaX - 1, deltaY - 1) - Math.PI / 2;
     const axis = [Math.sin(a), Math.cos(a), 0];
     const delta = Math.sqrt(deltaX ** 2 + deltaY ** 2);
     const speed = delta / Math.max(window.innerHeight, window.innerWidth) / 15;
     this.#rotationAxis = axis;
     this.#rotationSpeed = speed;
+  }
+
+  #onTouchStart(e) {
+    if (e.touches.length === 1) {
+      this.#onMouseMove(e.touches[0]);
+    }
+  }
+
+  #onTouchMove(e) {
+    if (e.touches.length === 1) {
+      this.#onMouseMove(e.touches[0]);
+    }
+  }
+
+  #onTouchEnd(e) {
+
   }
 
   #update() {

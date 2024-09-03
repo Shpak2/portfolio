@@ -85,20 +85,46 @@
   .swiper {
     width: vw_big_screen(636px);
     max-height: vw_big_screen(320px);
+    @include viewport(tabs) {
+      width: 100%;
+      max-height: vw_tabs(320px);
+    }
+    @include viewport(swap_tabs) {
+      max-height: vw_tabs(230px);
+    }
   }
   h2 {
     font-size: vw_big_screen(32px);
     line-height: vw_big_screen(52px);
     margin: vw_big_screen(4px) 0 vw_big_screen(12px);
     font-weight: 900;
+    @include viewport(tabs) {
+      font-size: vw_tabs(32px);
+      line-height: vw_tabs(52px);
+      margin: 0 0 vw_tabs(12px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(24px);
+      line-height: vw_tabs(40px);
+      margin: 0 0 vw_tabs(8px);
+    }
   }
   .content {
     max-width: vw_big_screen(636px);
+    @include viewport(tabs) {
+      max-width: unset;
+    }
+    @include viewport(swap_tabs) {
+      max-width: 65%;
+    }
     & h2, & p {
       color: var(--secondary-color);
     }
     &-wrap {
       width: 100%;
+      @include viewport(tabs) {
+        margin: vw_tabs(160px) 0 auto;
+      }
     }
     &-img {
       width: vw_big_screen(350px);
