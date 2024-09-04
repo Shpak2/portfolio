@@ -499,12 +499,28 @@ body {
 }
 
 .review {
+  &-slider {
+    & .review-inner {
+      @include viewport(tabs) {
+        opacity: 1 !important;
+        // transform: unset !important;
+      }
+    }
+  }
   &-content {
     user-select: none;
     & p {
       font-size: vw_big_screen(14px);
       font-weight: 400;
       margin: vw_big_screen(4px) 0;
+      @include viewport(tabs) {
+        font-size: vw_tabs(14px);
+        margin: vw_tabs(4px) 0;
+      }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(10px);
+        margin: vw_tabs(3px) 0;
+      }
     }
   }
   &-bullet {
@@ -514,6 +530,14 @@ body {
     border-radius: vw_big_screen(2px);
     cursor: pointer;
     transition: 0.2s ease-in;
+    @include viewport(tabs) {
+      width: vw_tabs(10px);
+      height: vw_tabs(10px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(6px);
+      height: vw_tabs(6px);
+    }
     &.active {
       background-color: var(--button-color);
       pointer-events: none;
@@ -533,6 +557,12 @@ body {
     }
     &:not(:last-child) {
       margin-right: vw_big_screen(12px);
+      @include viewport(tabs) {
+        margin-right: vw_tabs(12px);
+      }
+      @include viewport(swap_tabs) {
+        margin-right: vw_tabs(8px);
+      }
     }
   }
 }

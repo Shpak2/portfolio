@@ -233,9 +233,27 @@ export default {
     font-weight: 900;
     width: 100%;
     text-align: center;
+    @include viewport(tabs) {
+      font-size: vw_tabs(32px);
+      line-height: vw_tabs(52px);
+      margin: vw_tabs(14px) 0;
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(24px);
+      line-height: vw_tabs(40px);
+      margin: vw_tabs(8px) 0;
+    }
   }
   .content {
     width: vw_big_screen(856px);
+    @include viewport(tabs) {
+      width: 100%;
+      margin-bottom: vw_tabs(140px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(542px);
+      margin-bottom: 0;
+    }
   }
 
   p {
@@ -244,6 +262,16 @@ export default {
     text-align: center;
     max-width: vw_big_screen(580px);
     margin: vw_big_screen(16px) auto;
+    @include viewport(tabs) {
+      font-size: vw_tabs(16px);
+      max-width: vw_tabs(636px);
+      margin: vw_tabs(16px) auto;
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(10px);
+      max-width: vw_tabs(367px);
+      margin: vw_tabs(10px) auto;
+    }
   }
 
   form {
@@ -252,6 +280,12 @@ export default {
     & .field {
       position: relative;
       margin: vw_big_screen(12px) 0;
+      @include viewport(tabs) {
+        margin: vw_tabs(12px) 0;
+      }
+      @include viewport(swap_tabs) {
+        margin: vw_tabs(8px) 0;
+      }
       & label {
         position: absolute;
         left: vw_big_screen(15px);
@@ -266,6 +300,17 @@ export default {
         transform: translateY(-50%) rotateX(90deg);
         background-color: var(--secondary-color);
         color: var(--tags-bg);
+        @include viewport(tabs) {
+          font-size: vw_tabs(12px);
+          border-radius: 4px;
+          padding: 0 vw_tabs(6px);
+          line-height: vw_tabs(16px);
+        }
+        @include viewport(swap_tabs) {
+          font-size: vw_tabs(8px);
+          padding: 0 vw_tabs(4px);
+          line-height: vw_tabs(10px);
+        }
       }
       &.focused {
         & label {
@@ -307,6 +352,17 @@ export default {
       background-color: var(--danger-color);
       color: #ffffff;
       padding: 0 vw_big_screen(6px);
+      @include viewport(tabs) {
+        right: vw_tabs(15px);
+        font-size: vw_tabs(12px);
+        line-height: vw_tabs(16px);
+        border-radius: 4px;
+      }
+      @include viewport(swap_tabs) {
+        right: vw_tabs(10px);
+        font-size: vw_tabs(8px);
+        line-height: vw_tabs(10px);
+      }
     }
     & .field-half {
       width: 49%;
@@ -318,6 +374,12 @@ export default {
       resize: none;
       height: vw_big_screen(120px);
       overflow: auto;
+      @include viewport(tabs) {
+        height: vw_tabs(120px);
+      }
+      @include viewport(swap_tabs) {
+        height: vw_tabs(76px);
+      }
     }
     & input, & textarea {
       width: 100%;
@@ -331,6 +393,16 @@ export default {
       transition: .2s ease-in;
       color: var(--secondary-color);
       display: flex;
+      @include viewport(tabs) {
+        padding: vw_tabs(20px);
+        font-size: vw_tabs(16px);
+        line-height: vw_tabs(20px);
+      }
+      @include viewport(swap_tabs) {
+        padding: vw_tabs(12px);
+        font-size: vw_tabs(10px);
+        line-height: vw_tabs(13px);
+      }
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
@@ -338,12 +410,23 @@ export default {
         -webkit-background-clip: text;
         -webkit-text-fill-color: var(--secondary-color);
         box-shadow: inset 0 0 vw_big_screen(40px) vw_big_screen(40px) var(--review-color);
+        @include viewport(tabs) {
+          box-shadow: inset 0 0 40px 40px var(--review-color);
+        }
       }
       &::placeholder {
         font-size: vw_big_screen(16px);
         line-height: vw_big_screen(20px);
         color: var(--border-color);
         transition: 0.2s;
+        @include viewport(tabs) {
+          font-size: vw_tabs(16px);
+          line-height: vw_tabs(20px);
+        }
+        @include viewport(swap_tabs) {
+          font-size: vw_tabs(10px);
+          line-height: vw_tabs(13px);
+        }
       }
       &:hover {
         @include viewport(hover) {
@@ -363,9 +446,28 @@ export default {
       color: var(--primary-color);
       padding: vw_big_screen(12.5px) vw_big_screen(16px);
       transition: 0.2s ease-in;
+      font-size: vw_big_screen(16px);
+      @include viewport(tabs) {
+        bottom: vw_tabs(-50px);
+        padding: vw_tabs(12.5px) vw_tabs(16px);
+        font-size: vw_tabs(16px);
+      }
+      @include viewport(swap_tabs) {
+        font-size: vw_tabs(10px);
+        bottom: vw_tabs(-32px);
+        padding: vw_tabs(8.5px) vw_tabs(10px);
+      }
       & svg {
         width: vw_big_screen(22px);
         margin-left: vw_big_screen(10px);
+        @include viewport(tabs) {
+          width: vw_tabs(22px);
+          margin-left: vw_tabs(10px);
+        }
+        @include viewport(swap_tabs) {
+          width: vw_tabs(14px);
+          margin-left: vw_tabs(6px);
+        }
       }
       &:hover {
         @include viewport(hover) {

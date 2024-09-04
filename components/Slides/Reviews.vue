@@ -1,6 +1,6 @@
 <template>
   <div class="container m-auto flex items-center full-height" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
-    <div class="container">
+    <div class="review-container">
       <Decorative :content="'main'" :className="'tag-item__text'" :tag="'wrap'">
         <h2 v-html="$t('reviewTitle')"></h2>
         <swiper
@@ -154,6 +154,16 @@
     font-weight: 900;
     width: 100%;
     text-align: center;
+    @include viewport(tabs) {
+      font-size: vw_tabs(32px);
+      line-height: vw_tabs(52px);
+      margin: vw_tabs(14px) 0;
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(24px);
+      line-height: vw_tabs(40px);
+      margin: vw_tabs(8px) 0;
+    }
   }
   .container {
     position: relative;
@@ -165,24 +175,55 @@
     max-height: vw_big_screen(280px);
     padding-bottom: vw_big_screen(14px);
     mask-image: linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent);
+    @include viewport(tabs) {
+      max-height: vw_tabs(480px);
+      padding-bottom: vw_tabs(14px);
+    }
+    @include viewport(swap_tabs) {
+      max-height: vw_tabs(170px);
+    }
     &-slide {
       width: calc(100% - vw_big_screen(10px));
       margin: vw_big_screen(12px) 0;
+      @include viewport(tabs) {
+        width: calc(100% - vw_tabs(10px));
+        margin: vw_tabs(12px) 0;
+      }
+      @include viewport(swap_tabs) {
+        margin: vw_tabs(8px) 0;
+      }
+      &:last-child {
+        padding-bottom: 0 !important;
+      }
     }
   }
 
   .review {
+    &-container {
+      @include viewport(swap_tabs) {
+        margin-top: vw_tabs(60px);
+      }
+    }
     &-inner {
       background-color: var(--review-color);
       filter: drop-shadow(vw_big_screen(8px) vw_big_screen(14px) vw_big_screen(4px) var(--shadow-slide));
       width: 80%;
       position: relative;
       padding: vw_big_screen(22px);
+      @include viewport(tabs) {
+        filter: drop-shadow(8px 14px 4px var(--shadow-slide));
+      }
       & svg {
         position: absolute;
         width: vw_big_screen(49px);
         bottom: 0;
         transform: translateY(78%);
+        @include viewport(tabs) {
+          width: vw_tabs(49px);
+        }
+        @include viewport(swap_tabs) {
+          width: vw_tabs(31px);
+        }
       }
     }
     &-avatar {
@@ -192,6 +233,17 @@
       overflow: hidden;
       margin-right: vw_big_screen(24px);
       border: vw_big_screen(2px) solid var(--sidebar-color);
+      @include viewport(tabs) {
+        width: vw_tabs(60px);
+        height: vw_tabs(60px);
+        margin-right: vw_tabs(24px);
+        border-width: vw_tabs(2px);
+      }
+      @include viewport(swap_tabs) {
+        width: vw_tabs(38px);
+        height: vw_tabs(38px);
+        margin-right: vw_tabs(16px);
+      }
     }
     &-body {
       width: 90%;
@@ -199,20 +251,52 @@
         margin: 0 0 vw_big_screen(12px);
         font-size: vw_big_screen(16px);
         font-weight: 800;
+        @include viewport(tabs) {
+          margin-bottom: vw_tabs(12px);
+          font-size: vw_tabs(16px);
+        }
+        @include viewport(swap_tabs) {
+          margin-bottom: vw_tabs(8px);
+          font-size: vw_tabs(10px);
+        }
       }
     }
     &-pagination {
       margin-bottom: vw_big_screen(20px);
+      @include viewport(tabs) {
+        margin-bottom: vw_tabs(20px);
+      }
+      @include viewport(swap_tabs) {
+        margin-bottom: vw_tabs(14px);
+      }
     }
     &-navigation {
       margin-bottom: vw_big_screen(16px);
+      @include viewport(tabs) {
+        margin-bottom: vw_tabs(16px);
+      }
+      @include viewport(swap_tabs) {
+        margin-bottom: vw_tabs(10px);
+      }
     }
     &-button {
       width: vw_big_screen(24px);
       cursor: pointer;
       transition: 0.2s ease-in;
+      @include viewport(tabs) {
+        width: vw_tabs(24px);
+      }
+      @include viewport(swap_tabs) {
+        width: vw_tabs(16px);
+      }
       &-prev {
         margin-right: vw_big_screen(12px);
+        @include viewport(tabs) {
+          margin-right: vw_tabs(12px);
+        }
+        @include viewport(swap_tabs) {
+          margin-right: vw_tabs(8px);
+        }
         &:active {
           transform: translateX(-10%) scale(0.9)
         }

@@ -101,6 +101,18 @@
     position: absolute;
     top: vw_big_screen(20px);
     right: vw_big_screen(20px);
+    @include viewport(tabs) {
+      width: vw_tabs(32px);
+      height: vw_tabs(32px);
+      top: vw_tabs(20px);
+      right: vw_tabs(20px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(20px);
+      height: vw_tabs(20px);
+      top: vw_tabs(14px);
+      right: vw_tabs(14px);
+    }
     &:active {
       transform: scale(0.8);
     }
@@ -113,11 +125,23 @@
     background-color: var(--secondary-color);
     font-size: vw_big_screen(16px);
     font-weight: 600;
-    line-height: vw_big_screen(19.36px);
+    line-height: vw_big_screen(19px);
     padding: vw_big_screen(12.5px) vw_big_screen(16px);
     margin-top: vw_big_screen(24px);
     transition: opacity 0.2s ease;
     color: var(--tags-bg);
+    @include viewport(tabs) {
+      font-size: vw_tabs(16px);
+      line-height: vw_tabs(19px);
+      padding: vw_tabs(12.5px) vw_tabs(16px);
+      margin-top: vw_tabs(24px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(10px);
+      line-height: vw_tabs(12px);
+      padding: vw_tabs(8.5px) vw_tabs(10px);
+      margin-top: vw_tabs(15px);
+    }
     &:hover {
       @include viewport(hover) {
         opacity: 0.75;
@@ -131,6 +155,16 @@
     font-weight: 900;
     line-height: vw_big_screen(52px);
     text-align: center;
+    @include viewport(tabs) {
+      margin: vw_tabs(16px) 0 vw_tabs(8px);
+      font-size: vw_tabs(32px);
+      line-height: vw_tabs(52px);
+    }
+    @include viewport(swap_tabs) {
+      margin: vw_tabs(10px) 0 vw_tabs(6px);
+      font-size: vw_tabs(20px);
+      line-height: vw_tabs(20px);
+    }
   }
 
   p {
@@ -142,6 +176,18 @@
     max-height: vw_big_screen(220px);
     overflow: auto;
     padding: 0 vw_big_screen(4px);
+    @include viewport(tabs) {
+      font-size: vw_tabs(16px);
+      line-height: vw_tabs(20px);
+      max-height: vw_tabs(220px);
+      padding: 0 vw_tabs(4px);
+    }
+    @include viewport(swap_tabs) {
+      font-size: vw_tabs(10px);
+      line-height: vw_tabs(14px);
+      max-height: vw_tabs(140px);
+      padding: 0 vw_tabs(4px);
+    }
   }
 
   .popup-wrap {
@@ -149,6 +195,14 @@
     padding: vw_big_screen(78px) vw_big_screen(52px) vw_big_screen(66px);
     background-color: var(--primary-color);
     position: relative;
+    @include viewport(tabs) {
+      width: vw_tabs(400px);
+      padding: vw_tabs(78px) vw_tabs(52px) vw_tabs(66px);
+    }
+    @include viewport(swap_tabs) {
+      width: vw_tabs(254px);
+      padding: vw_tabs(50px) vw_tabs(34px) vw_tabs(42px);
+    }
   }
 
   @keyframes show {
