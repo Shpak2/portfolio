@@ -46,7 +46,7 @@
       height: vw_tabs(80px);
       border-bottom-width: 1px;
     }
-    @include viewport(mobile) {
+    @include viewport(sm_mobile) {
       height: vmin_mobile(80px);
     }
   }

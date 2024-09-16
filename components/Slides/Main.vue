@@ -63,10 +63,25 @@
       padding: 0 vw_tabs(28px);
       margin: vw_tabs(4px) 0;
     }
+    @include viewport(sm_mobile) {
+      height: vmin_mobile(51px);
+      font-size: vmin_mobile(16px);
+      padding: 0 vmin_mobile(24px);
+      margin: vmin_mobile(16px) 0;
+    }
     & span {
       width: vw_big_screen(22px);
       margin-left: vw_big_screen(12px);
       transform: translate(0%,10%);
+      @include viewport(tabs) {
+        width: vw_tabs(22px);
+        margin-left: vw_tabs(12px);
+      }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(22px);
+        margin-left: vmin_mobile(12px);
+        transform: unset;
+      }
       & svg {
         & path {
           transition: 0.3s ease;

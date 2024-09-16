@@ -61,6 +61,9 @@
     @include viewport(swap_tabs) {
       font-size: vw_tabs(16px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(16px);
+    }
   }
 
   .language-link {
@@ -74,6 +77,9 @@
       margin-left: vw_big_screen(16px);
       @include viewport(tabs) {
         margin-left: vw_tabs(16px);
+      }
+      @include viewport(sm_mobile) {
+        margin-left: vmin_mobile(16px);
       }
     }
     &:hover {
@@ -95,6 +101,11 @@
         bottom: vw_tabs(-6px);
         width: vw_tabs(6px);
         height: vw_tabs(6px);
+      }
+      @include viewport(sm_mobile) {
+        bottom: vmin_mobile(-6px);
+        width: vmin_mobile(6px);
+        height: vmin_mobile(6px);
       }
     }
     &.active {

@@ -77,6 +77,14 @@
 	@else if $point == mobile {
 		@media only screen and (max-width: #{$vp-mobile}px) { @content; }
 	}
+	@else if $point == sm_mobile {
+		@media only screen and (max-width: #{$vp-mobile}px) {
+			@content;
+		}
+		@media only screen and (max-height: #{$vp-mobile}px) and (orientation: landscape) {
+			@content;
+		}
+	}
 	// > 350
 	@else if $point == smobile {
 		@media only screen and (max-width: #{$vp-small-mobile}px) { @content; }

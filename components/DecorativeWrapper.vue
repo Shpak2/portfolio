@@ -59,6 +59,9 @@
     @include viewport(tabs) {
       font-size: vw_tabs(12px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(12px);
+    }
     & span {
       color: var(--code-color);
     }
@@ -76,11 +79,17 @@
         @include viewport(tabs) {
           top: vw_tabs(104px);
         }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(104px);
+        }
       }
       &:last-child {
         bottom: vh_big_screen(24px);
         @include viewport(tabs) {
           bottom: vw_tabs(24px);
+        }
+        @include viewport(sm_mobile) {
+          bottom: vmin_mobile(24px);
         }
       }
     }
@@ -97,11 +106,17 @@
         @include viewport(tabs) {
           top: vw_tabs(134px);
         }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(134px);
+        }
       }
       &-close {
         bottom: vh_big_screen(54px);
         @include viewport(tabs) {
           bottom: vw_tabs(54px);
+        }
+        @include viewport(sm_mobile) {
+          bottom: vmin_mobile(54px);
         }
       }
     }
@@ -113,6 +128,9 @@
         }
         @include viewport(swap_tabs) {
           margin-bottom: vw_tabs(8px);
+        }
+        @include viewport(sm_mobile) {
+          margin-bottom: vmin_mobile(8px);
         }
       }
     }

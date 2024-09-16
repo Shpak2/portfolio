@@ -9,11 +9,7 @@
           :freeMode="true"
           :parallax="true"
           :modules="modules"
-          :navigation="{
-            disabledClass: 'disable',
-            nextEl: '.review-button-next',
-            prevEl: '.review-button-prev'
-          }"
+          :navigation="navigation"
           :pagination="pagination"
           @reachEnd="handleFullSlider(true)"
           @reachBeginning="handleFullSlider(true)"
@@ -27,7 +23,7 @@
             :key="index"
             style="pointer-events: none;"
             :style="{
-              paddingBottom: index === data.length-1 ? '150px' : ''
+              paddingBottom: index === data.length - 1 ? '150px' : ''
               }"
             >
             <div
@@ -98,6 +94,11 @@
             return `<span class="review-bullet flex"></span>`;
           },
         },
+        navigation: {
+          disabledClass: 'disable',
+          nextEl: '.review-button-next',
+          prevEl: '.review-button-prev'
+        }
       }
     },
     components: {

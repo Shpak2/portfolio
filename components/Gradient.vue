@@ -118,6 +118,9 @@
     transform: translateY(-50%);
     pointer-events: none;
     overflow: hidden;
+    @include viewport(sm_mobile) {
+      display: none;
+    }
     & svg {
       position: absolute;
       inset: 0;

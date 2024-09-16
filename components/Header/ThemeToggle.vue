@@ -42,6 +42,11 @@
       height: vw_tabs(40px);
       margin-right: vw_tabs(14px);
     }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(40px);
+      height: vmin_mobile(40px);
+      margin-right: vmin_mobile(14px);
+    }
     & svg {
       pointer-events: none;
       width: vw_big_screen(20px);

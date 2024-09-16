@@ -20,6 +20,10 @@ body {
   background-color: var(--primary-color);
   transition: background-color 0.3s ease, color 0.3s ease;
   color: var(--secondary-color);
+  @include viewport(sm_mobile) {
+    overflow: unset;
+    overflow-x: hidden;
+  }
 }
 
 * {
@@ -81,6 +85,9 @@ body {
   @include viewport(tabs) {
     border-radius: vw_tabs(6px);
   }
+  @include viewport(sm_mobile) {
+    border-radius: vmin_mobile(8px);
+  }
 }
 
 .mono-font {
@@ -124,6 +131,16 @@ body {
       line-height: vw_tabs(58px);
       margin: 0 0 vw_tabs(8px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(32px);
+      line-height: vmin_mobile(40px);
+      margin: vmin_mobile(4px) 0 vmin_mobile(12px);
+    }
+    & br {
+      @include viewport(mobile) {
+        display: none;
+      }
+    }
     & span {
       background-color: var(--button-color);
       transition: 0.3s ease;
@@ -131,6 +148,10 @@ body {
       color: #fff;
       @include viewport(tabs) {
         padding: 0 vw_tabs(14px);
+      }
+      @include viewport(sm_mobile) {
+        padding: 0 vmin_mobile(14px);
+        display: inline-flex;
       }
     }
   }
@@ -149,6 +170,11 @@ body {
       margin: 0 0 vw_tabs(6px);
       font-size: vw_tabs(18px);
       line-height: vw_tabs(22px);
+    }
+    @include viewport(sm_mobile) {
+      margin: 0 0 vmin_mobile(6px);
+      font-size: vmin_mobile(14px);
+      line-height: vmin_mobile(16px);
     }
     & span {
       color: var(--secondary-color);
@@ -201,6 +227,15 @@ body {
     margin-top: 10%;
     margin-left: vw_tabs(10px);
   }
+  @include viewport(mobile) {
+    margin-top: vmin_mobile(32px);
+  }
+  @include viewport(swap_mobile) {
+    margin-top: 0;
+  }
+  @include viewport(sm_mobile) {
+    margin-left: 0;
+  }
   & .btn-main p {
     font-size: vw_big_screen(20px);
     @include viewport(tabs) {
@@ -208,6 +243,9 @@ body {
     }
     @include viewport(swap_tabs) {
       font-size: vw_tabs(16px);
+    }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(16px);
     }
   }
 }
@@ -242,8 +280,20 @@ body {
   @include viewport(tabs) {
     width: vw_tabs(696px);
   }
-  @include viewport(mobile) {
-    width: vmin_mobile(351px);
+  @include viewport(sm_mobile) {
+    width: 94%;
+  }
+}
+
+main {
+  @include viewport(sm_mobile) {
+    padding-top: vmin_mobile(80px);
+  }
+}
+
+.wrapper {
+  @include viewport(sm_mobile) {
+    margin-top: vmin_mobile(88px);
   }
 }
 

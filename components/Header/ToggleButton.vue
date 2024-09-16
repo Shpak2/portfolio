@@ -43,6 +43,10 @@
     @include viewport(tabs) {
       display: flex;
     }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(44px);
+      height: vmin_mobile(44px);
+    }
     & svg {
       pointer-events: none;
       transform: scale(1.22);

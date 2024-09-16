@@ -31,7 +31,7 @@
     @include viewport(tabs) {
       width: vw_tabs(180px);
     }
-    @include viewport(mobile) {
+    @include viewport(sm_mobile) {
       width: vmin_mobile(180px);
     }
   }
