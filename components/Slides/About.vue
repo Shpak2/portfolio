@@ -94,6 +94,9 @@
       flex-direction: unset;
       margin: vw_tabs(160px) 0 auto;
     }
+    @include viewport(sm_mobile) {
+      margin: vmin_mobile(60px) 0 auto;
+    }
   }
   .swiper {
     width: vw_big_screen(636px);
@@ -120,6 +123,11 @@
       font-size: vw_tabs(24px);
       line-height: vw_tabs(40px);
       margin: 0 0 vw_tabs(8px);
+    }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(28px);
+      line-height: vmin_mobile(32px);
+      margin-bottom: vmin_mobile(14px);
     }
   }
   .content {
@@ -149,6 +157,16 @@
         width: vw_tabs(200px);
         transform: unset;
         margin-right: vw_tabs(10px);
+      }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(240px);
+        margin-bottom: vmin_mobile(20px);
+      }
+      @include viewport(mobile) {
+        padding-top: 0;
+      }
+      @include viewport(swap_mobile) {
+        padding-top: vmin_mobile(22px);
       }
     }
   }

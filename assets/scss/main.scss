@@ -174,8 +174,8 @@ body {
     }
     @include viewport(sm_mobile) {
       margin: 0 0 vmin_mobile(6px);
-      font-size: vmin_mobile(14px);
-      line-height: vmin_mobile(16px);
+      font-size: vmin_mobile(18px);
+      line-height: vmin_mobile(20px);
     }
     & span {
       color: var(--secondary-color);
@@ -236,6 +236,7 @@ body {
   }
   @include viewport(sm_mobile) {
     margin-left: 0;
+    margin-bottom: 0;
   }
   & .btn-main p {
     font-size: vw_big_screen(20px);
@@ -251,6 +252,12 @@ body {
   }
 }
 
+.slide-item {
+  @include viewport(sm_mobile) {
+    overflow: hidden;
+  }
+}
+
 .content {
   color: var(--secondary-color);
   & p {
@@ -260,6 +267,10 @@ body {
       font-size: vw_tabs(14px);
       line-height: vw_tabs(24px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(14px);
+      line-height: vmin_mobile(24px);
+    }
   }
   & div p {
     margin: 0;
@@ -267,6 +278,9 @@ body {
       margin: vw_big_screen(14px) 0 0;
       @include viewport(tabs) {
         margin: vw_tabs(14px) 0 0;
+      }
+      @include viewport(sm_mobile) {
+        margin-top: vmin_mobile(14px);
       }
     }
   }
@@ -292,7 +306,7 @@ main {
   }
 }
 
-.wrapper {
+.wrapper-main {
   @include viewport(sm_mobile) {
     margin-top: vmin_mobile(88px);
   }

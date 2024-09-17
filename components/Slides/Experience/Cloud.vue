@@ -1,5 +1,4 @@
 <template>
-  <!-- <div id="cursor"></div> -->
   <ul class="tags-cloud">
     <li v-for="( tag, i ) in tags" :key="i" class='tag'>
       <span class='wrap'>{{ tag }}</span>
@@ -61,6 +60,7 @@
     width: vw_big_screen(412px);
     transform: translateY(-50%);
     list-style: none;
+    padding: 0;
     @include viewport(tabs) {
       right: 50%;
       top: unset;
@@ -77,6 +77,15 @@
       transform: translateY(-50%);
       bottom: unset;
     }
+    @include viewport(mobile) {
+      right: 50%;
+      top: unset;
+      height: vmin_mobile(300px);
+      width: vmin_mobile(300px);
+      transform: translateX(50%);
+      bottom: vmin_mobile(40px);
+      // overflow: hidden;
+    }
     & .tag {
       position: absolute;
       top: 50%;
@@ -90,6 +99,9 @@
       }
       @include viewport(swap_tabs) {
         font-size: vw_tabs(14px);
+      }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(14px);
       }
       & .wrap {
         display: inline-block;

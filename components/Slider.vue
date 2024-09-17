@@ -31,7 +31,7 @@
       <component :is="slide.component" :key="slide.key" />
     </swiper-slide>
   </swiper>
-  <div v-if="isMobile" class="wrapper">
+  <div v-if="isMobile" class="wrapper-main">
     <div v-for="(slide, index) in slides" :key="index" class="slide-item">
       <component :is="slide.component" :key="slide.key" :isMobile="isMobile" />
     </div>

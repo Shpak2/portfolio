@@ -108,6 +108,11 @@
       line-height: vw_tabs(40px);
       margin: 0 0 vw_tabs(8px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(28px);
+      line-height: vmin_mobile(32px);
+      margin: 0 0 vmin_mobile(14px);
+    }
   }
   .content {
     max-width: vw_big_screen(636px);
@@ -124,6 +129,11 @@
       width: 100%;
       @include viewport(tabs) {
         margin: vw_tabs(160px) 0 auto;
+      }
+      @include viewport(sm_mobile) {
+        margin: vmin_mobile(60px) 0 0;
+        position: relative;
+        padding-bottom: vmin_mobile(340px);
       }
     }
     &-img {
