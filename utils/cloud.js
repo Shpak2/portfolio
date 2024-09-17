@@ -26,18 +26,25 @@ export class TagsCloud {
   #tags;
   #rotationAxis;
   #rotationAngle;
-  #rotationSpeed;
+  #currentSpeed;
+  #targetSpeed;
+  #speedChangeRate;
   #frameRequestId;
+  #changeTrajectoryInterval;
+  #lastChangeTime;
 
   constructor(root) {
     this.#root = root;
-    this.#size = this.#root.offsetWidth;
     this.#tags = root.querySelectorAll('.tag');
+    this.#size = this.#root.offsetWidth;
     this.#sphere = new FibonacciSphere(this.#tags.length);
     this.#rotationAxis = [1, 0, 0];
     this.#rotationAngle = 0;
-
-    this.#rotationSpeed = 0.002;
+    this.#currentSpeed = 0.002;
+    this.#targetSpeed = this.#currentSpeed;
+    this.#speedChangeRate = 0.0005;
+    this.#changeTrajectoryInterval = 5000 + Math.random() * 2000;
+    this.#lastChangeTime = Date.now();
 
     this.#updatePositions();
     this.#initEventListeners();
@@ -47,12 +54,14 @@ export class TagsCloud {
   }
 
   #initEventListeners() {
-    window.addEventListener('resize', this.#updatePositions.bind(this));
+    window.addEventListener('resize', this.#onResize.bind(this));
     document.addEventListener('mousemove', this.#onMouseMove.bind(this));
+  }
 
-    this.#root.addEventListener('touchstart', this.#onTouchStart.bind(this), { passive: true });
-    this.#root.addEventListener('touchmove', this.#onTouchMove.bind(this), { passive: true });
-    this.#root.addEventListener('touchend', this.#onTouchEnd.bind(this), { passive: true });
+  #onResize() {
+    this.#size = this.#root.offsetWidth;
+    this.#sphere = new FibonacciSphere(this.#tags.length);
+    this.#updatePositions();
   }
 
   #updatePositions() {
@@ -105,33 +114,32 @@ export class TagsCloud {
     const delta = Math.sqrt(deltaX ** 2 + deltaY ** 2);
     const speed = delta / Math.max(window.innerHeight, window.innerWidth) / 15;
     this.#rotationAxis = axis;
-    this.#rotationSpeed = speed;
-  }
-
-  #onTouchStart(e) {
-    if (e.touches.length === 1) {
-      this.#onMouseMove(e.touches[0]);
-    }
-  }
-
-  #onTouchMove(e) {
-    if (e.touches.length === 1) {
-      this.#onMouseMove(e.touches[0]);
-    }
-  }
-
-  #onTouchEnd(e) {
-
+    this.#targetSpeed = speed;
   }
 
   #update() {
-    this.#rotationAngle += this.#rotationSpeed;
+    this.#rotationAngle += this.#currentSpeed;
+    this.#currentSpeed += (this.#targetSpeed - this.#currentSpeed) * this.#speedChangeRate;
     this.#updatePositions();
+  }
+
+  #changeTrajectory() {
+    const a = Math.random() * 2 * Math.PI;
+    this.#rotationAxis = [Math.sin(a), Math.cos(a), 0];
+    this.#targetSpeed = 0.002 + Math.random() * 0.005;
+    this.#speedChangeRate = 0.0005;
+    this.#changeTrajectoryInterval = 5000 + Math.random() * 2000;
   }
 
   start() {
     this.#update();
     this.#frameRequestId = requestAnimationFrame(this.start.bind(this));
+
+    const now = Date.now();
+    if (now - this.#lastChangeTime >= this.#changeTrajectoryInterval) {
+      this.#changeTrajectory();
+      this.#lastChangeTime = now;
+    }
   }
 
   stop() {
