@@ -55,7 +55,7 @@ export class TagsCloud {
 
   #initEventListeners() {
     window.addEventListener('resize', this.#onResize.bind(this));
-    document.addEventListener('mousemove', this.#onMouseMove.bind(this));
+    document.addEventListener('pointermove', this.#onPointerMove.bind(this));
   }
 
   #onResize() {
@@ -105,7 +105,9 @@ export class TagsCloud {
     }
   }
 
-  #onMouseMove(e) {
+  #onPointerMove(e) {
+    if (e.pointerType !== 'mouse') return;
+
     const rootRect = this.#root.getBoundingClientRect();
     const deltaX = (e.clientX <= window.innerWidth / 2 ? window.innerWidth / 2 : e.clientX) - (rootRect.left + this.#root.offsetWidth / 2);
     const deltaY = e.clientY - (rootRect.top + this.#root.offsetHeight / 2);

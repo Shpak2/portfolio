@@ -36,6 +36,9 @@ export default {
       isPortrait: window.matchMedia("(max-width: 584px) and (orientation: portrait)").matches
     };
   },
+  props: {
+    isMobile: false
+  },
   watch: {
     "$store.state.theme.darkMode"() {
       this.updateColors();
@@ -49,14 +52,18 @@ export default {
       this.generateFigures();
     }
     this.initializeCanvas();
-    window.addEventListener("mousemove", this.handleMouseMove);
+    if(!this.isMobile) {
+      window.addEventListener("mousemove", this.handleMouseMove);
+    }
     window.addEventListener("resize", this.handleResize);
     if (this.isPortrait) {
       this.updateMousePosition(window.innerWidth * 0.75, window.innerHeight * 0.75);
     }
   },
   beforeDestroy() {
-    window.removeEventListener("mousemove", this.handleMouseMove);
+    if(!this.isMobile) {
+      window.removeEventListener("mousemove", this.handleMouseMove);
+    }
     window.removeEventListener("resize", this.handleResize);
     clearTimeout(this.mouseStillTimeout);
     cancelAnimationFrame(this.animationFrameId);
