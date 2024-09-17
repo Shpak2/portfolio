@@ -32,11 +32,15 @@
     </swiper-slide>
   </swiper>
   <div v-if="isMobile" class="wrapper-main">
-    <div v-for="(slide, index) in slides" :key="index" class="slide-item">
-      <component :is="slide.component" :key="slide.key" :isMobile="isMobile" />
+    <div
+      v-for="(slide, index) in slides"
+      :key="index"
+      ref="slideItems"
+      class="slide-item">
+        <component :is="slide.component" :key="slide.key" :isMobile="isMobile" />
     </div>
   </div>
-  <div class="swiper-scrollbar custom-scrollbar"></div>
+  <div v-if="!isMobile" class="swiper-scrollbar custom-scrollbar"></div>
   <DecorMouse/>
   <Decorative :content="'body'" :className="'tag-item__body tag-item__body-close'" :tag="'close'" />
   <Decorative :content="'html'" :className="'tag-item__html'" :tag="'close'" />
@@ -96,17 +100,18 @@
       // this.$refs.splide.splide.on('move', this.handleSlideChange);
     },
     watch: {
-      '$store.state.activeItem'(newValue, oldValue) {
-        this.changeSlide(newValue);
-        this.swiper.mousewheel.enable()
+      '$store.state.activeItem'(newValue) {
+        if (this.isMobile) {
+          let numSlide = this.slides.findIndex(slide => slide.key === newValue)
+          this.scrollToSlide(numSlide)
+        } else {
+          this.changeSlide(newValue);
+          this.swiper.mousewheel.enable()
+        }
       },
-      '$store.state.allowMouseScroll'(newValue, oldValue) {
+      '$store.state.allowMouseScroll'(newValue) {
         newValue ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
       },
-      // '$store.state.isMobile'(val) {
-      //   this.isMobile = val
-      //   console.log('val',val)
-      // }
     },
     methods: {
       onSwiper(swiper) {
@@ -120,13 +125,16 @@
         const slideIndex = this.slides.findIndex(slide => slide.key === key);
         this.swiper.slideTo(slideIndex)
       },
-      // isActiveSlide(slideKey) {
-      //   // return this.activeSlideKey === slideKey;
-      // },
-      // handleSlideChange(slideIndex) {
-      //   const currentIndex = slideIndex;
-      //   // this.$store.commit('setActiveItem', this.slides[currentIndex].key);
-      // },
+      scrollToSlide(key) {
+        const slideElement = this.$refs.slideItems[key];
+        if (slideElement) {
+          const { top } = slideElement.getBoundingClientRect();
+          window.scrollTo({
+            top: window.pageYOffset + top - 90,
+            behavior: 'smooth'
+          });
+        }
+      }
     },
   };
 </script>

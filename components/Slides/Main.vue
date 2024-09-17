@@ -42,6 +42,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    position: relative;
+    z-index: 1;
+  }
   .btn-main {
     height: vw_big_screen(64px);
     color: var(--primary-color);

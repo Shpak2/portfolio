@@ -50,23 +50,24 @@
         ()=>{
           setTimeout(this.loopComplete,3000)
           this.$store.commit('preloader/setIsPlay', true);
-
         }, 1)
+
+      window.addEventListener("resize", this.checkWidth);
     },
     methods: {
-      checkTheme: function () {
+      checkTheme() {
         return this.$store.state.theme.darkMode;
       },
-      loopComplete: function () {
+      loopComplete() {
         this.completeLoop = true
         this.$store.commit('preloader/setCompleteLoop', true);
         setTimeout(()=>{
           this.$store.commit('preloader/setIsPlay', false);
         }, 1000)
       },
-      checkWidth: function () {
-        this.width = screen.width <= 1024 ? '70%' : ((500 * window.innerWidth) / 1920) + 'px'
-      }
+      checkWidth() {
+        this.width = screen.width <= 768 ? ((400 * window.innerWidth) / 768) + 'px' : ((500 * window.innerWidth) / 1920) + 'px'
+      },
     }
   };
 </script>

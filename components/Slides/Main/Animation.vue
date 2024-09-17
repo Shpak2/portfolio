@@ -29,10 +29,11 @@ export default {
       mouseStillTimeout: null,
       minRadius: 0.8,
       maxRadius: 1.2,
-      targetRadius: window.innerWidth <= 1024 ? (200 * window.innerWidth) / 768 : 200,
+      targetRadius: window.innerWidth <= 1024 ? (180 * window.innerWidth) / 768 : 200,
       figures: [],
-      length: window.innerWidth <= 1024 ? (50 * window.innerWidth) / 768 : 50,
-      animationFrameId: null
+      length: window.innerWidth <= 1024 ? (40 * window.innerWidth) / 768 : 50,
+      animationFrameId: null,
+      isPortrait: window.matchMedia("(max-width: 584px) and (orientation: portrait)").matches
     };
   },
   watch: {
@@ -50,16 +51,13 @@ export default {
     this.initializeCanvas();
     window.addEventListener("mousemove", this.handleMouseMove);
     window.addEventListener("resize", this.handleResize);
-
-    window.addEventListener("touchstart", this.handleTouchMove);
-    window.addEventListener("touchmove", this.handleTouchMove);
+    if (this.isPortrait) {
+      this.updateMousePosition(window.innerWidth * 0.75, window.innerHeight * 0.75);
+    }
   },
   beforeDestroy() {
     window.removeEventListener("mousemove", this.handleMouseMove);
     window.removeEventListener("resize", this.handleResize);
-
-    window.removeEventListener("touchstart", this.handleTouchMove);
-    window.removeEventListener("touchmove", this.handleTouchMove);
     clearTimeout(this.mouseStillTimeout);
     cancelAnimationFrame(this.animationFrameId);
   },
@@ -81,15 +79,12 @@ export default {
     },
     handleResize() {
       this.initializeCanvas();
+      if (this.isPortrait) {
+        this.updateMousePosition(window.innerWidth * 0.75, window.innerHeight * 0.75);
+      }
     },
     handleMouseMove(event) {
       this.updateMousePosition(event.clientX, event.clientY);
-    },
-    handleTouchMove(event) {
-      if (event.touches.length > 0) {
-        const touch = event.touches[0];
-        this.updateMousePosition(touch.clientX, touch.clientY);
-      }
     },
     updateMousePosition(x, y) {
       this.mouseX = x;

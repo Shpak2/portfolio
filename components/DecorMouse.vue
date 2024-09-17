@@ -25,6 +25,13 @@ export default {
       this.hideMouse = true
     },
   },
+  mounted() {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 30) {
+        this.hideMouse = true
+      }
+    });
+  }
 };
 </script>
 
@@ -63,6 +70,11 @@ export default {
       @include viewport(tabs) {
         bottom: vw_tabs(80px);
         right: vw_tabs(70px);
+      }
+      @include viewport(sm_mobile) {
+        bottom: unset;
+        top: calc(100vh - vmin_mobile(40px));
+        right: vmin_mobile(20px);
       }
       &.hide {
         animation: hideDecor 0.2s ease forwards;
@@ -113,6 +125,9 @@ export default {
         animation: handTap 2s cubic-bezier(0.785, 0.135, 0.150, 0.860) infinite;
         transform-origin: center bottom;
       }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(26px);
+      }
     }
     &-text {
       font-size: vw_big_screen(12px);
@@ -122,6 +137,10 @@ export default {
       @include viewport(tabs) {
         font-size: vw_tabs(12px);
         margin-right: vw_tabs(10px);
+      }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(10px);
+        margin-right: vmin_mobile(6px);
       }
     }
   }
