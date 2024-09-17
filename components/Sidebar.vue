@@ -118,6 +118,10 @@
         padding: vw_tabs(8px) 0;
         font-size: vw_tabs(24px);
       }
+      @include viewport(sm_mobile) {
+        padding: vmin_mobile(8px) 0;
+        font-size: vmin_mobile(24px);
+      }
       @include viewport(hover) {
         &:hover {
           color: var(--secondary-color);
@@ -140,6 +144,9 @@
         width: 100%;
         height: 2px;
         border-radius: 8px;
+        @include viewport(sm_mobile) {
+          bottom: vmin_mobile(4px);
+        }
       }
     }
     &-border {
@@ -164,6 +171,9 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+    }
+    @include viewport(swap_mobile) {
+      padding-top: vmin_mobile(160px);
     }
   }
 </style>

@@ -33,6 +33,9 @@
     @include viewport(tabs) {
       width: vw_tabs(24px);
     }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(24px);
+    }
     @include viewport(hover) {
       &:hover {
         & svg path {
@@ -57,6 +60,9 @@
         margin-left: 0;
         margin-top: vw_tabs(28px);
       }
+      @include viewport(sm_mobile) {
+        margin-top: vmin_mobile(22px);
+      }
       & .social-item {
         @include viewport(tabs) {
           width: vw_tabs(38px);
@@ -64,12 +70,18 @@
         @include viewport(swap_tabs) {
           width: vw_tabs(30px);
         }
+        @include viewport(sm_mobile) {
+          width: vmin_mobile(26px);
+        }
         &:not(:last-child) {
           @include viewport(tabs) {
             margin-right: vw_tabs(16px);
           }
           @include viewport(swap_tabs) {
             margin-right: vw_tabs(14px);
+          }
+          @include viewport(sm_mobile) {
+            margin-right: vmin_mobile(14px);
           }
         }
       }

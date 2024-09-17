@@ -29,6 +29,10 @@
       @include viewport(swap_tabs) {
         font-size: vw_tabs(12px);
       }
+      @include viewport(sm_mobile) {
+        margin: vmin_mobile(18px) 0 vmin_mobile(24px);
+        font-size: vmin_mobile(12px);
+      }
     }
   }
 </style>

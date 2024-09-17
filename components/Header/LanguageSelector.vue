@@ -49,6 +49,9 @@
         margin-top: auto;
         display: flex;
       }
+      @include viewport(swap_mobile) {
+        margin-top: vmin_mobile(60px);
+      }
     }
   }
 

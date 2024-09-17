@@ -29,6 +29,7 @@ body {
 * {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer і Edge */
+  // outline: 1px solid red;
 }
 
 *::-webkit-scrollbar {

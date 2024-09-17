@@ -77,6 +77,9 @@
         display: flex;
         flex-direction: column;
       }
+      @include viewport(sm_mobile) {
+        padding-top: vmin_mobile(80px);
+      }
       &.show {
         animation: show 0.2s ease-in-out forwards;
       }
@@ -89,6 +92,9 @@
     &-inner {
       height: 100%;
       overflow: auto;
+      @include viewport(swap_mobile) {
+        width: 100%;
+      }
     }
   }
 
