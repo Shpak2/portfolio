@@ -52,17 +52,20 @@ export default {
       this.generateFigures();
     }
     this.initializeCanvas();
-    if(!this.isMobile) {
+    if (!this.isMobile) {
       window.addEventListener("mousemove", this.handleMouseMove);
     }
     window.addEventListener("resize", this.handleResize);
-    if (this.isPortrait) {
-      this.updateMousePosition(window.innerWidth * 0.75, window.innerHeight * 0.75);
+    if (this.isMobile) {
+      this.getPositionMobile()
+      window.addEventListener("orientationchange", this.getPositionMobile);
     }
   },
   beforeDestroy() {
     if(!this.isMobile) {
       window.removeEventListener("mousemove", this.handleMouseMove);
+    } else {
+      window.removeEventListener("orientationchange", this.getPositionMobile);
     }
     window.removeEventListener("resize", this.handleResize);
     clearTimeout(this.mouseStillTimeout);
@@ -86,9 +89,11 @@ export default {
     },
     handleResize() {
       this.initializeCanvas();
-      if (this.isPortrait) {
+    },
+    getPositionMobile() {
+      setTimeout(()=>{
         this.updateMousePosition(window.innerWidth * 0.75, window.innerHeight * 0.75);
-      }
+      },100)
     },
     handleMouseMove(event) {
       this.updateMousePosition(event.clientX, event.clientY);
