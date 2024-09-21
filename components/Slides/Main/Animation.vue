@@ -48,19 +48,20 @@ export default {
     },
   },
   mounted() {
-    for (let i = 0; i < this.length; i++) {
-      this.generateFigures();
-    }
-    this.initializeCanvas();
-    if (!this.isMobile) {
-      window.addEventListener("mousemove", this.handleMouseMove);
-    }
-    window.addEventListener("resize", this.handleResize);
-    this.getPositionMobile()
-    if (this.isMobile) {
-      this.getPositionMobile()
-      window.addEventListener("orientationchange", this.getPositionMobile);
-    }
+    setTimeout(()=>{
+      for (let i = 0; i < this.length; i++) {
+        this.generateFigures();
+      }
+      this.initializeCanvas();
+      if (!this.isMobile) {
+        window.addEventListener("mousemove", this.handleMouseMove);
+      }
+      window.addEventListener("resize", this.handleResize);
+      if (this.isMobile) {
+        this.getPositionMobile()
+        window.addEventListener("orientationchange", this.getPositionMobile);
+      }
+    },100)
   },
   beforeDestroy() {
     if(!this.isMobile) {

@@ -1,7 +1,7 @@
 <template>
   <div class="container m-auto flex items-center full-height" data-swiper-parallax-y="-10%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="400">
     <div class="review-container">
-      <Decorative :content="'main'" :className="'tag-item__text'" :tag="'wrap'">
+      <Decorative :content="'section'" :className="'tag-item__text'" :tag="'wrap'">
         <h2 v-html="$t('reviewTitle')"></h2>
         <swiper
           :direction="'vertical'"
@@ -11,6 +11,7 @@
           :modules="modules"
           :navigation="navigation"
           :pagination="pagination"
+          :preventInteractionOnTransition="true"
           @reachEnd="handleFullSlider(true)"
           @reachBeginning="handleFullSlider(true)"
           @mouseenter="handleFullSlider(false)"
@@ -36,7 +37,7 @@
               data-swiper-parallax-duration="400"
               >
               <div class="review-avatar">
-                <img v-if="item.avatar" :src="item.avatar" alt="photo">
+                <img v-if="item.avatar" class="flex" :src="item.avatar" alt="photo">
                 <IconUser v-if="!item.avatar"/>
               </div>
               <div class="review-body">
@@ -165,9 +166,17 @@
       line-height: vw_tabs(40px);
       margin: vw_tabs(8px) 0;
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(28px);
+      line-height: vmin_mobile(32px);
+      margin: 0 0 vmin_mobile(14px);
+    }
   }
   .container {
     position: relative;
+    @include viewport(sm_mobile) {
+      margin-top: vmin_mobile(60px);
+    }
   }
 
   .swiper {
@@ -183,6 +192,10 @@
     @include viewport(swap_tabs) {
       max-height: vw_tabs(170px);
     }
+    @include viewport(sm_mobile) {
+      max-height: vmin_mobile(280px);
+      padding-bottom: vmin_mobile(14px);
+    }
     &-slide {
       width: calc(100% - vw_big_screen(10px));
       margin: vw_big_screen(12px) 0;
@@ -192,6 +205,10 @@
       }
       @include viewport(swap_tabs) {
         margin: vw_tabs(8px) 0;
+      }
+      @include viewport(sm_mobile) {
+        width: calc(100% - vmin_mobile(10px));
+        margin: vmin_mobile(14px) 0;
       }
       &:last-child {
         padding-bottom: 0 !important;
@@ -213,6 +230,11 @@
       padding: vw_big_screen(22px);
       @include viewport(tabs) {
         filter: drop-shadow(8px 14px 4px var(--shadow-slide));
+        padding: vw_tabs(22px);
+      }
+      @include viewport(sm_mobile) {
+        padding: vmin_mobile(12px);
+        width: 95%;
       }
       & svg {
         position: absolute;
@@ -224,6 +246,9 @@
         }
         @include viewport(swap_tabs) {
           width: vw_tabs(31px);
+        }
+        @include viewport(sm_mobile) {
+          width: vmin_mobile(49px);
         }
       }
     }
@@ -245,9 +270,18 @@
         height: vw_tabs(38px);
         margin-right: vw_tabs(16px);
       }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(40px);
+        height: vmin_mobile(40px);
+        margin-right: vmin_mobile(8px);
+        border-width: vmin_mobile(2px);
+      }
     }
     &-body {
       width: 90%;
+      @include viewport(sm_mobile) {
+        width: 82%;
+      }
       & h5 {
         margin: 0 0 vw_big_screen(12px);
         font-size: vw_big_screen(16px);
@@ -259,6 +293,10 @@
         @include viewport(swap_tabs) {
           margin-bottom: vw_tabs(8px);
           font-size: vw_tabs(10px);
+        }
+        @include viewport(sm_mobile) {
+          margin-bottom: vmin_mobile(6px);
+          font-size: vmin_mobile(14px);
         }
       }
     }
@@ -279,6 +317,9 @@
       @include viewport(swap_tabs) {
         margin-bottom: vw_tabs(10px);
       }
+      @include viewport(sm_mobile) {
+        margin-bottom: vmin_mobile(16px);
+      }
     }
     &-button {
       width: vw_big_screen(24px);
@@ -290,6 +331,9 @@
       @include viewport(swap_tabs) {
         width: vw_tabs(16px);
       }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(24px);
+      }
       &-prev {
         margin-right: vw_big_screen(12px);
         @include viewport(tabs) {
@@ -297,6 +341,9 @@
         }
         @include viewport(swap_tabs) {
           margin-right: vw_tabs(8px);
+        }
+        @include viewport(sm_mobile) {
+          margin-right: vmin_mobile(12px);
         }
         &:active {
           transform: translateX(-10%) scale(0.9)

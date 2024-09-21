@@ -638,6 +638,10 @@ main {
         font-size: vw_tabs(10px);
         margin: vw_tabs(3px) 0;
       }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(12px);
+        margin: vmin_mobile(4px) 0;
+      }
     }
   }
   &-bullet {
@@ -650,10 +654,16 @@ main {
     @include viewport(tabs) {
       width: vw_tabs(10px);
       height: vw_tabs(10px);
+      border-radius: vw_tabs(2px);
     }
     @include viewport(swap_tabs) {
       width: vw_tabs(6px);
       height: vw_tabs(6px);
+    }
+    @include viewport(sm_mobile) {
+      border-radius: vmin_mobile(2px);
+      width: vmin_mobile(10px);
+      height: vmin_mobile(10px);
     }
     &.active {
       background-color: var(--button-color);
@@ -679,6 +689,9 @@ main {
       }
       @include viewport(swap_tabs) {
         margin-right: vw_tabs(8px);
+      }
+      @include viewport(sm_mobile) {
+        margin-right: vmin_mobile(8px);
       }
     }
   }

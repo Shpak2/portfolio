@@ -1,5 +1,5 @@
 <template>
-  <div class="site-background full-height">
+  <div class="site-background full-height" :style="{transform: `translate(-50%,-50%) rotate(${rotateMobile}deg)`}">
     <svg
       width="1440"
       height="900"
@@ -77,8 +77,12 @@
           'translate(70%, 65%)',
           'translate(0%, 0%)'
         ],
+        rotateMobile: 0,
         size: 0,
       };
+    },
+    props: {
+      isMobile: false,
     },
     watch: {
       '$store.state.activeItem'() {
@@ -91,6 +95,15 @@
       //   this.loaded = true
       // },1000)
       // this.checkOrientation()
+      if (this.isMobile) {
+        window.addEventListener("scroll", () => {
+          this.rotateMobile = window.pageYOffset % 360
+          // this.position[0] = `translate(0%,${window.pageYOffset}px)`
+          // this.position[1] = `translate(0%,${window.pageYOffset + (window.innerHeight/2)}px)`
+          // this.position[2] = `translate(0%,${window.pageYOffset + (window.innerHeight/3)}px)`
+          // this.position[3] = `translate(0%,${window.pageYOffset + (window.innerHeight/4)}px)`
+        });
+      }
     },
     methods: {
       setPosiotion: function() {
@@ -119,7 +132,11 @@
     pointer-events: none;
     overflow: hidden;
     @include viewport(sm_mobile) {
-      display: none;
+      transform: translate(-50%,-50%) rotate(0deg);
+      height: 100%;
+      position: fixed;
+      width: 200vh;
+      overflow: unset;
     }
     & svg {
       position: absolute;
@@ -128,6 +145,17 @@
       width: auto;
       height: 100%;
       opacity: 0.5;
+      @include viewport(sm_mobile) {
+        // opacity: 1;
+        height: 200%;
+      }
+    }
+  }
+  circle {
+    @include viewport(sm_mobile) {
+      // opacity: 0.4 !important;
+      width: vmin_mobile(240px);
+      height: vmin_mobile(240px);
     }
   }
 </style>

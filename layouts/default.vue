@@ -3,13 +3,13 @@
 
     <Loader/>
     <Header v-if="!maskOn" />
-    <Gradient v-if="!maskOn" />
+    <Gradient v-if="!maskOn" :isMobile="mobile" />
 
     <main v-if="!maskOn">
       <Slider :isMobile="mobile" />
       <!-- <NuxtPage /> -->
     </main>
-    <Sidebar v-if="!maskOn" :isMenu="false"/>
+    <Sidebar v-if="!maskOn && !mobile" :isMenu="false"/>
     <Footer v-if="!maskOn" />
     <Clicker v-if="!maskOn" />
     <div v-if="maskOn" class="mask"></div>
