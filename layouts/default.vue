@@ -74,6 +74,8 @@ export default {
     },
     '$store.state.popup.show'(val) {
       this.showPopup = val
+      const body = document.querySelector('body')
+      val ? body.classList.add('hide') : body.classList.remove('hide')
     },
     '$store.state.formPopup'(val) {
       this.showFormPopup = val

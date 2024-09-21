@@ -26,6 +26,10 @@ body {
   }
 }
 
+.hide {
+  overflow: hidden !important;
+}
+
 * {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer і Edge */
@@ -252,7 +256,7 @@ body {
   }
 }
 
-.slide-item {
+.mobile-overflow {
   @include viewport(sm_mobile) {
     overflow: hidden;
   }
@@ -359,6 +363,12 @@ main {
       & .body-inner {
         box-shadow: vw_big_screen(8px) vw_big_screen(14px) vw_big_screen(4px) 0 var(--shadow-slide);
         transition: box-shadow 0.4s cubic-bezier(0.22, -0.01, 0.01, 1.02) 0.2s;
+        @include viewport(tabs) {
+          box-shadow: vw_tabs(8px) vw_tabs(14px) vw_tabs(4px) 0 var(--shadow-slide);
+        }
+        @include viewport(sm_mobile) {
+          box-shadow: vmin_mobile(6px) vmin_mobile(10px) vmin_mobile(4px) 0 var(--shadow-slide);
+        }
       }
     }
   }
@@ -374,6 +384,9 @@ main {
   @include viewport(tabs) {
     font-size: vw_tabs(16px);
   }
+  @include viewport(sm_mobile) {
+    font-size: vmin_mobile(16px);
+  }
   &::after {
     content: '';
     position: absolute;
@@ -388,6 +401,11 @@ main {
       bottom: vw_tabs(-4.5px);
       width: vw_tabs(4px);
       height: vw_tabs(4px);
+    }
+    @include viewport(sm_mobile) {
+      bottom: vmin_mobile(-4.5px);
+      width: vmin_mobile(4px);
+      height: vmin_mobile(4px);
     }
   }
   &:active {
@@ -437,6 +455,10 @@ main {
           top: vw_tabs(10px);
           width: vw_tabs(367px);
         }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(6px);
+          width: vmin_mobile(300px);
+        }
       }
     }
     &.emulate-tablet {
@@ -451,6 +473,10 @@ main {
           top: vw_tabs(10px);
           width: vw_tabs(228px);
         }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(6px);
+          width: vmin_mobile(200px);
+        }
       }
     }
     &.emulate-mobile {
@@ -464,6 +490,10 @@ main {
         @include viewport(swap_tabs) {
           top: vw_tabs(10px);
           width: vw_tabs(184px);
+        }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(6px);
+          width: vmin_mobile(164px);
         }
       }
     }
@@ -483,6 +513,9 @@ main {
           @include viewport(swap_tabs) {
             width: vw_tabs(15px);
           }
+          @include viewport(sm_mobile) {
+            width: vmin_mobile(24px);
+          }
         }
         &.icon-tablet svg {
           width: vw_big_screen(18px);
@@ -492,6 +525,9 @@ main {
           @include viewport(swap_tabs) {
             width: vw_tabs(12px);
           }
+          @include viewport(sm_mobile) {
+            width: vmin_mobile(18px);
+          }
         }
         &.icon-mobile svg {
           width: vw_big_screen(13.4px);
@@ -500,6 +536,9 @@ main {
           }
           @include viewport(swap_tabs) {
             width: vw_tabs(9.4px);
+          }
+          @include viewport(sm_mobile) {
+            width: vmin_mobile(13.4px);
           }
         }
         &:hover, &.active {
@@ -533,6 +572,12 @@ main {
         margin-top: vw_tabs(8px);
         order: unset;
       }
+      @include viewport(sm_mobile) {
+        max-height: 20vh;
+        font-size: vmin_mobile(14px);
+        padding-right: vmin_mobile(4px);
+        margin-top: vmin_mobile(12px);
+      }
       & p {
         margin: 0;
         &:not(:last-child) {
@@ -542,6 +587,9 @@ main {
           }
           @include viewport(swap_tabs) {
             margin-bottom: vw_tabs(8px);
+          }
+          @include viewport(sm_mobile) {
+            margin-bottom: vmin_mobile(12px);
           }
         }
       }
@@ -557,6 +605,10 @@ main {
         @include viewport(swap_tabs) {
           margin-bottom: vw_tabs(8px);
           padding-left: vw_tabs(8px);
+        }
+        @include viewport(sm_mobile) {
+          margin-bottom: vmin_mobile(12px);
+          padding-left: vmin_mobile(12px);
         }
       }
     }

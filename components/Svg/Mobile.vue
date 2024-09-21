@@ -27,6 +27,9 @@
     @include viewport(swap_tabs) {
       width: vw_tabs(12px);
     }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(18px);
+    }
   }
   svg {
     transition: 0.2s ease-in;

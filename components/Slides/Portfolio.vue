@@ -17,27 +17,15 @@
           </svg>
         </div>
       </div>
-      <Decorative :content="'main'" :className="'tag-item__text'" :tag="'wrap'">
+      <Decorative :content="'section'" :className="'tag-item__text'" :tag="'wrap'">
         <swiper
           :pagination="pagination"
           :slides-per-view="1"
           :effect="'creative'"
           :modules="modules"
           :limitProgress="2"
-          :navigation="{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }"
-          :creativeEffect="{
-            prev: {
-              translate: [0, 0, -400],
-              opacity: 0
-            },
-            next: {
-              translate: ['95%', '-17.5%', 0],
-              scale: 0.65
-            },
-          }"
+          :navigation="navParam"
+          :creativeEffect="creativeParam"
           :keyboard="true"
         >
         <swiper-slide v-for="(project, index) in data" :key="index">
@@ -115,6 +103,20 @@
             return `<span class="${className}">${formattedNumber}</span>`;
           },
         },
+        creativeParam: {
+          prev: {
+            translate: [0, 0, -400],
+            opacity: 0
+          },
+          next: {
+            translate: ['95%', '-17.5%', 0],
+            scale: 0.65
+          },
+        },
+        navParam: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       };
     },
     components: {
@@ -209,6 +211,11 @@
     @include viewport(swap_tabs) {
       margin: vw_tabs(5px) 0;
     }
+    @include viewport(sm_mobile) {
+      margin: vmin_mobile(5px) 0;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   .body-inner {
@@ -223,6 +230,9 @@
     }
     @include viewport(swap_tabs) {
       font-size: vw_tabs(10px);
+    }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(14px);
     }
   }
 
@@ -247,6 +257,9 @@
         left: unset;
         bottom: unset;
       }
+      @include viewport(sm_mobile) {
+        bottom: vmin_mobile(40px);
+      }
     }
     &-title {
       font-size: vw_big_screen(12px);
@@ -258,6 +271,10 @@
       @include viewport(swap_tabs) {
         font-size: vw_tabs(10px);
         margin-right: vw_tabs(5px);
+      }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(14px);
+        margin-right: vmin_mobile(8px);
       }
     }
   }
@@ -279,6 +296,11 @@
       left: unset;
       bottom: unset;
     }
+    @include viewport(sm_mobile) {
+      right: 0;
+      left: unset;
+      bottom: vmin_mobile(40px);
+    }
   }
 
   .swiper-button-next, .swiper-button-prev {
@@ -290,6 +312,9 @@
     }
     @include viewport(swap_tabs) {
       width: vw_tabs(24px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(32px);
     }
     &:hover {
       @include viewport(hover) {
@@ -329,6 +354,9 @@
     @include viewport(swap_tabs) {
       margin-left: vw_tabs(10px);
     }
+    @include viewport(sm_mobile) {
+      margin-left: vmin_mobile(12px);
+    }
     &:hover {
       @include viewport(hover) {
         & svg {
@@ -355,6 +383,10 @@
       padding: 0 vw_tabs(8px);
       max-width: vw_tabs(158px);
     }
+    @include viewport(sm_mobile) {
+      padding: 0 vmin_mobile(8px);
+      max-width: vmin_mobile(258px);
+    }
     &::after {
       content: '...';
       position: absolute;
@@ -371,6 +403,10 @@
         padding-right: vw_tabs(3px);
         font-size: vw_tabs(8px);
       }
+      @include viewport(sm_mobile) {
+        padding-right: vmin_mobile(5px);
+        font-size: vmin_mobile(12px);
+      }
     }
     & span {
       font-size: vw_big_screen(12px);
@@ -380,6 +416,9 @@
       }
       @include viewport(swap_tabs) {
         font-size: vw_tabs(8px);
+      }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(12px);
       }
     }
     &:hover::after {
@@ -394,6 +433,13 @@
       }
       @include viewport(swap_tabs) {
         height: vw_tabs(20px);
+      }
+      @include viewport(mobile) {
+        transform-origin: center left;
+      }
+      @include viewport(sm_mobile) {
+        height: vmin_mobile(32px);
+        margin-top: vmin_mobile(12px);
       }
     }
   }
@@ -415,6 +461,11 @@
     @include viewport(swap_tabs) {
       width: vw_tabs(380px);
       padding-bottom: vw_tabs(4px);
+      overflow: unset;
+    }
+    @include viewport(sm_mobile) {
+      width: 100%;
+      padding-bottom: vmin_mobile(60px);
       overflow: unset;
     }
   }
@@ -441,6 +492,9 @@
     @include viewport(swap_tabs) {
       gap: vw_tabs(14px);
     }
+    @include viewport(sm_mobile) {
+      gap: vmin_mobile(16px);
+    }
     & button {
       padding: 0;
       &:hover span {
@@ -460,6 +514,10 @@
         width: vw_tabs(50px);
         height: vw_tabs(50px);
       }
+      @include viewport(sm_mobile) {
+        width: vmin_mobile(80px);
+        height: vmin_mobile(80px);
+      }
     }
     & b {
       font-size: vw_big_screen(12px);
@@ -469,6 +527,10 @@
       @include viewport(tabs) {
         font-size: vw_tabs(12px);
         margin-top: vw_tabs(6px);
+      }
+      @include viewport(sm_mobile) {
+        font-size: vmin_mobile(12px);
+        margin-top: vmin_mobile(6px);
       }
     }
   }

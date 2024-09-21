@@ -6,7 +6,7 @@
       <div class="popup-header mono-font flex items-center">
         <h4 :style="{transform: !handleTitle ? 'scale(1,0)' : ''}">{{(project + 1).toString().padStart(2, '0')}}. {{ data[project].name }}</h4>
         <div class="popup-header-nav flex items-center">
-          <div class="popup-header-list">
+          <div class="popup-header-list flex items-center">
             <span>Projects:</span>
             <button
               v-for="(item, index) in data"
@@ -230,6 +230,9 @@
     opacity: 0;
     transition: 0.3s ease-in;
     transform: scale(2);
+    @include viewport(sm_mobile) {
+      position: fixed;
+    }
     &.show {
       animation: show 0.2s ease-in-out forwards;
     }
@@ -256,6 +259,12 @@
       @include viewport(swap_tabs) {
         height: 80%;
       }
+      @include viewport(sm_mobile) {
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        border-radius: unset;
+        width: 100%;
+      }
       .popup-wrap.show & {
         animation: show 0.2s ease-in-out 0.2s forwards;
       }
@@ -281,6 +290,10 @@
         height: vw_tabs(52px);
         padding: 0 vw_tabs(16px);
       }
+      @include viewport(sm_mobile) {
+        height: vmin_mobile(60px);
+        padding: 0 vmin_mobile(12px);
+      }
       &-nav {
         @include viewport(tabs) {
           position: absolute;
@@ -291,6 +304,9 @@
           position: unset;
           width: unset;
           top: unset;
+        }
+        @include viewport(sm_mobile) {
+          top: calc(100% + vmin_mobile(16px));
         }
       }
       &-list {
@@ -310,6 +326,10 @@
           @include viewport(swap_tabs) {
             font-size: vw_tabs(8px);
           }
+          @include viewport(sm_mobile) {
+            font-size: vmin_mobile(12px);
+            line-height: vmin_mobile(20px);
+          }
         }
         & button {
           color: var(--footer-color);
@@ -321,6 +341,10 @@
           }
           @include viewport(swap_tabs) {
             font-size: vw_tabs(10px);
+          }
+          @include viewport(sm_mobile) {
+            font-size: vmin_mobile(16px);
+            line-height: vmin_mobile(20px);
           }
           &:active {
             transform: scale(0.8);
@@ -339,6 +363,11 @@
               bottom: vw_tabs(-4.5px);
               width: vw_tabs(4px);
               height: vw_tabs(4px);
+            }
+            @include viewport(sm_mobile) {
+              bottom: vmin_mobile(-4.5px);
+              width: vmin_mobile(4px);
+              height: vmin_mobile(4px);
             }
           }
           &.active {
@@ -361,11 +390,15 @@
         & button {
           width: vw_big_screen(38px);
           transition: transform 0.2s ease;
+          padding: 0;
           @include viewport(tabs) {
             width: vw_tabs(38px);
           }
           @include viewport(swap_tabs) {
             width: vw_tabs(24px);
+          }
+          @include viewport(sm_mobile) {
+            width: vmin_mobile(38px);
           }
           &:active {
             transform: scale(0.8);
@@ -374,6 +407,13 @@
             }
           }
           &:first-child {
+            margin-right: vw_big_screen(16px);
+            @include viewport(tabs) {
+              margin-right: vw_tabs(16px);
+            }
+            @include viewport(sm_mobile) {
+              margin-right: vmin_mobile(16px);
+            }
             &:hover {
               @include viewport(hover) {
                 & svg {
@@ -382,10 +422,12 @@
               }
             }
           }
-          &:last-child:hover {
-            @include viewport(hover) {
-              & svg {
-                animation: pulseNext 1s infinite;
+          &:last-child {
+            &:hover {
+              @include viewport(hover) {
+                & svg {
+                  animation: pulseNext 1s infinite;
+                }
               }
             }
           }
@@ -403,10 +445,15 @@
         width: 65%;
         height: 100%;
       }
+      @include viewport(sm_mobile) {
+        height: 50%;
+      }
       &-inner {
         height: calc((100% - vw_big_screen(60px)) - 1px);
+        height: calc((var(--vh, 1vh) * 100) - vw_big_screen(60px) - 1px);
         @include viewport(tabs) {
           height: calc((100% - vw_tabs(60px)) - 1px);
+          height: calc((var(--vh, 1vh) * 100) - vw_tabs(60px) - 1px);
           flex-direction: column-reverse;
           justify-content: flex-start;
           align-items: center;
@@ -415,6 +462,11 @@
           flex-direction: unset;
           justify-content: unset;
           align-items: unset;
+        }
+        @include viewport(sm_mobile) {
+          height: calc((100vh - vmin_mobile(60px)));
+          height: calc((var(--vh, 1vh) * 100) - vmin_mobile(60px));
+          background-color: var(--popup-color);
         }
       }
       &-emulate {
@@ -440,6 +492,11 @@
           width: vw_tabs(338px);
           height: vw_tabs(229px);
         }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(21px);
+          width: vmin_mobile(274px);
+          height: vmin_mobile(189px);
+        }
       }
       &.emulate-tablet .popup-main-emulate {
         top: vw_big_screen(36px);
@@ -455,6 +512,11 @@
           top: vw_tabs(23px);
           width: vw_tabs(204px);
           height: vw_tabs(243px);
+        }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(17px);
+          width: vmin_mobile(180px);
+          height: vmin_mobile(214px);
         }
       }
       &.emulate-mobile .popup-main-emulate {
@@ -472,6 +534,11 @@
           top: vw_tabs(54px);
           width: vw_tabs(146px);
           height: vw_tabs(206px);
+        }
+        @include viewport(sm_mobile) {
+          top: vmin_mobile(52px);
+          width: vmin_mobile(130px);
+          height: vmin_mobile(174px);
         }
       }
     }
@@ -497,6 +564,10 @@
         justify-content: unset;
         align-items: unset;
       }
+      @include viewport(sm_mobile) {
+        justify-content: center;
+        height: 42%;
+      }
       &-buttons {
         gap: vw_big_screen(12px);
         margin-bottom: vw_big_screen(12px);
@@ -509,6 +580,10 @@
           gap: vw_tabs(8px);
           margin-bottom: vw_tabs(8px);
           order: unset;
+        }
+        @include viewport(sm_mobile) {
+          gap: vmin_mobile(12px);
+          order: 1;
         }
         & button {
           width: vw_big_screen(48px);
@@ -523,6 +598,10 @@
           @include viewport(swap_tabs) {
             width: vw_tabs(30px);
             height: vw_tabs(30px);
+          }
+          @include viewport(sm_mobile) {
+            width: vmin_mobile(48px);
+            height: vmin_mobile(48px);
           }
           &:active {
             transform: scale(0.8);
@@ -541,6 +620,12 @@
         @include viewport(swap_tabs) {
           height: vw_tabs(20px);
           order: unset;
+        }
+        @include viewport(sm_mobile) {
+          height: vmin_mobile(32px);
+          order: 2;
+          margin-top: vmin_mobile(16px);
+          margin-right: auto;
         }
         & + div {
           & svg {
@@ -570,6 +655,10 @@
             padding: 0 vw_tabs(8px);
             max-width: vw_tabs(140px);
           }
+          @include viewport(sm_mobile) {
+            padding: 0 vmin_mobile(12px);
+            max-width: unset;
+          }
           &::after {
             content: '...';
             position: absolute;
@@ -586,6 +675,10 @@
               padding-right: vw_tabs(3px);
               font-size: vw_tabs(8px);
             }
+            @include viewport(sm_mobile) {
+              padding-right: vmin_mobile(5px);
+              font-size: vmin_mobile(12px);
+            }
           }
           & span {
             font-size: vw_big_screen(12px);
@@ -595,6 +688,9 @@
             }
             @include viewport(swap_tabs) {
               font-size: vw_tabs(8px);
+            }
+            @include viewport(sm_mobile) {
+              font-size: vmin_mobile(12px);
             }
           }
           &:hover::after {
@@ -617,6 +713,9 @@
     @include viewport(swap_tabs) {
       font-size: vw_tabs(16px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(16px);
+    }
   }
 
   .btn-close {
@@ -630,6 +729,10 @@
     @include viewport(swap_tabs) {
       width: vw_tabs(20px);
       height: vw_tabs(20px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(32px);
+      height: vmin_mobile(32px);
     }
     &:active {
       transform: scale(0.8);

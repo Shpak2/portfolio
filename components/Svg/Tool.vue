@@ -18,6 +18,9 @@
     @include viewport(swap_tabs) {
       width: vw_tabs(20px);
     }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(32px);
+    }
   }
   svg {
     width: vw_big_screen(20px);
@@ -26,6 +29,9 @@
     }
     @include viewport(swap_tabs) {
       width: vw_tabs(14px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(20px);
     }
   }
 </style>

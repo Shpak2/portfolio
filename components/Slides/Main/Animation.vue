@@ -56,6 +56,7 @@ export default {
       window.addEventListener("mousemove", this.handleMouseMove);
     }
     window.addEventListener("resize", this.handleResize);
+    this.getPositionMobile()
     if (this.isMobile) {
       this.getPositionMobile()
       window.addEventListener("orientationchange", this.getPositionMobile);

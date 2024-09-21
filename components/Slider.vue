@@ -36,6 +36,7 @@
       v-for="(slide, index) in slides"
       :key="index"
       ref="slideItems"
+      :class="{'mobile-overflow': slide.key === 'experience' || slide.key === 'portfolio'}"
       class="slide-item">
         <component :is="slide.component" :key="slide.key" :isMobile="isMobile" />
     </div>
