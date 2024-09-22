@@ -35,8 +35,10 @@
       top: 100%;
     }
     &-inner {
-      flex-direction: column-reverse;
-      justify-content: center;
+      @include viewport(sm_mobile) {
+        flex-direction: column-reverse;
+        justify-content: center;
+      }
     }
   }
 </style>
