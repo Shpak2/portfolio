@@ -573,10 +573,16 @@ main {
         order: unset;
       }
       @include viewport(sm_mobile) {
-        max-height: 20vh;
         font-size: vmin_mobile(14px);
         padding-right: vmin_mobile(4px);
         margin-top: vmin_mobile(12px);
+      }
+      @include viewport(mobile) {
+        max-height: 20vh;
+      }
+      @include viewport(swap_mobile) {
+        max-height: 45vh;
+        max-height: calc(var(--vh, 1vh) * 45);
       }
       & p {
         margin: 0;

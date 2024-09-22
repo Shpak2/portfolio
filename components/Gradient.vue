@@ -135,8 +135,14 @@
       transform: translate(-50%,-50%) rotate(0deg);
       height: 100%;
       position: fixed;
-      width: 200vh;
       overflow: unset;
+    }
+    @include viewport(mobile) {
+      width: 200vh;
+    }
+    @include viewport(swap_mobile) {
+      height: 250vw;
+      width: 250vw;
     }
     & svg {
       position: absolute;

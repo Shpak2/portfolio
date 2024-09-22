@@ -133,12 +133,20 @@
       @include viewport(sm_mobile) {
         margin: vmin_mobile(60px) 0 0;
         position: relative;
+      }
+      @include viewport(mobile) {
         padding-bottom: vmin_mobile(340px);
       }
     }
     &-img {
       width: vw_big_screen(350px);
       padding-top: vw_big_screen(64px);
+    }
+  }
+  .wrapper {
+    @include viewport(swap_mobile) {
+      overflow: auto;
+      max-height: vmin_mobile(200px);
     }
   }
 </style>

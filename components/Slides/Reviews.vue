@@ -192,8 +192,13 @@
       max-height: vw_tabs(170px);
     }
     @include viewport(sm_mobile) {
-      max-height: vmin_mobile(280px);
       padding-bottom: vmin_mobile(14px);
+    }
+    @include viewport(mobile) {
+      max-height: vmin_mobile(280px);
+    }
+    @include viewport(swap_mobile) {
+      max-height: vmin_mobile(180px);
     }
     &-slide {
       width: calc(100% - vw_big_screen(10px));
@@ -220,6 +225,9 @@
       @include viewport(swap_tabs) {
         margin-top: vw_tabs(60px);
       }
+      @include viewport(sm_mobile) {
+        margin-top: 0;
+      }
     }
     &-inner {
       background-color: var(--review-color);
@@ -233,7 +241,12 @@
       }
       @include viewport(sm_mobile) {
         padding: vmin_mobile(12px);
+      }
+      @include viewport(mobile) {
         width: 95%;
+      }
+      @include viewport(swap_mobile) {
+        width: 85%;
       }
       & svg {
         position: absolute;

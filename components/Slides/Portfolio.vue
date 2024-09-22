@@ -212,9 +212,9 @@
       margin: vw_tabs(5px) 0;
     }
     @include viewport(sm_mobile) {
-      margin: vmin_mobile(5px) 0;
       flex-direction: column;
       align-items: flex-start;
+      margin: vmin_mobile(5px) 0 vmin_mobile(10px);
     }
   }
 
@@ -257,8 +257,12 @@
         left: unset;
         bottom: unset;
       }
-      @include viewport(sm_mobile) {
+      @include viewport(mobile) {
+        top: unset;
         bottom: vmin_mobile(40px);
+      }
+      @include viewport(swap_mobile) {
+        top: vmin_mobile(30px);
       }
     }
     &-title {
@@ -299,7 +303,13 @@
     @include viewport(sm_mobile) {
       right: 0;
       left: unset;
+    }
+    @include viewport(mobile) {
+      top: unset;
       bottom: vmin_mobile(40px);
+    }
+    @include viewport(swap_mobile) {
+      top: vmin_mobile(66px);
     }
   }
 
@@ -385,7 +395,12 @@
     }
     @include viewport(sm_mobile) {
       padding: 0 vmin_mobile(8px);
-      max-width: vmin_mobile(258px);
+    }
+    @include viewport(mobile) {
+      max-width: vmin_mobile(320px);
+    }
+    @include viewport(swap_mobile) {
+      max-width: vmin_mobile(250px);
     }
     &::after {
       content: '...';
@@ -465,8 +480,13 @@
     }
     @include viewport(sm_mobile) {
       width: 100%;
-      padding-bottom: vmin_mobile(60px);
       overflow: unset;
+    }
+    @include viewport(mobile) {
+      padding-bottom: vmin_mobile(60px);
+    }
+    @include viewport(swap_mobile) {
+      padding-bottom: vmin_mobile(10px);
     }
   }
 

@@ -167,7 +167,14 @@
       }
       @include viewport(swap_mobile) {
         padding-top: vmin_mobile(22px);
+        margin-top: vmin_mobile(42px);
       }
+    }
+  }
+  .wrapper {
+    @include viewport(swap_mobile) {
+      overflow: auto;
+      max-height: vmin_mobile(200px);
     }
   }
 </style>

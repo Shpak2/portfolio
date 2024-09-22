@@ -33,8 +33,11 @@
     @include viewport(tabs) {
       width: vw_tabs(140px);
     }
-    @include viewport(sm_mobile) {
+    @include viewport(mobile) {
       width: vmin_mobile(140px);
+    }
+    @include viewport(swap_mobile) {
+      width: vmin_mobile(100px);
     }
   }
   svg {

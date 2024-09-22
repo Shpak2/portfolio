@@ -180,10 +180,15 @@
       font-size: vw_tabs(20px);
       line-height: vw_tabs(20px);
     }
-    @include viewport(sm_mobile) {
+    @include viewport(mobile) {
       margin: vmin_mobile(16px) 0 vmin_mobile(8px);
       font-size: vmin_mobile(32px);
       line-height: vmin_mobile(52px);
+    }
+    @include viewport(swap_mobile) {
+      margin: vmin_mobile(12px) 0 vmin_mobile(8px);
+      font-size: vmin_mobile(28px);
+      line-height: vmin_mobile(44px);
     }
   }
 
@@ -209,10 +214,16 @@
       padding: 0 vw_tabs(4px);
     }
     @include viewport(sm_mobile) {
-      font-size: vmin_mobile(16px);
-      line-height: vmin_mobile(20px);
       max-height: vmin_mobile(220px);
       padding: 0 vmin_mobile(4px);
+    }
+    @include viewport(mobile) {
+      font-size: vmin_mobile(16px);
+      line-height: vmin_mobile(20px);
+    }
+    @include viewport(swap_mobile) {
+      font-size: vmin_mobile(14px);
+      line-height: vmin_mobile(18px);
     }
   }
 
@@ -231,7 +242,14 @@
     }
     @include viewport(sm_mobile) {
       width: vmin_mobile(350px);
+    }
+    @include viewport(mobile) {
       padding: vmin_mobile(78px) vmin_mobile(52px) vmin_mobile(66px);
+    }
+    @include viewport(swap_mobile) {
+      height: 90vh;
+      justify-content: center;
+      padding: vmin_mobile(18px) vmin_mobile(52px) vmin_mobile(16px);
     }
   }
 

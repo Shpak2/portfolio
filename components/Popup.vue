@@ -445,8 +445,11 @@
         width: 65%;
         height: 100%;
       }
-      @include viewport(sm_mobile) {
+      @include viewport(mobile) {
         height: 50%;
+      }
+      @include viewport(swap_mobile) {
+        width: 55%;
       }
       &-inner {
         height: calc((100% - vw_big_screen(60px)) - 1px);
@@ -561,12 +564,13 @@
         height: 100%;
         padding: vw_tabs(10px) vw_tabs(16px);
         display: unset;
-        justify-content: unset;
-        align-items: unset;
       }
-      @include viewport(sm_mobile) {
+      @include viewport(mobile) {
         justify-content: center;
         height: 42%;
+      }
+      @include viewport(swap_mobile) {
+        width: 45%;
       }
       &-buttons {
         gap: vw_big_screen(12px);
@@ -657,7 +661,12 @@
           }
           @include viewport(sm_mobile) {
             padding: 0 vmin_mobile(12px);
+          }
+          @include viewport(mobile) {
             max-width: unset;
+          }
+          @include viewport(swap_mobile) {
+            max-width: vmin_mobile(230px);
           }
           &::after {
             content: '...';
