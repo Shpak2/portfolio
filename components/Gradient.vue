@@ -1,5 +1,5 @@
 <template>
-  <div class="site-background full-height" :style="{transform: `translate(-50%,-50%) rotate(${rotateMobile}deg)`}">
+  <div class="site-background full-height" :style="{transform: isMobile ? `translate(-50%,-50%) rotate(${rotateMobile}deg)` : ''}">
     <svg
       width="1440"
       height="900"
