@@ -86,6 +86,9 @@
     opacity: 0;
     transition: 0.3s ease-in;
     transform: scale(2);
+    @include viewport(sm_mobile) {
+      position: fixed;
+    }
     &.show {
       animation: show 0.2s ease-in-out forwards;
     }
@@ -112,6 +115,12 @@
       height: vw_tabs(20px);
       top: vw_tabs(14px);
       right: vw_tabs(14px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(32px);
+      height: vmin_mobile(32px);
+      top: vmin_mobile(20px);
+      right: vmin_mobile(20px);
     }
     &:active {
       transform: scale(0.8);
@@ -142,6 +151,12 @@
       padding: vw_tabs(8.5px) vw_tabs(10px);
       margin-top: vw_tabs(15px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(16px);
+      line-height: vmin_mobile(19px);
+      padding: vmin_mobile(12.5px) vmin_mobile(16px);
+      margin-top: vmin_mobile(24px);
+    }
     &:hover {
       @include viewport(hover) {
         opacity: 0.75;
@@ -164,6 +179,11 @@
       margin: vw_tabs(10px) 0 vw_tabs(6px);
       font-size: vw_tabs(20px);
       line-height: vw_tabs(20px);
+    }
+    @include viewport(sm_mobile) {
+      margin: vmin_mobile(16px) 0 vmin_mobile(8px);
+      font-size: vmin_mobile(32px);
+      line-height: vmin_mobile(52px);
     }
   }
 
@@ -188,6 +208,12 @@
       max-height: vw_tabs(140px);
       padding: 0 vw_tabs(4px);
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(16px);
+      line-height: vmin_mobile(20px);
+      max-height: vmin_mobile(220px);
+      padding: 0 vmin_mobile(4px);
+    }
   }
 
   .popup-wrap {
@@ -202,6 +228,10 @@
     @include viewport(swap_tabs) {
       width: vw_tabs(254px);
       padding: vw_tabs(50px) vw_tabs(34px) vw_tabs(42px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(350px);
+      padding: vmin_mobile(78px) vmin_mobile(52px) vmin_mobile(66px);
     }
   }
 

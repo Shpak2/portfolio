@@ -11,7 +11,6 @@
           :modules="modules"
           :navigation="navigation"
           :pagination="pagination"
-          :preventInteractionOnTransition="true"
           @reachEnd="handleFullSlider(true)"
           @reachBeginning="handleFullSlider(true)"
           @mouseenter="handleFullSlider(false)"

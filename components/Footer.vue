@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="container flex items-center m-auto">
+    <div class="container flex items-center m-auto footer-inner">
       <Copyright :isMenu="false" />
       <Social :isMenu="false" />
     </div>
@@ -29,6 +29,14 @@
     z-index: 90;
     @include viewport(tabs) {
       bottom: vw_tabs(24px);
+    }
+    @include viewport(sm_mobile) {
+      bottom: unset;
+      top: 100%;
+    }
+    &-inner {
+      flex-direction: column-reverse;
+      justify-content: center;
     }
   }
 </style>

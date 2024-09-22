@@ -146,14 +146,13 @@
       height: 100%;
       opacity: 0.5;
       @include viewport(sm_mobile) {
-        // opacity: 1;
+        opacity: 0.6;
         height: 200%;
       }
     }
   }
   circle {
     @include viewport(sm_mobile) {
-      // opacity: 0.4 !important;
       width: vmin_mobile(240px);
       height: vmin_mobile(240px);
     }

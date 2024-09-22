@@ -11,5 +11,15 @@
     width: vw_big_screen(13px);
     height: vw_big_screen(13px);
     margin-right: vw_big_screen(4px);
+    @include viewport(tabs) {
+      width: vw_tabs(13px);
+      height: vw_tabs(13px);
+      margin-right: vw_tabs(4px);
+    }
+    @include viewport(sm_mobile) {
+      width: vmin_mobile(13px);
+      height: vmin_mobile(13px);
+      margin-right: vmin_mobile(4px);
+    }
   }
 </style>

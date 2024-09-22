@@ -306,7 +306,7 @@ body {
 
 main {
   @include viewport(sm_mobile) {
-    padding-top: vmin_mobile(80px);
+    padding: vmin_mobile(80px) 0;
   }
 }
 

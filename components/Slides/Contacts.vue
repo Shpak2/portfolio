@@ -243,6 +243,11 @@ export default {
       line-height: vw_tabs(40px);
       margin: vw_tabs(8px) 0;
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(28px);
+      line-height: vmin_mobile(32px);
+      margin: 0 0 vmin_mobile(14px);
+    }
   }
   .content {
     width: vw_big_screen(856px);
@@ -252,6 +257,10 @@ export default {
     }
     @include viewport(swap_tabs) {
       width: vw_tabs(542px);
+      margin-bottom: 0;
+    }
+    @include viewport(sm_mobile) {
+      margin-top: vmin_mobile(60px);
       margin-bottom: 0;
     }
   }
@@ -272,6 +281,11 @@ export default {
       max-width: vw_tabs(367px);
       margin: vw_tabs(10px) auto;
     }
+    @include viewport(sm_mobile) {
+      font-size: vmin_mobile(14px);
+      max-width: unset;
+      margin: vmin_mobile(10px) auto vmin_mobile(16px);
+    }
   }
 
   form {
@@ -285,6 +299,9 @@ export default {
       }
       @include viewport(swap_tabs) {
         margin: vw_tabs(8px) 0;
+      }
+      @include viewport(sm_mobile) {
+        margin: vmin_mobile(8px) 0;
       }
       & label {
         position: absolute;
@@ -310,6 +327,11 @@ export default {
           font-size: vw_tabs(8px);
           padding: 0 vw_tabs(4px);
           line-height: vw_tabs(10px);
+        }
+        @include viewport(sm_mobile) {
+          font-size: vmin_mobile(12px);
+          padding: 0 vmin_mobile(6px);
+          line-height: vmin_mobile(16px);
         }
       }
       &.focused {
@@ -356,16 +378,27 @@ export default {
         right: vw_tabs(15px);
         font-size: vw_tabs(12px);
         line-height: vw_tabs(16px);
+        padding: 0 vw_tabs(6px);
         border-radius: 4px;
       }
       @include viewport(swap_tabs) {
+        padding: 0 vw_tabs(4px);
         right: vw_tabs(10px);
         font-size: vw_tabs(8px);
         line-height: vw_tabs(10px);
       }
+      @include viewport(sm_mobile) {
+        padding: 0 vmin_mobile(6px);
+        right: vmin_mobile(15px);
+        font-size: vmin_mobile(12px);
+        line-height: vmin_mobile(16px);
+      }
     }
     & .field-half {
       width: 49%;
+      @include viewport(tabs) {
+        width: 100%;
+      }
     }
     & .field-full {
       width: 100%;
@@ -379,6 +412,9 @@ export default {
       }
       @include viewport(swap_tabs) {
         height: vw_tabs(76px);
+      }
+      @include viewport(sm_mobile) {
+        height: vmin_mobile(120px);
       }
     }
     & input, & textarea {
@@ -403,6 +439,11 @@ export default {
         font-size: vw_tabs(10px);
         line-height: vw_tabs(13px);
       }
+      @include viewport(sm_mobile) {
+        padding: vmin_mobile(20px);
+        font-size: vmin_mobile(16px);
+        line-height: vmin_mobile(20px);
+      }
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
@@ -426,6 +467,10 @@ export default {
         @include viewport(swap_tabs) {
           font-size: vw_tabs(10px);
           line-height: vw_tabs(13px);
+        }
+        @include viewport(sm_mobile) {
+          font-size: vmin_mobile(16px);
+          line-height: vmin_mobile(20px);
         }
       }
       &:hover {
@@ -457,6 +502,16 @@ export default {
         bottom: vw_tabs(-32px);
         padding: vw_tabs(8.5px) vw_tabs(10px);
       }
+      @include viewport(sm_mobile) {
+        position: relative;
+        bottom: unset;
+        justify-content: center;
+        padding: vmin_mobile(18px) vmin_mobile(16px);
+        font-size: vmin_mobile(16px);
+        line-height: vmin_mobile(11.55px);
+        width: 100%;
+        margin: vmin_mobile(8px) 0;
+      }
       & svg {
         width: vw_big_screen(22px);
         margin-left: vw_big_screen(10px);
@@ -467,6 +522,10 @@ export default {
         @include viewport(swap_tabs) {
           width: vw_tabs(14px);
           margin-left: vw_tabs(6px);
+        }
+        @include viewport(sm_mobile) {
+          width: vmin_mobile(22px);
+          margin-left: vmin_mobile(10px);
         }
       }
       &:hover {
