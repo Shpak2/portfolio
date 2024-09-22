@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const transporter = nodemailer.createTransport({
     host: config.smtpHost,
     port: config.smtpPort,
-    secure: false, // true = for port 465, false = for port 587
+    secure: true, // true = for port 465, false = for port 587
     auth: {
       user: config.smtpUser,
       pass: config.smtpPassword,
