@@ -225,6 +225,7 @@
   h4 {
     margin: 0;
     font-size: vw_big_screen(16px);
+    font-weight: 500;
     @include viewport(tabs) {
       font-size: vw_tabs(16px);
     }

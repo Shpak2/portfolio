@@ -9,13 +9,14 @@
             :direction="'vertical'"
             :slidesPerView="'auto'"
             :freeMode="true"
-            :scrollbar="true"
+            :scrollbar="scrollbarOptions"
             :modules="modules"
             @reachEnd="handleFullSlider(true)"
             @reachBeginning="handleFullSlider(true)"
             @mouseenter="handleFullSlider(false)"
             @mouseleave="handleFullSlider(true)"
             @swiper="onSwiper"
+            @scrollbarDragEnd="handleSlider"
             class="mySwiper"
           >
             <swiper-slide>
@@ -23,6 +24,7 @@
               v-html="$t('expirienceContent')"
               />
             </swiper-slide>
+            <div class="swiper-scrollbar"></div>
           </swiper>
           <div v-if="isMobile" class="wrapper">
             <div class="scrollable-container"
@@ -46,6 +48,12 @@
   export default {
     data() {
       return {
+        scrollbarOptions: {
+          el: '.swiper-scrollbar',
+          enabled: true,
+          draggable: true,
+          hide: false,
+        },
         modules: [FreeMode, Scrollbar, Mousewheel],
         swiper: null,
       }
@@ -70,12 +78,18 @@
       onSwiper(swiper) {
         this.swiper = swiper;
       },
-      handleFullSlider: function(val) {
+      handleFullSlider(val) {
         setTimeout(()=>{
           this.$store.commit('setAllowMouseScroll', val);
           !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
         },300)
       },
+      handleSlider(swiper){
+        let translate = swiper.previousTranslate
+        setTimeout(()=>{
+          swiper.setTranslate(translate);
+        },1)
+      }
     }
   };
 

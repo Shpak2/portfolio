@@ -218,6 +218,18 @@ body {
   }
 }
 
+.swiper-vertical > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-vertical {
+  background-color: var(--border-color);
+  &:hover .swiper-scrollbar-drag {
+    width: vw_big_screen(5px);
+    left: -1px;
+    background: var(--secondary-color);
+    @include viewport(tabs) {
+      width: vw_tabs(5px);
+    }
+  }
+}
+
 .swiper-scrollbar-drag {
   cursor: pointer;
   transition: 0.2s ease;

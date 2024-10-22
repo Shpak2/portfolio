@@ -51,12 +51,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    await transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-    })
+    await transporter.sendMail(mailOptions)
     return {
       statusCode: 200,
       body: { success: true }

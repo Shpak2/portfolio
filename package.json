@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "clean": "find /home/admin/web/shpakov.site/public_html/* ! -name '.env' ! -name 'robots.txt' -exec rm -rf {} + || true",
-    "deploy": "git pull && pm2 stop nuxt-app && npm run clean && npm run build && pm2 start .output/server/index.mjs --name nuxt-app",
+    "deploy": "git pull && pm2 stop nuxt-app && npm run install && npm run clean && npm run build && pm2 start .output/server/index.mjs --name nuxt-app",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
     "nuxt3-vuex-module": "^1.0.14",
     "sass": "^1.69.7",
     "sass-loader": "^14.0.0",
-    "swiper": "^11.0.5",
+    "swiper": "^11.1.4",
     "vue3-lottie": "^3.2.0"
   }
 }
