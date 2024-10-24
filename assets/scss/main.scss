@@ -142,6 +142,9 @@ body {
       margin: vmin_mobile(4px) 0 vmin_mobile(12px);
     }
     & br {
+      @include viewport(tabs) {
+        display: none;
+      }
       @include viewport(mobile) {
         display: none;
       }
@@ -198,7 +201,7 @@ body {
 }
 
 .swiper-vertical > .swiper-scrollbar.custom-scrollbar, .swiper-scrollbar.custom-scrollbar.swiper-scrollbar-vertical {
-  height: vw_big_screen(150px);
+  height: vmin_mobile(70px);
   bottom: vw_big_screen(70px);
   right: vw_big_screen(184px);
   top: unset;

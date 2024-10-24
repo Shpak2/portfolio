@@ -20,10 +20,10 @@
     color: var(--footer-color);
     @include viewport(tabs) {
       font-size: vw_tabs(12px);
-      margin: vmin_mobile(16px) 0 vmin_mobile(22px);
     }
-    @include viewport(sm_mobile) {
+    @include viewport(mobile) {
       font-size: vmin_mobile(12px);
+      margin: vmin_mobile(16px) 0 vmin_mobile(22px);
     }
     &.menu-copyright {
       @include viewport(tabs) {

@@ -48,6 +48,11 @@
   .container {
     position: relative;
     z-index: 1;
+    @include viewport(mobile) {
+      @media (max-height: 700px) {
+        padding-bottom: 12vmax;
+      }
+    }
   }
   .btn-main {
     height: vw_big_screen(64px);

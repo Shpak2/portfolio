@@ -32,7 +32,6 @@
                 margin: index % 2 == 0 ? '0 auto 0 0' : '0 0 0 auto'
                 }"
               :data-swiper-parallax-x="index % 2 == 0 ? '-5%' : '5%'"
-              data-swiper-parallax-opacity="0"
               data-swiper-parallax-duration="400"
               >
               <div class="review-avatar">
@@ -184,6 +183,9 @@
     max-height: vw_big_screen(280px);
     padding-bottom: vw_big_screen(14px);
     mask-image: linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent);
+    @include viewport(laptop) {
+      max-height: vh_big_screen(380px);
+    }
     @include viewport(tabs) {
       max-height: vw_tabs(480px);
       padding-bottom: vw_tabs(14px);
@@ -330,6 +332,7 @@
         margin-bottom: vw_tabs(10px);
       }
       @include viewport(sm_mobile) {
+        margin-top: vmin_mobile(16px);
         margin-bottom: vmin_mobile(16px);
       }
     }

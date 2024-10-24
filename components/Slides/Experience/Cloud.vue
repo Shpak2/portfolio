@@ -56,23 +56,21 @@
     position: absolute;
     top: 50%;
     right: vw_big_screen(-20px);
-    height: vw_big_screen(412px);
     width: vw_big_screen(412px);
+    aspect-ratio: 1;
     transform: translateY(-50%);
     list-style: none;
     padding: 0;
     @include viewport(tabs) {
       right: 50%;
       top: unset;
-      height: vw_tabs(320px);
       width: vw_tabs(320px);
       transform: translateX(50%);
       bottom: vw_tabs(100px);
     }
     @include viewport(swap_tabs) {
       right: vw_tabs(30px);
-      top: 50%;
-      height: vw_tabs(220px);
+      top: 55%;
       width: vw_tabs(220px);
       transform: translateY(-50%);
       bottom: unset;
@@ -80,9 +78,8 @@
     @include viewport(mobile) {
       right: 50%;
       top: unset;
-      height: vmin_mobile(300px);
       width: vmin_mobile(300px);
-      transform: translateX(50%);
+      transform: translateX(47%);
       bottom: vmin_mobile(40px);
       // overflow: hidden;
     }

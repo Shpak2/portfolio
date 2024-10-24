@@ -15,16 +15,6 @@
 	}
 }
 
-@mixin text( $color, $font, $weight ) {
-	color: $color;
-	font-size: $font;
-	font-weight: $weight;
-}
-
-@function to_rgba($color, $alpha) {
-  @return rgb($color, $alpha);
-}
-
 // PX TO VW
 @function vw_big_screen( $value ) {
 	$vw-context: $vp-big-screen * 0.01 * 1px;

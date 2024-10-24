@@ -65,7 +65,7 @@
               transform: !handleDisplay ? 'translateX(-50%) scale(1,0)' : 'translateX(-50%) scale(1)'
               }"
             >
-            <img class="flex" :src="data[project].img[mode]" :alt="data[project].name">
+            <img v-if="handleDisplay" class="flex" :src="data[project].img[mode]" :alt="data[project].name">
           </div>
           <IconDesktop v-if="mode === 'desktop'"/>
           <IconTablet v-if="mode === 'tablet'"/>
@@ -104,7 +104,11 @@
               <span ref="tagsText">{{ data[project].tools.join(', ') }}</span>
             </div>
           </div>
-          <div class="popup-aside-content" v-html="data[project].description[$i18n.locale]"/>
+          <div
+            v-if="handleDisplay"
+            class="popup-aside-content"
+            v-html="data[project].description[$i18n.locale]"
+            />
         </div>
       </div>
     </div>
@@ -246,7 +250,8 @@
   .popup {
     &-inner {
       width: vw_big_screen(1100px);
-      height: 80%;
+      max-height: 95%;
+      aspect-ratio: 16/9;
       background-color: var(--primary-color);
       overflow: hidden;
       transition: 0.3s ease-in;
@@ -255,6 +260,8 @@
       @include viewport(tabs) {
         width: vw_tabs(696px);
         height: 90%;
+        max-height: unset;
+        aspect-ratio: unset;
       }
       @include viewport(swap_tabs) {
         height: 80%;

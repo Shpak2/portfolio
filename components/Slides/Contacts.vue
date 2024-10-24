@@ -420,7 +420,7 @@ export default {
     & input, & textarea {
       width: 100%;
       padding: vw_big_screen(20px);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--sidebar-color);
       background-color: var(--review-color);
       font-size: vw_big_screen(16px);
       line-height: vw_big_screen(20px);
@@ -458,7 +458,7 @@ export default {
       &::placeholder {
         font-size: vw_big_screen(16px);
         line-height: vw_big_screen(20px);
-        color: var(--border-color);
+        color: var(--sidebar-color);
         transition: 0.2s;
         @include viewport(tabs) {
           font-size: vw_tabs(16px);
@@ -475,9 +475,9 @@ export default {
       }
       &:hover {
         @include viewport(hover) {
-          border-color: var(--sidebar-color);
+          border-color: var(--form-color);
           &::placeholder {
-            color: var(--sidebar-color);
+            color: var(--form-color);
           }
         }
       }

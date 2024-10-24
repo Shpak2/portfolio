@@ -47,6 +47,7 @@
       border-bottom-width: 1px;
     }
     @include viewport(sm_mobile) {
+      backdrop-filter: blur(5px);
       height: vmin_mobile(80px);
     }
     // @include viewport(swap_mobile) {

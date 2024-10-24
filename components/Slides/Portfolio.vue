@@ -47,21 +47,21 @@
                 @mouseleave="fillDesktop = '#860CFB'"
                 @click="showPopup(index, 'desktop')">
                 <span class="rounded flex items-center justify-center"><IconDesktop :color="fillDesktop" /></span>
-                <b>Desktop</b>
+                <b v-html="$t('portfolioBtnDesc')"></b>
               </button>
               <button v-if="project.img.tablet" class="flex flex-col items-center"
                 @mouseover="fillTablet = '#fff'"
                 @mouseleave="fillTablet = '#860CFB'"
                 @click="showPopup(index, 'tablet')">
                 <span class="rounded flex items-center justify-center"><IconTablet :color="fillTablet" /></span>
-                <b>Tablet</b>
+                <b v-html="$t('portfolioBtnTab')"></b>
               </button>
               <button v-if="project.img.mobile" class="flex flex-col items-center"
                 @mouseover="fillMobile = '#fff'"
                 @mouseleave="fillMobile = '#860CFB'"
                 @click="showPopup(index, 'mobile')">
                 <span class="rounded flex items-center justify-center"><IconMobile :color="fillMobile" /></span>
-                <b>Mobile</b>
+                <b v-html="$t('portfolioBtnMob')"></b>
               </button>
             </div>
             <img class="flex" :src="project.img.main" :alt="project.name" loading="lazy">
@@ -465,10 +465,11 @@
   }
 
   .swiper {
-    width: vw_big_screen(600px);
+    width: vh_big_screen(700px);
     margin-left: 0;
     overflow: unset;
     padding-bottom: vw_big_screen(14px);
+
     @include viewport(tabs) {
       width: 100%;
       padding-bottom: vw_tabs(140px);

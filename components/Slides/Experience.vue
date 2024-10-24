@@ -134,7 +134,7 @@
       max-width: unset;
     }
     @include viewport(swap_tabs) {
-      max-width: 65%;
+      max-width: 62%;
     }
     & h2, & p {
       color: var(--secondary-color);

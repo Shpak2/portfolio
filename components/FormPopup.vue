@@ -200,6 +200,7 @@
     text-align: center;
     max-height: vw_big_screen(220px);
     overflow: auto;
+    word-break: break-word;
     padding: 0 vw_big_screen(4px);
     @include viewport(tabs) {
       font-size: vw_tabs(16px);
@@ -232,9 +233,11 @@
     padding: vw_big_screen(78px) vw_big_screen(52px) vw_big_screen(66px);
     background-color: var(--primary-color);
     position: relative;
+    box-shadow: 0 vw_big_screen(20px) vw_big_screen(40px) 0 var(--sidebar-color);
     @include viewport(tabs) {
       width: vw_tabs(400px);
       padding: vw_tabs(78px) vw_tabs(52px) vw_tabs(66px);
+      box-shadow: 0 20px 40px 0 var(--sidebar-color);
     }
     @include viewport(swap_tabs) {
       width: vw_tabs(254px);

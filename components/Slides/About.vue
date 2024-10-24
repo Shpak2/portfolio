@@ -149,7 +149,7 @@
       width: 100%;
     }
     @include viewport(swap_tabs) {
-      width: 70%;
+      width: 62%;
     }
     & h2, & p {
       color: var(--secondary-color);
@@ -170,7 +170,7 @@
       @include viewport(swap_tabs) {
         width: vw_tabs(200px);
         transform: unset;
-        margin-right: vw_tabs(10px);
+        margin-right: vw_tabs(30px);
       }
       @include viewport(sm_mobile) {
         width: vmin_mobile(240px);
