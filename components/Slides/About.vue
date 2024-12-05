@@ -86,9 +86,7 @@
         this.swiper = swiper;
       },
       handleFullSlider(val) {
-
         if (!val) {
-          // console.log(this.swiper?.el)
           this.swiper?.el.addEventListener('wheel', this.handleWheelEvent)
         }else {
           this.swiper?.el.removeEventListener('wheel', this.handleWheelEvent)

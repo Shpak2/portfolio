@@ -11,8 +11,8 @@
             :freeMode="true"
             :scrollbar="scrollbarOptions"
             :modules="modules"
-            @reachEnd="handleFullSlider(true)"
-            @reachBeginning="handleFullSlider(true)"
+            @reachEnd = "slideEnd"
+            @reachBeginning = "slideBegin"
             @mouseenter="handleFullSlider(false)"
             @mouseleave="handleFullSlider(true)"
             @swiper="onSwiper"
@@ -56,6 +56,11 @@
         },
         modules: [FreeMode, Scrollbar, Mousewheel],
         swiper: null,
+        isEnd: null,
+        isBegin: null,
+        scrollTimeout: null,
+        isScrolling: false,
+        timer: 100
       }
     },
     components: {
@@ -79,6 +84,11 @@
         this.swiper = swiper;
       },
       handleFullSlider(val) {
+        if (!val) {
+          this.swiper?.el.addEventListener('wheel', this.handleWheelEvent)
+        }else {
+          this.swiper?.el.removeEventListener('wheel', this.handleWheelEvent)
+        }
         setTimeout(()=>{
           this.$store.commit('setAllowMouseScroll', val);
           !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
@@ -89,6 +99,42 @@
         setTimeout(()=>{
           swiper.setTranslate(translate);
         },1)
+      },
+      handleWheelEvent(event) {
+        clearTimeout(this.scrollTimeout);
+        this.isScrolling = true;
+        if (event.deltaY > 0) {
+          this.isBegin = false
+          if (this.swiper.translate === -1 * this.swiper.snapGrid[1] && this.isEnd) {
+            this.scrollTimeout = setTimeout(() => {
+              if (this.isScrolling) {
+                this.$store.commit('setActiveItem', 'portfolio');
+              }
+            }, this.timer);
+          }
+        } else {
+          this.isEnd = false
+          if (this.swiper.translate === -1 * this.swiper.snapGrid[0] && this.isBegin) {
+            this.scrollTimeout = setTimeout(() => {
+              if (this.isScrolling) {
+                this.$store.commit('setActiveItem', 'about');
+              }
+            }, this.timer);
+          }
+        }
+        this.scrollTimeout = setTimeout(() => {
+          this.isScrolling = false;
+        }, this.timer);
+      },
+      slideEnd(){
+        setTimeout(()=>{
+          this.isEnd = true
+        },this.timer)
+      },
+      slideBegin(){
+        setTimeout(()=>{
+          this.isBegin = true
+        },this.timer)
       }
     }
   };
