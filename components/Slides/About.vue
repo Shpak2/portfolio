@@ -63,7 +63,7 @@
         isBegin: null,
         scrollTimeout: null,
         isScrolling: false,
-        timer: 400
+        timer: 100
       }
     },
     props: {
