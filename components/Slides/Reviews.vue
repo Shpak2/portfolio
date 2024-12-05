@@ -6,13 +6,10 @@
         <swiper
           :direction="'vertical'"
           :slidesPerView="'auto'"
-          :freeMode="true"
           :parallax="true"
           :modules="modules"
           :navigation="navigation"
           :pagination="pagination"
-          @reachEnd="handleFullSlider(true)"
-          @reachBeginning="handleFullSlider(true)"
           @mouseenter="handleFullSlider(false)"
           @mouseleave="handleFullSlider(true)"
           @swiper="onSwiper"
@@ -74,7 +71,7 @@
   import Decorative from '~/components/DecorativeWrapper.vue';
   import IconUser from '~/components/Svg/User.vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { FreeMode, Mousewheel, Navigation, Pagination, Parallax } from 'swiper/modules';
+  import { Mousewheel, Navigation, Pagination, Parallax } from 'swiper/modules';
   import { data } from '~/data/reviews'
 
   export default {
@@ -83,7 +80,7 @@
         data,
         swiper: null,
         // lastScrollDelta: null,
-        modules: [FreeMode, Mousewheel, Navigation, Pagination, Parallax],
+        modules: [Mousewheel, Navigation, Pagination, Parallax],
         pagination: {
           el: ".review-pagination",
           clickable: true,
