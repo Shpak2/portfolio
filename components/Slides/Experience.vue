@@ -57,7 +57,7 @@
         modules: [FreeMode, Scrollbar, Mousewheel],
         swiper: null,
         isEnd: null,
-        isBegin: null,
+        isBegin: true,
         scrollTimeout: null,
         isScrolling: false,
         timer: 100

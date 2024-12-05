@@ -60,7 +60,7 @@
         },
         modules: [FreeMode, Scrollbar, Mousewheel],
         isEnd: null,
-        isBegin: null,
+        isBegin: true,
         scrollTimeout: null,
         isScrolling: false,
         timer: 100

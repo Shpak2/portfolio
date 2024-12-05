@@ -10,6 +10,8 @@
           :modules="modules"
           :navigation="navigation"
           :pagination="pagination"
+          @reachEnd = "slideEnd"
+          @reachBeginning = "slideBegin"
           @mouseenter="handleFullSlider(false)"
           @mouseleave="handleFullSlider(true)"
           @swiper="onSwiper"
@@ -94,7 +96,12 @@
           disabledClass: 'disable',
           nextEl: '.review-button-next',
           prevEl: '.review-button-prev'
-        }
+        },
+        isEnd: null,
+        isBegin: true,
+        scrollTimeout: null,
+        isScrolling: false,
+        timer: 100
       }
     },
     components: {
@@ -123,22 +130,52 @@
         this.swiper = swiper;
       },
       handleFullSlider: function(val) {
+        if (!val) {
+          this.swiper?.el.addEventListener('wheel', this.handleWheelEvent)
+        }else {
+          this.swiper?.el.removeEventListener('wheel', this.handleWheelEvent)
+        }
         setTimeout(()=>{
           this.$store.commit('setAllowMouseScroll', val);
           !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
         },300)
       },
-      // handleSlider: function(val) {
-      //   setTimeout(()=>{
-      //     this.$store.commit('setAllowMouseScroll', val);
-      //     !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
-      //   },300)
-        // this.handleScrollDirection()
-      // },
-      // handleScrollDirection() {
-      //   const currentDelta = window.event.deltaY;
-      //   this.lastScrollDelta = currentDelta < 0;
-      // },
+      handleWheelEvent(event) {
+        clearTimeout(this.scrollTimeout);
+        this.isScrolling = true;
+        if (event.deltaY > 0) {
+          this.isBegin = false
+          if (this.swiper.translate === -1 * this.swiper.snapGrid[this.swiper.snapGrid.length-1] && this.isEnd) {
+            this.scrollTimeout = setTimeout(() => {
+              if (this.isScrolling) {
+                this.$store.commit('setActiveItem', 'contacts');
+              }
+            }, this.timer);
+          }
+        } else {
+          this.isEnd = false
+          if (this.swiper.activeIndex === 0 && this.isBegin) {
+            this.scrollTimeout = setTimeout(() => {
+              if (this.isScrolling) {
+                this.$store.commit('setActiveItem', 'portfolio');
+              }
+            }, this.timer);
+          }
+        }
+        this.scrollTimeout = setTimeout(() => {
+          this.isScrolling = false;
+        }, this.timer);
+      },
+      slideEnd(){
+        setTimeout(()=>{
+          this.isEnd = true
+        },this.timer)
+      },
+      slideBegin(){
+        setTimeout(()=>{
+          this.isBegin = true
+        },this.timer)
+      }
     }
   };
 
