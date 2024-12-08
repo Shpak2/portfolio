@@ -65,6 +65,7 @@
       return {
         swiper: null,
         activeSlide: null,
+        lastActiveSlide: null,
         modules: [Mousewheel, Keyboard, EffectFade, Parallax, Scrollbar],
       };
     },
@@ -98,7 +99,10 @@
       },
     },
     mounted() {
-      // this.$refs.splide.splide.on('move', this.handleSlideChange);
+      if (this.isMobile) window.addEventListener('scroll', this.controlMenu);
+    },
+    beforeDestroy() {
+      if (this.isMobile) window.removeEventListener('scroll', this.controlMenu);
     },
     watch: {
       '$store.state.activeItem'(newValue) {
@@ -134,6 +138,26 @@
             top: window.pageYOffset + top - 90,
             behavior: 'smooth'
           });
+        }
+      },
+      controlMenu() {
+        const slideItems = this.$refs.slideItems;
+
+        if (!slideItems || slideItems.length === 0) return;
+        let activeSlide = null;
+
+        slideItems.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+
+          if (isVisible) {
+            activeSlide = this.slides[index];
+          }
+        });
+
+        if (activeSlide && activeSlide.key !== this.lastActiveSlide) {
+          this.lastActiveSlide = activeSlide.key;
+          this.$store.commit('setActiveItem', activeSlide.key);
         }
       }
     },
