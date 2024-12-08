@@ -61,6 +61,7 @@
             ]"
           >
           <div class="popup-main-emulate"
+            ref="emulate"
             :style="{
               transform: !handleDisplay ? 'translateX(-50%) scale(1,0)' : 'translateX(-50%) scale(1)'
               }"
@@ -216,6 +217,10 @@
       },
       handleEmulate(val) {
         this.mode = val
+        this.$refs.emulate.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
     },
   }
