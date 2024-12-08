@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     port: config.smtpPort,
     logger: true,
     debug: true,
-    secure: true, // true = for port 465, false = for port 587
+    secure: false, // true = for port 465, false = for port 587
     auth: {
       user: config.smtpUser,
       pass: config.smtpPassword,
