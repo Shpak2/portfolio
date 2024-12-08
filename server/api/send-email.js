@@ -9,13 +9,13 @@ export default defineEventHandler(async (event) => {
   const transporter = nodemailer.createTransport({
     host: config.smtpHost,
     port: config.smtpPort,
-    secure: config.smtpPort === 465,
+    logger: true,
+    debug: true,
+    secure: true, // true = for port 465, false = for port 587
     auth: {
       user: config.smtpUser,
       pass: config.smtpPassword,
     },
-    logger: true,
-    debug: true
   })
 
   const htmlTemplate = `
@@ -48,9 +48,6 @@ export default defineEventHandler(async (event) => {
     to: 'zhenya19880307@gmail.com',
     subject: `New Message from ${name}: ${subject}`,
     html: htmlTemplate,
-    headers: {
-      'Content-Type': 'text/html; charset=UTF-8'
-    }
   }
 
   try {
