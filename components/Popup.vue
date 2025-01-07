@@ -348,6 +348,7 @@
           position: relative;
           transition: transform 0.2s ease;
           font-size: vw_big_screen(16px);
+          user-select: none;
           @include viewport(tabs) {
             font-size: vw_tabs(16px);
           }
@@ -357,8 +358,7 @@
           @include viewport(sm_mobile) {
             font-size: vmin_mobile(16px);
             line-height: vmin_mobile(20px);
-            width: fit-content;
-            display: flex;
+            padding: 0 vmin_mobile(6px);
           }
           &:active {
             transform: scale(0.8);
