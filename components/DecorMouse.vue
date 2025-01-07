@@ -20,6 +20,11 @@ export default {
       hideMouse: false
     }
   },
+  watch: {
+    '$store.state.activeItem'() {
+      this.hideMouse = true
+    },
+  },
   mounted() {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 30) {
