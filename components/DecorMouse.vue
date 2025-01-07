@@ -20,11 +20,6 @@ export default {
       hideMouse: false
     }
   },
-  watch: {
-    '$store.state.activeItem'() {
-      this.hideMouse = true
-    },
-  },
   mounted() {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 30) {
@@ -73,7 +68,7 @@ export default {
       }
       @include viewport(sm_mobile) {
         bottom: unset;
-        top: calc(100vh - vmin_mobile(40px));
+        top: calc(100vh - vmin_mobile(120px));
         right: vmin_mobile(20px);
       }
       &.hide {

@@ -357,6 +357,8 @@
           @include viewport(sm_mobile) {
             font-size: vmin_mobile(16px);
             line-height: vmin_mobile(20px);
+            width: fit-content;
+            display: flex;
           }
           &:active {
             transform: scale(0.8);

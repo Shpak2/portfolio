@@ -548,6 +548,7 @@
       font-weight: 600;
       color: #fff;
       margin-top: vw_big_screen(6px);
+      user-select: none;
       @include viewport(tabs) {
         font-size: vw_tabs(12px);
         margin-top: vw_tabs(6px);

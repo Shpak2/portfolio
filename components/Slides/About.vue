@@ -33,7 +33,7 @@
           </div>
         </Decorative>
       </div>
-      <div class="content-img">
+      <div class="content-img" :class="{ show: hideImg }">
         <img class="rounded" :src="myPhoto" width="350" height="286" alt="photo" loading="lazy"/>
       </div>
     </div>
@@ -63,6 +63,7 @@
         isBegin: true,
         scrollTimeout: null,
         isScrolling: false,
+        hideImg: false,
         timer: 100
       }
     },
@@ -138,6 +139,13 @@
           this.isBegin = true
         },this.timer)
       }
+    },
+    mounted() {
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 30) {
+          this.hideImg = true
+        }
+      });
     }
   };
 
@@ -225,9 +233,20 @@
       @include viewport(mobile) {
         padding-top: 0;
       }
+      @include viewport(port_mobile) {
+        opacity: 0;
+        translate: 0 25%;
+      }
       @include viewport(swap_mobile) {
         padding-top: vmin_mobile(22px);
         margin-top: vmin_mobile(42px);
+      }
+      &.show {
+        @include viewport(port_mobile) {
+          opacity: 1;
+          transition: 0.3s ease;
+          translate: 0;
+        }
       }
     }
   }
