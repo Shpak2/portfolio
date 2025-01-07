@@ -4,19 +4,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt3-vuex-module',
     '@nuxtjs/i18n',
-    'nuxt-mail', {
-      message: {
-        to: 'zhenya19880307@gmail.com',
-      },
-      smtp: {
-        host: process.env.SMTP_HOST,
-        port: 587, //
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
-        },
-      },
-    }
+    'nuxt-mail',
   ],
   components: true,
   vite: {
