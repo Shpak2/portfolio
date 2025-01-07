@@ -4,6 +4,19 @@ export default defineNuxtConfig({
   modules: [
     'nuxt3-vuex-module',
     '@nuxtjs/i18n',
+    'nuxt-mail', {
+      message: {
+        to: 'zhenya19880307@gmail.com',
+      },
+      smtp: {
+        host: process.env.SMTP_HOST,
+        port: 587, //
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      },
+    }
   ],
   components: true,
   vite: {
@@ -28,10 +41,19 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
   },
   runtimeConfig: {
-    smtpHost: process.env.SMTP_HOST,
-    smtpPort: process.env.SMTP_PORT,
-    smtpUser: process.env.SMTP_USER,
-    smtpPassword: process.env.SMTP_PASSWORD,
+    mail: {
+      message: {
+        to: 'zhenya19880307@gmail.com',
+      },
+      smtp: {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      },
+    },
     recaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY,
     public: {
       recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY

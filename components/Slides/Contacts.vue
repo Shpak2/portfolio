@@ -151,35 +151,34 @@ export default {
   methods: {
     async submitForm() {
       if (this.correct) {
-
         this.$store.commit('setlogoLoader', true);
         this.$store.commit('setFormPopup', true);
 
         this.loading = true;
 
         try {
-          const response = await fetch('/api/send-email', {
-            method: 'POST',
-            body: JSON.stringify(this.form),
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
+          // Використовуємо $mail для відправки листа через nuxt-mail
+          const { $mail } = useNuxtApp();
 
-          const data = await response.json();
+          const mailOptions = {
+            from: this.form.email, // Використовуємо email з форми
+            subject: this.form.subject,
+            text: this.form.message, // Текст повідомлення
+          };
 
-          this.$store.commit('setMessagePopup', data.body?.message);
+          // Відправка листа через nuxt-mail
+          await $mail.send(mailOptions);
 
-          if (response.status !== 200 || !data.body?.success) {
-            this.$store.commit('setError', true);
-            this.$store.commit('setMessagePopup', data.body?.message || 'Unknown error');
-          } else {
-            this.$store.commit('setError', false);
-            this.resetForm();
-          }
+          // Логіка для обробки результату
+          this.$store.commit('setMessagePopup', 'Email sent successfully');
+
+          this.$store.commit('setError', false);
+          this.resetForm();
+
           this.$store.commit('setlogoLoader', false);
+
         } catch (err) {
-          this.$store.commit('setMessagePopup', err || 'Unknown error');
+          this.$store.commit('setMessagePopup', err.message || 'Unknown error');
           this.$store.commit('setError', true);
         } finally {
           this.loading = false;
