@@ -16,6 +16,9 @@ export default defineEventHandler(async (event) => {
       user: config.smtpUser,
       pass: config.smtpPassword,
     },
+    tls: {
+      rejectUnauthorized: false
+    }
   })
 
   const htmlTemplate = `

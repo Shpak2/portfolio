@@ -81,6 +81,9 @@
           this.swiper.update()
         }
       },
+      '$store.state.activeItem'() {
+        this.hideImg = true
+      },
     },
     methods: {
       onSwiper(swiper) {
