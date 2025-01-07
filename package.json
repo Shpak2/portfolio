@@ -20,7 +20,7 @@
   "dependencies": {
     "@splidejs/vue-splide": "^0.6.12",
     "baffle": "^0.3.6",
-    "nuxt-mail": "^5.1.1",
+    "nodemailer": "^6.9.14",
     "nuxt3-vuex-module": "^1.0.14",
     "sass": "^1.69.7",
     "sass-loader": "^14.0.0",
