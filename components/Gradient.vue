@@ -107,12 +107,14 @@
     },
     methods: {
       setPosiotion: function() {
-        const shuffledArray = this.position.slice();
-        for (let i = shuffledArray.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        if (!this.isMobile) {
+          const shuffledArray = this.position.slice();
+          for (let i = shuffledArray.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+          }
+          this.position = shuffledArray;
         }
-        this.position = shuffledArray;
       },
       // checkOrientation() {
       //   return window.innerHeight < window.innerWidth ? true : false

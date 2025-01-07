@@ -462,6 +462,7 @@
       }
       @include viewport(swap_mobile) {
         width: 55%;
+        min-height: 315px;
       }
       &-inner {
         height: calc((100% - vw_big_screen(60px)) - 1px);
@@ -482,6 +483,9 @@
           height: calc((100vh - vmin_mobile(60px)));
           height: calc((var(--vh, 1vh) * 100) - vmin_mobile(60px));
           background-color: var(--popup-color);
+        }
+        @include viewport(swap_mobile) {
+          overflow: auto
         }
       }
       &-emulate {
@@ -583,6 +587,7 @@
       }
       @include viewport(swap_mobile) {
         width: 45%;
+        min-height: 315px;
       }
       &-buttons {
         gap: vw_big_screen(12px);

@@ -150,43 +150,43 @@ export default {
   },
   methods: {
     async submitForm() {
-    if (this.correct) {
+      if (this.correct) {
 
-      this.$store.commit('setlogoLoader', true);
-      this.$store.commit('setFormPopup', true);
+        this.$store.commit('setlogoLoader', true);
+        this.$store.commit('setFormPopup', true);
 
-      this.loading = true;
+        this.loading = true;
 
-      try {
-        const response = await fetch('/api/send-email', {
-          method: 'POST',
-          body: JSON.stringify(this.form),
-          headers: {
-            'Content-Type': 'application/json',
+        try {
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            body: JSON.stringify(this.form),
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          const data = await response.json();
+
+          this.$store.commit('setMessagePopup', data.body?.message);
+
+          if (response.status !== 200 || !data.body?.success) {
+            this.$store.commit('setError', true);
+            this.$store.commit('setMessagePopup', data.body?.message || 'Unknown error');
+          } else {
+            this.$store.commit('setError', false);
+            this.resetForm();
           }
-        });
-
-        const data = await response.json();
-
-        this.$store.commit('setMessagePopup', data.body?.message);
-
-        if (response.status !== 200 || !data.body?.success) {
+          this.$store.commit('setlogoLoader', false);
+        } catch (err) {
+          this.$store.commit('setMessagePopup', err || 'Unknown error');
           this.$store.commit('setError', true);
-          this.$store.commit('setMessagePopup', data.body?.message || 'Unknown error');
-        } else {
-          this.$store.commit('setError', false);
-          this.resetForm();
+        } finally {
+          this.loading = false;
+          this.$store.commit('setlogoLoader', false);
         }
-        this.$store.commit('setlogoLoader', false);
-      } catch (err) {
-        this.$store.commit('setMessagePopup', err || 'Unknown error');
-        this.$store.commit('setError', true);
-      } finally {
-        this.loading = false;
-        this.$store.commit('setlogoLoader', false);
       }
-    }
-  },
+    },
     resetForm() {
       this.form = {
         name: '',
@@ -260,7 +260,6 @@ export default {
       margin-bottom: 0;
     }
     @include viewport(sm_mobile) {
-      margin-top: vmin_mobile(60px);
       margin-bottom: 0;
     }
   }

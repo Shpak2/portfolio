@@ -11,7 +11,8 @@
     data() {
       return {
         baffleText: undefined,
-        animationDelay: 500
+        animationDelay: 500,
+        mobile: false
       }
     },
     props: {
@@ -21,11 +22,20 @@
     },
     methods: {
       animateCode(ref) {
-        let baf = baffle(ref, {
-          characters: 'uiopaqwertysdfghjklzxcvbnm',
-          speed: 100
-        });
-        baf.start().text(text => this.content).reveal(4000,this.animationDelay);
+        if(!this.mobile) {
+          let baf = baffle(ref, {
+            characters: 'uiopaqwertysdfghjklzxcvbnm',
+            speed: 100
+          });
+          baf.start().text(text => this.content).reveal(4000,this.animationDelay);
+        }
+      },
+      checkMobile() {
+        let isMobile = window.matchMedia("(max-width: 1024px) and (max-height: 584px) and (orientation: landscape)").matches
+          || window.matchMedia("(max-width: 584px) and (orientation: portrait)").matches;
+          // console.log('isMobile',isMobile)
+          // this.$store.commit('setIsMobile', isMobile);
+          this.mobile = isMobile
       }
     },
     watch: {
@@ -39,6 +49,7 @@
       },
     },
     mounted() {
+      this.checkMobile()
       if (this.tag === 'open' || this.tag === 'wrap') {
         this.animateCode(this.$refs.decorOpen);
       }

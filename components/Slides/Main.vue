@@ -34,7 +34,13 @@
     },
     methods: {
       toPortfolio() {
-        this.$store.commit('setActiveItem', 'portfolio');
+        if (this.isMobile) {
+          this.$store.commit('setMenuClick', true);
+          this.$store.commit('setActiveItem', 'portfolio');
+          this.$store.commit('setMenuActive', false);
+        } else {
+          this.$store.commit('setActiveItem', 'portfolio');
+        }
       },
       handleMouse(val) {
         this.$store.commit('setHover', val);

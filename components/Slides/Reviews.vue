@@ -263,6 +263,7 @@
       }
       @include viewport(sm_mobile) {
         margin-top: 0;
+        margin-bottom: vmin_mobile(60px);
       }
     }
     &-inner {

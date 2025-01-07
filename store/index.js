@@ -20,7 +20,8 @@ export const state = () => ({
   hasError: false,
   messagePopup: '',
   menuActive: false,
-  isMobile: false
+  isMobile: false,
+  menuClick: false
 });
 
 export const mutations = {
@@ -50,5 +51,8 @@ export const mutations = {
   },
   setIsMobile(state, value) {
     state.isMobile = value;
+  },
+  setMenuClick(state, value) {
+    state.menuClick = value;
   },
 };

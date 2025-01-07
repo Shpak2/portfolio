@@ -48,6 +48,7 @@
 </template>
 
 <script>
+  import { useStore } from 'vuex';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Mousewheel, Keyboard, EffectFade, Parallax, Scrollbar } from 'swiper/modules';
   import MainSlide from '~/components/Slides/Main.vue';
@@ -98,6 +99,10 @@
         ];
       },
     },
+    beforeMount() {
+      const store = useStore();
+      this.$store = store;
+    },
     mounted() {
       if (this.isMobile) window.addEventListener('scroll', this.controlMenu);
     },
@@ -106,10 +111,7 @@
     },
     watch: {
       '$store.state.activeItem'(newValue) {
-        if (this.isMobile) {
-          let numSlide = this.slides.findIndex(slide => slide.key === newValue)
-          this.scrollToSlide(numSlide)
-        } else {
+        if (!this.isMobile) {
           this.changeSlide(newValue);
           this.swiper.mousewheel.enable()
         }
@@ -117,6 +119,13 @@
       '$store.state.allowMouseScroll'(newValue) {
         newValue ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
       },
+      '$store.state.menuClick'(newValue) {
+        if (newValue) {
+          let numSlide = this.slides.findIndex(slide => slide.key === this.$store.state.activeItem)
+          this.scrollToSlide(numSlide)
+          this.$store.commit('setMenuClick', false);
+        }
+      }
     },
     methods: {
       onSwiper(swiper) {

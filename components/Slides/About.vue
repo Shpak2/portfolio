@@ -155,7 +155,7 @@
       margin: vw_tabs(160px) 0 auto;
     }
     @include viewport(sm_mobile) {
-      margin: vmin_mobile(60px) 0 auto;
+      margin: 0 0 vmin_mobile(60px);
     }
   }
   .swiper {
@@ -235,6 +235,10 @@
     @include viewport(swap_mobile) {
       overflow: auto;
       max-height: vmin_mobile(200px);
+    }
+    @include viewport(mobile) {
+      overflow: auto;
+      max-height: vmin_mobile(250px);
     }
   }
 </style>

@@ -520,7 +520,9 @@
     & button {
       padding: 0;
       &:hover span {
-        background-color: #860CFB;
+        @include viewport(hover) {
+          background-color: #860CFB;
+        }
       }
     }
     & span {

@@ -191,7 +191,7 @@
         margin: vw_tabs(160px) 0 auto;
       }
       @include viewport(sm_mobile) {
-        margin: vmin_mobile(60px) 0 0;
+        margin: 0;
         position: relative;
       }
       @include viewport(mobile) {
@@ -207,6 +207,10 @@
     @include viewport(swap_mobile) {
       overflow: auto;
       max-height: vmin_mobile(200px);
+    }
+    @include viewport(mobile) {
+      overflow: auto;
+      max-height: vmin_mobile(250px);
     }
   }
 </style>

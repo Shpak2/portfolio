@@ -41,6 +41,7 @@
         this.$store.commit('setActiveItem', itemKey);
         if (this.isMenu) {
           this.$store.commit('setMenuActive', false);
+          this.$store.commit('setMenuClick', true);
         }
       },
       calculateTranslateY() {

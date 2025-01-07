@@ -3,7 +3,7 @@
 
     <Loader/>
     <Header v-if="!maskOn" />
-    <!-- <Gradient v-if="!maskOn" :isMobile="mobile" /> -->
+    <Gradient v-if="!maskOn" :isMobile="mobile" />
 
     <main v-if="!maskOn">
       <Slider :isMobile="mobile" />
