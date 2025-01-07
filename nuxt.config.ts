@@ -37,6 +37,7 @@ export default defineNuxtConfig({
       recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
     }
   },
+  pages: false,
   app: {
     head: {
       link: [

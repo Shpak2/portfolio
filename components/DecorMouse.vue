@@ -34,16 +34,16 @@ export default {
 
   @keyframes handTap {
     0%, 100% {
-      transform: rotateX(0deg) translateY(0);
+      transform: translateY(0);
     }
     20%{
-      transform: rotateX(-15deg) translateY(0);
+      transform: translateY(0);
     }
     50% {
-      transform: rotateX(-15deg) translateY(-50%);
+      transform: translateY(-50%);
     }
     70% {
-      transform: rotateX(0deg) translateY(-50%);
+      transform: translateY(-50%);
     }
   }
   @keyframes hideDecor {
@@ -68,7 +68,7 @@ export default {
       }
       @include viewport(sm_mobile) {
         bottom: unset;
-        top: calc(100vh - vmin_mobile(120px));
+        top: calc(100svh - vmin_mobile(50px));
         right: vmin_mobile(20px);
       }
       &.hide {

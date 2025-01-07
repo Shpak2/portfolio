@@ -72,7 +72,7 @@
           <IconTablet v-if="mode === 'tablet'"/>
           <IconMobile v-if="mode === 'mobile'"/>
         </div>
-        <div class="popup-aside">
+        <div class="popup-aside" :class="{'handle-content': !handleDisplay}">
           <div class="popup-aside-buttons flex items-center">
             <button
               @click="handleEmulate('desktop')"
@@ -106,7 +106,6 @@
             </div>
           </div>
           <div
-            v-if="handleDisplay"
             class="popup-aside-content"
             v-html="data[project].description[$i18n.locale]"
             />
@@ -568,6 +567,14 @@
       height: 100%;
       background-color: var(--popup-color);
       padding: vw_big_screen(16px) vw_big_screen(24px);
+      transform-origin: center bottom;
+      transition: 0.2s cubic-bezier(0.22, -0.01, 0.01, 1.02);
+      // transform: scaleY(1);
+      opacity: 1;
+      &.handle-content {
+        // transform: scaleY(0);
+        opacity: 0;
+      }
       @include viewport(tabs) {
         width: 100%;
         height: 32%;
