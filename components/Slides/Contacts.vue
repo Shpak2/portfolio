@@ -157,27 +157,20 @@ export default {
         this.loading = true;
 
         try {
-          // Використовуємо $mail для відправки листа через nuxt-mail
           const { $mail } = useNuxtApp();
 
           const mailOptions = {
-            from: this.form.email, // Використовуємо email з форми
+            to: 'zhenya19880307@gmail.com',
+            from: this.form.email,
             subject: this.form.subject,
-            text: this.form.message, // Текст повідомлення
+            text: this.form.message,
           };
-
-          // Відправка листа через nuxt-mail
           await $mail.send(mailOptions);
-
-          // Логіка для обробки результату
           this.$store.commit('setMessagePopup', 'Email sent successfully');
-
           this.$store.commit('setError', false);
           this.resetForm();
-
-          this.$store.commit('setlogoLoader', false);
-
         } catch (err) {
+          console.error(err);
           this.$store.commit('setMessagePopup', err.message || 'Unknown error');
           this.$store.commit('setError', true);
         } finally {
