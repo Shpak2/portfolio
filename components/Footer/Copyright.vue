@@ -1,6 +1,6 @@
 <template>
   <span class="copyright" :class="{'menu-copyright': isMenu}">
-    Yevhenii Shpakov | 2019 - 2024
+    Yevhenii Shpakov | 2019 - 2025
   </span>
 </template>
 
