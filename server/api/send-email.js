@@ -6,10 +6,6 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const { name, email, subject, message } = body
 
-
-    console.log('SMTP User:', config.smtpUser)
-    console.log('SMTP Host:', config.smtpHost)
-
   const transporter = nodemailer.createTransport({
     host: config.smtpHost,
     port: config.smtpPort,

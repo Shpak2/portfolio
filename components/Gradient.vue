@@ -90,19 +90,11 @@
       },
     },
     mounted() {
-      // this.size = `${screen.height}px`;
-      // setTimeout(()=>{
-      //   this.loaded = true
-      // },1000)
-      // this.checkOrientation()
       if (this.isMobile) {
-        window.addEventListener("scroll", () => {
-          this.rotateMobile = window.pageYOffset % 360
-          // this.position[0] = `translate(0%,${window.pageYOffset}px)`
-          // this.position[1] = `translate(0%,${window.pageYOffset + (window.innerHeight/2)}px)`
-          // this.position[2] = `translate(0%,${window.pageYOffset + (window.innerHeight/3)}px)`
-          // this.position[3] = `translate(0%,${window.pageYOffset + (window.innerHeight/4)}px)`
-        });
+        // window.addEventListener("scroll", () => {
+        //   this.rotateMobile = window.pageYOffset % 360
+        // });
+        this.setRandomRotation()
       }
     },
     methods: {
@@ -116,9 +108,9 @@
           this.position = shuffledArray;
         }
       },
-      // checkOrientation() {
-      //   return window.innerHeight < window.innerWidth ? true : false
-      // }
+      setRandomRotation() {
+        this.rotateMobile = Math.floor(Math.random() * 361);
+      }
     },
   }
 </script>

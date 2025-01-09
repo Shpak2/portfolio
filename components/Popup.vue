@@ -23,7 +23,7 @@
               @click="handleArrows(false)"
               :style="{
                 opacity: project === 0 ? '0.25' : '',
-                pointerEvents: project === 0 ? 'none' : ''
+                pointerEvents: project === 0 ? 'none' : '' || !handleTitle ? 'none' : ''
                 }"
               >
               <svg width="40" height="21" viewBox="0 0 40 21" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scale(-1,1);">
@@ -35,7 +35,7 @@
               @click="handleArrows(true)"
               :style="{
                 opacity: project === data.length-1 ? '0.25' : '',
-                pointerEvents: project === data.length-1 ? 'none' : ''
+                pointerEvents: project === data.length-1 ? 'none' : '' || !handleTitle ? 'none' : ''
                 }"
               >
               <svg width="40" height="21" viewBox="0 0 40 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,6 +141,9 @@
       IconDesktop,
       IconTablet,
       IconMobile
+    },
+    mounted() {
+      console.log(this.data)
     },
     beforeMount() {
       const store = useStore();
@@ -516,6 +519,9 @@
           top: vmin_mobile(21px);
           width: vmin_mobile(274px);
           height: vmin_mobile(189px);
+        }
+        @include viewport(swap_mobile) {
+          width: vmin_mobile(278px);
         }
       }
       &.emulate-tablet .popup-main-emulate {
