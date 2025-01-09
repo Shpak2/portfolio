@@ -86,19 +86,21 @@
     },
     watch: {
       '$store.state.activeItem'() {
-        this.setPosiotion()
+        if (!this.isMobile) {
+          this.setPosition()
+        }
       },
     },
     mounted() {
       if (this.isMobile) {
-        // window.addEventListener("scroll", () => {
-        //   this.rotateMobile = window.pageYOffset % 360
-        // });
-        this.setRandomRotation()
+        window.addEventListener("scroll", () => {
+          this.rotateMobile = window.pageYOffset % 360
+        });
+        // this.setRandomRotation()
       }
     },
     methods: {
-      setPosiotion: function() {
+      setPosition: function() {
         if (!this.isMobile) {
           const shuffledArray = this.position.slice();
           for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -108,9 +110,9 @@
           this.position = shuffledArray;
         }
       },
-      setRandomRotation() {
-        this.rotateMobile = Math.floor(Math.random() * 361);
-      }
+      // setRandomRotation() {
+      //   this.rotateMobile = Math.floor(Math.random() * 361);
+      // }
     },
   }
 </script>
