@@ -158,7 +158,7 @@ export default {
         this.loading = true;
 
         try {
-          const response = await fetch('/api/send-email', {
+          const response = await fetch(`${window.location.origin}/api/send-email`, {
             method: 'POST',
             body: JSON.stringify(this.form),
             headers: {
