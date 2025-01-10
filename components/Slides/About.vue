@@ -4,29 +4,10 @@
       <div class="content">
         <Decorative :content="'p'" :className="'tag-item__text'" :tag="'wrap'">
           <h2 v-html="$t('aboutTitle')"/>
-          <swiper
-            v-if="!isMobile"
-            :direction="'vertical'"
-            :slidesPerView="'auto'"
-            :freeMode="true"
-            :scrollbar="scrollbarOptions"
-            :modules="modules"
-            @reachEnd = "slideEnd"
-            @reachBeginning = "slideBegin"
-            @mouseenter="handleFullSlider(false)"
-            @mouseleave="handleFullSlider(true)"
-            @swiper="onSwiper"
-            class="mySwiper"
-            @scrollbarDragEnd="handleSlider"
-          >
-            <swiper-slide>
-              <div class="scrollable-container"
+          <div v-if="!isMobile" class="content-container"
               v-html="$t('aboutContent')"
               />
-            </swiper-slide>
-            <div class="swiper-scrollbar"></div>
-          </swiper>
-          <div v-if="isMobile" class="wrapper">
+          <div v-else class="wrapper">
             <div class="scrollable-container"
               v-html="$t('aboutContent')"
               />
@@ -44,104 +25,23 @@
   import Decorative from '~/components/DecorativeWrapper.vue';
   import photoPath from '~/assets/images/main/photo.webp';
 
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
-
   export default {
     data() {
       return {
-        swiper: null,
         myPhoto: photoPath,
-        scrollbarOptions: {
-          el: '.swiper-scrollbar',
-          enabled: true,
-          draggable: true,
-          hide: false,
-        },
-        modules: [FreeMode, Scrollbar, Mousewheel],
-        isEnd: null,
-        isBegin: true,
-        scrollTimeout: null,
-        isScrolling: false,
-        hideImg: false,
-        timer: 100
+        hideImg: false
       }
     },
     props: {
       isMobile: false
     },
     components: {
-      Decorative,
-      Swiper,
-      SwiperSlide
+      Decorative
     },
     watch: {
-      '$store.state.preloader.isPlay'(newValue) {
-        if(!newValue && this.swiper) {
-          this.swiper.update()
-        }
-      },
       '$store.state.activeItem'() {
         this.hideImg = true
       },
-    },
-    methods: {
-      onSwiper(swiper) {
-        this.swiper = swiper;
-      },
-      handleFullSlider(val) {
-        if (!val) {
-          this.swiper?.el.addEventListener('wheel', this.handleWheelEvent)
-        }else {
-          this.swiper?.el.removeEventListener('wheel', this.handleWheelEvent)
-        }
-        setTimeout(()=>{
-          this.$store.commit('setAllowMouseScroll', val);
-          !val ? this.swiper.mousewheel.enable() : this.swiper.mousewheel.disable()
-        },300)
-      },
-      handleSlider(swiper){
-        let translate = swiper.previousTranslate
-        setTimeout(()=>{
-          swiper.setTranslate(translate);
-        },1)
-      },
-      handleWheelEvent(event) {
-        clearTimeout(this.scrollTimeout);
-        this.isScrolling = true;
-        if (event.deltaY > 0) {
-          this.isBegin = false
-          if (this.swiper.translate === -1 * this.swiper.snapGrid[1] && this.isEnd) {
-            this.scrollTimeout = setTimeout(() => {
-              if (this.isScrolling) {
-                this.$store.commit('setActiveItem', 'experience');
-              }
-            }, this.timer);
-          }
-        } else {
-          this.isEnd = false
-          if (this.swiper.translate === -1 * this.swiper.snapGrid[0] && this.isBegin) {
-            this.scrollTimeout = setTimeout(() => {
-              if (this.isScrolling) {
-                this.$store.commit('setActiveItem', 'home');
-              }
-            }, this.timer);
-          }
-        }
-        this.scrollTimeout = setTimeout(() => {
-          this.isScrolling = false;
-        }, this.timer);
-      },
-      slideEnd(){
-        setTimeout(()=>{
-          this.isEnd = true
-        },this.timer)
-      },
-      slideBegin(){
-        setTimeout(()=>{
-          this.isBegin = true
-        },this.timer)
-      }
     },
     mounted() {
       window.addEventListener("scroll", () => {
@@ -169,7 +69,7 @@
       margin: 0 0 vmin_mobile(60px);
     }
   }
-  .swiper {
+  .content-container {
     width: vw_big_screen(636px);
     max-height: vw_big_screen(320px);
     @include viewport(tabs) {

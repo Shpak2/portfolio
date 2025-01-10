@@ -350,6 +350,7 @@ export default {
           transform: translateY(-50%) rotateX(0deg);
           background-color: var(--danger-color);
           color: #ffffff;
+          z-index: 10;
         }
         & input, & textarea {
           border-color: var(--danger-color);

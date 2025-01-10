@@ -53,6 +53,7 @@
     },
     mounted() {
       // console.log(this.$store.state.hasError)
+      document.querySelector('body').style.overflow = 'hidden';
     },
     beforeMount() {
       // const store = useStore();
@@ -65,6 +66,7 @@
         setTimeout(()=>{
           this.$store.commit('setFormPopup', false);
           this.hidePopup = false
+          document.querySelector('body').style.overflow = '';
         },400)
         // this.$store.commit('popup/setShowPopup', false);
       },

@@ -99,13 +99,18 @@
               <IconMobile/>
             </button>
           </div>
-          <div class="popup-aside-tags rounded flex items-center" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+          <div
+            class="popup-aside-tags rounded flex items-center"
+            @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeave"
+            >
             <IconTool />
             <div class="flex tags mono-font items-center">
               <span ref="tagsText">{{ data[project].tools.join(', ') }}</span>
             </div>
           </div>
           <div
+            ref="description"
             class="popup-aside-content"
             v-html="data[project].description[$i18n.locale]"
             />
@@ -142,9 +147,9 @@
       IconTablet,
       IconMobile
     },
-    mounted() {
-      console.log(this.data)
-    },
+    // mounted() {
+    //   console.log(this.data)
+    // },
     beforeMount() {
       const store = useStore();
       this.$store = store;
@@ -215,6 +220,10 @@
         },200)
         setTimeout(()=>{
           this.handleDisplay = true
+          this.$refs.description.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
         },300)
       },
       handleEmulate(val) {
