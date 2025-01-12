@@ -124,6 +124,9 @@ export default {
         // console.log('isMobile',isMobile)
         // this.$store.commit('setIsMobile', isMobile);
         this.mobile = isMobile
+        if (!isMobile) {
+          document.querySelector('html').style.overflow = 'hidden';
+        }
     }
   }
 };
