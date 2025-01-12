@@ -594,6 +594,10 @@ main {
       }
       @include viewport(mobile) {
         max-height: 17vh;
+        @media screen and (max-height: 600px) {
+          margin-top: vmin_mobile(8px);
+          max-height: 12vh;
+        }
       }
       @include viewport(swap_mobile) {
         max-height: 45vh;
