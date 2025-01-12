@@ -106,6 +106,7 @@
     position: absolute;
     top: vw_big_screen(20px);
     right: vw_big_screen(20px);
+    padding: 0;
     @include viewport(tabs) {
       width: vw_tabs(32px);
       height: vw_tabs(32px);

@@ -464,7 +464,7 @@
       width: 65%;
       @include viewport(tabs) {
         width: 100%;
-        height: 60%;
+        height: 68%;
       }
       @include viewport(swap_tabs) {
         width: 65%;
@@ -589,8 +589,8 @@
       }
       @include viewport(tabs) {
         width: 100%;
-        height: 32%;
-        padding: vw_tabs(16px) vw_tabs(24px);
+        height: 24%;
+        padding: vw_tabs(8px) vw_tabs(24px);
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;

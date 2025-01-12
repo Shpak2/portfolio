@@ -574,7 +574,7 @@ main {
       margin-top: vw_big_screen(12px);
       font-size: vw_big_screen(14px);
       @include viewport(tabs) {
-        max-height: vw_tabs(150px);
+        max-height: vw_tabs(130px);
         font-size: vw_tabs(14px);
         padding-right: vw_tabs(4px);
         margin-top: vw_tabs(12px);
