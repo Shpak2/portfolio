@@ -283,8 +283,8 @@
         height: 80%;
       }
       @include viewport(sm_mobile) {
-        height: 100vh;
-        height: calc(var(--vh, 1vh) * 100);
+        height: 100svh;
+        height: calc(var(--vh, 1svh) * 100);
         border-radius: unset;
         width: 100%;
       }
@@ -479,10 +479,10 @@
       }
       &-inner {
         height: calc((100% - vw_big_screen(60px)) - 1px);
-        height: calc((var(--vh, 1vh) * 100) - vw_big_screen(60px) - 1px);
+        height: calc((var(--vh, 1svh) * 100) - vw_big_screen(60px) - 1px);
         @include viewport(tabs) {
           height: calc((100% - vw_tabs(60px)) - 1px);
-          height: calc((var(--vh, 1vh) * 100) - vw_tabs(60px) - 1px);
+          height: calc((var(--vh, 1svh) * 100) - vw_tabs(60px) - 1px);
           flex-direction: column-reverse;
           justify-content: flex-start;
           align-items: center;
@@ -493,8 +493,8 @@
           align-items: unset;
         }
         @include viewport(sm_mobile) {
-          height: calc((100vh - vmin_mobile(60px)));
-          height: calc((var(--vh, 1vh) * 100) - vmin_mobile(60px));
+          height: calc((100svh - vmin_mobile(60px)));
+          height: calc((var(--vh, 1svh) * 100) - vmin_mobile(60px));
           background-color: var(--popup-color);
         }
         @include viewport(swap_mobile) {
@@ -526,11 +526,8 @@
         }
         @include viewport(sm_mobile) {
           top: vmin_mobile(21px);
-          width: vmin_mobile(274px);
-          height: vmin_mobile(189px);
-        }
-        @include viewport(swap_mobile) {
           width: vmin_mobile(278px);
+          height: vmin_mobile(189px);
         }
       }
       &.emulate-tablet .popup-main-emulate {

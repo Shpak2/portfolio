@@ -174,7 +174,7 @@
       text-align: center;
     }
     @include viewport(swap_mobile) {
-      padding-top: vmin_mobile(160px);
+      padding-top: vmin_mobile(220px);
     }
   }
 </style>

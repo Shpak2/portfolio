@@ -175,6 +175,6 @@
 
 <style lang="scss" scoped>
   .swiper {
-    height: 100vh;
+    height: 100svh;
   }
 </style>

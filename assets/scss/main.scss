@@ -597,7 +597,7 @@ main {
       }
       @include viewport(swap_mobile) {
         max-height: 45vh;
-        max-height: calc(var(--vh, 1vh) * 45);
+        max-height: calc(var(--vh, 1svh) * 45);
       }
       & p {
         margin: 0;

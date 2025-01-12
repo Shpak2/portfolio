@@ -63,8 +63,8 @@
       inset: 0;
       margin: auto;
       width: 100%;
-      height: 100vh;
-      height: calc(var(--vh, 1vh) * 100);
+      height: 100svh;
+      height: calc(var(--vh, 1svh) * 100);
       z-index: 99;
       background: var(--primary-color);
       backdrop-filter: blur(5px);

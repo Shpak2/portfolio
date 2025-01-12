@@ -81,8 +81,8 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100svh;
+    height: calc(var(--vh, 1svh) * 100);
     background: var(--primary-color);
     z-index: 5000;
     &.complete {

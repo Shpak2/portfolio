@@ -56,5 +56,8 @@
     z-index: 1000;
     transition: transform 0.2s ease-out, opacity 0.2s ease-out;
     pointer-events: none;
+    @include viewport(tabs) {
+      display: none;
+    }
   }
 </style>

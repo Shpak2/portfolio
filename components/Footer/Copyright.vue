@@ -37,10 +37,6 @@
         margin: vmin_mobile(18px) 0 vmin_mobile(24px);
         font-size: vmin_mobile(12px);
       }
-      @include viewport(tabs) {
-        font-size: vw_tabs(14px);
-        margin: vw_tabs(18px) 0 vw_tabs(24px);
-      }
     }
   }
 </style>

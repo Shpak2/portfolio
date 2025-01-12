@@ -317,6 +317,7 @@ export default {
         transform: translateY(-50%) rotateX(90deg);
         background-color: var(--secondary-color);
         color: var(--tags-bg);
+        z-index: 10;
         @include viewport(tabs) {
           font-size: vw_tabs(12px);
           border-radius: 4px;
